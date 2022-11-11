@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Triangle.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">persistence_g1_3</a> &gt; <a href="index.source.html" class="el_package">edu.uga.miage.m1.polygons.gui.shapes</a> &gt; <span class="el_source">Triangle.java</span></div><h1>Triangle.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * &quot;License&quot;); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+package edu.uga.miage.m1.polygons.gui.shapes;
+
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.GradientPaint;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.geom.GeneralPath;
+import java.awt.geom.Path2D;
+
+import edu.uga.miage.m1.polygons.gui.persistence.Visitable;
+import edu.uga.miage.m1.polygons.gui.persistence.Visitor;
+
+/**
+ * This inner class implements the triangle &lt;tt&gt;SimpleShape&lt;/tt&gt; service.
+ * It simply provides a &lt;tt&gt;draw()&lt;/tt&gt; that paints a triangle.
+ *
+ * @author &lt;a href=&quot;mailto:christophe.saint-marcel@univ-grenoble-alpes.fr&quot;&gt;Christophe&lt;/a&gt;
+ */
+public class Triangle implements SimpleShape, Visitable {
+
+    int mX;
+
+    int mY;
+
+<span class="fc" id="L44">    public Triangle(int x, int y) {</span>
+<span class="fc" id="L45">        mX = x - 25;</span>
+<span class="fc" id="L46">        mY = y - 25;</span>
+<span class="fc" id="L47">    }</span>
+
+    /**
+     * Implements the &lt;tt&gt;SimpleShape.draw()&lt;/tt&gt; method for painting
+     * the shape.
+     * @param g2 The graphics object used for painting.
+     */
+    public void draw(Graphics2D g2) {
+<span class="nc" id="L55">        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);</span>
+<span class="nc" id="L56">        GradientPaint gradient = new GradientPaint(mX, mY, Color.GREEN,(mX + 50), mY, Color.WHITE);</span>
+<span class="nc" id="L57">        g2.setPaint(gradient);</span>
+<span class="nc" id="L58">        int[] xcoords = { mX + 25, mX, mX + 50 };</span>
+<span class="nc" id="L59">        int[] ycoords = {mY, mY + 50, mY + 50 };</span>
+<span class="nc" id="L60">        GeneralPath polygon = new GeneralPath(Path2D.WIND_EVEN_ODD, xcoords.length);</span>
+
+<span class="nc" id="L62">        polygon.moveTo(mX + 25.00, mY);</span>
+<span class="nc bnc" id="L63" title="All 2 branches missed.">        for (int i = 0; i &lt; xcoords.length; i++) {</span>
+<span class="nc" id="L64">            polygon.lineTo(xcoords[i], ycoords[i]);</span>
+        }
+<span class="nc" id="L66">        polygon.closePath();</span>
+<span class="nc" id="L67">        g2.fill(polygon);</span>
+<span class="nc" id="L68">        BasicStroke wideStroke = new BasicStroke(2.0f);</span>
+<span class="nc" id="L69">        g2.setColor(Color.black);</span>
+<span class="nc" id="L70">        g2.setStroke(wideStroke);</span>
+<span class="nc" id="L71">        g2.draw(polygon);</span>
+<span class="nc" id="L72">    }</span>
+
+    @Override
+    public void accept(Visitor visitor) {
+<span class="nc" id="L76">        visitor.visit(this);</span>
+<span class="nc" id="L77">    }</span>
+
+    @Override
+    public int getX() {
+<span class="fc" id="L81">        return mX;</span>
+    }
+
+    @Override
+    public int getY() {
+<span class="fc" id="L86">        return mY;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

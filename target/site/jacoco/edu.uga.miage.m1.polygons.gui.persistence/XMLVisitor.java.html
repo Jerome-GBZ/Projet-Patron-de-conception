@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>XMLVisitor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">persistence_g1_3</a> &gt; <a href="index.source.html" class="el_package">edu.uga.miage.m1.polygons.gui.persistence</a> &gt; <span class="el_source">XMLVisitor.java</span></div><h1>XMLVisitor.java</h1><pre class="source lang-java linenums">package edu.uga.miage.m1.polygons.gui.persistence;
+
+import edu.uga.miage.m1.polygons.gui.shapes.Circle;
+import edu.uga.miage.m1.polygons.gui.shapes.Square;
+import edu.uga.miage.m1.polygons.gui.shapes.Triangle;
+
+/**
+ * @author &lt;a href=&quot;mailto:christophe.saint-marcel@univ-grenoble-alpes.fr&quot;&gt;Christophe&lt;/a&gt;
+ */
+public class XMLVisitor implements Visitor {
+
+<span class="nc" id="L12">    private String representation = null;</span>
+
+<span class="nc" id="L14">    public XMLVisitor() {</span>
+<span class="nc" id="L15">        representation = &quot;&lt;?xml version=\&quot;1.0\&quot; encoding=\&quot;UTF-8\&quot; ?&gt; &lt;root&gt; &lt;shapes&gt; &quot;;</span>
+<span class="nc" id="L16">    }</span>
+
+    @Override
+    public void visit(Circle circle) {
+<span class="nc" id="L20">        String xmlTriangle = String.format(&quot;&lt;shape&gt; &lt;type&gt;circle&lt;/type&gt; &lt;x&gt;%d&lt;/x&gt; &lt;y&gt;%d&lt;/y&gt; &lt;/shape&gt; &quot;, circle.getX(), circle.getY());</span>
+<span class="nc" id="L21">        representation += xmlTriangle;</span>
+<span class="nc" id="L22">    }</span>
+
+    @Override
+    public void visit(Square square) {
+<span class="nc" id="L26">        String xmlTriangle = String.format(&quot;&lt;shape&gt; &lt;type&gt;square&lt;/type&gt; &lt;x&gt;%d&lt;/x&gt; &lt;y&gt;%d&lt;/y&gt; &lt;/shape&gt; &quot;, square.getX(), square.getY());</span>
+<span class="nc" id="L27">        representation += xmlTriangle;</span>
+<span class="nc" id="L28">    }</span>
+
+    @Override
+    public void visit(Triangle triangle) {
+<span class="nc" id="L32">        String xmlTriangle = String.format(&quot;&lt;shape&gt; &lt;type&gt;triangle&lt;/type&gt; &lt;x&gt;%d&lt;/x&gt; &lt;y&gt;%d&lt;/y&gt; &lt;/shape&gt; &quot;, triangle.getX(), triangle.getY());</span>
+<span class="nc" id="L33">        representation += xmlTriangle;</span>
+<span class="nc" id="L34">    }</span>
+
+    /**
+     * @return the representation in JSon example for a Triangle:
+     *
+     *         &lt;pre&gt;
+     * {@code
+     *  &lt;shape&gt;
+     *    &lt;type&gt;triangle&lt;/type&gt;
+     *    &lt;x&gt;-25&lt;/x&gt;
+     *    &lt;y&gt;-25&lt;/y&gt;
+     *  &lt;/shape&gt;
+     * }
+     * &lt;/pre&gt;
+     */
+    public String getRepresentation() {
+<span class="nc" id="L50">        return  representation.concat(&quot;&lt;/shapes&gt; &lt;/root&gt;&quot;);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
