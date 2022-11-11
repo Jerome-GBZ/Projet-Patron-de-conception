@@ -50,11 +50,11 @@ import edu.uga.miage.m1.polygons.gui.shapes.Triangle;
  */
 public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionListener {
 
-<span class="nc" id="L53">    private enum Shapes {</span>
-<span class="nc" id="L54">        SQUARE,</span>
-<span class="nc" id="L55">        TRIANGLE,</span>
-<span class="nc" id="L56">        CIRCLE,</span>
-<span class="nc" id="L57">        COMPOUNDSHAPE</span>
+<span class="fc" id="L53">    public enum Shapes {</span>
+<span class="fc" id="L54">        SQUARE,</span>
+<span class="fc" id="L55">        TRIANGLE,</span>
+<span class="fc" id="L56">        CIRCLE,</span>
+<span class="fc" id="L57">        COMPOUNDSHAPE</span>
     }
 
     @Serial
@@ -70,25 +70,25 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
     private final JButton xmlImportButton;
     private final JCheckBox groupByCheckBox;
 
-<span class="nc" id="L73">    private transient ActionListener mReusableActionListener = new ShapeActionListener();</span>
-<span class="nc" id="L74">    private transient ArrayList&lt;SimpleShape&gt; shapesList = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L75">    private transient List&lt;SimpleShape&gt; shapesListGroupBy = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L76">    private Shapes shapeMenuSelected = Shapes.SQUARE;</span>
-<span class="nc" id="L77">    private transient SimpleShape shapeSelected = null;</span>
-<span class="nc" id="L78">    private boolean groupBySelected = false;</span>
+<span class="fc" id="L73">    private transient ActionListener mReusableActionListener = new ShapeActionListener();</span>
+<span class="fc" id="L74">    private transient ArrayList&lt;SimpleShape&gt; shapesList = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L75">    private transient List&lt;SimpleShape&gt; shapesListGroupBy = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L76">    private Shapes shapeMenuSelected = Shapes.SQUARE;</span>
+<span class="fc" id="L77">    private transient SimpleShape shapeSelected = null;</span>
+<span class="fc" id="L78">    private boolean groupBySelected = false;</span>
 
-<span class="nc" id="L80">    private transient JSonVisitor jsonVisitor = new JSonVisitor();</span>
-<span class="nc" id="L81">    private transient XMLVisitor  xmlVisitor  = new XMLVisitor();</span>
+<span class="fc" id="L80">    private transient JSonVisitor jsonVisitor = new JSonVisitor();</span>
+<span class="fc" id="L81">    private transient XMLVisitor  xmlVisitor  = new XMLVisitor();</span>
 
-<span class="nc" id="L83">    private transient java.util.logging.Logger logger =  java.util.logging.Logger.getLogger(this.getClass().getName());</span>
+<span class="fc" id="L83">    private transient java.util.logging.Logger logger =  java.util.logging.Logger.getLogger(this.getClass().getName());</span>
 
     /**
      * Tracks buttons to manage the background.
      */
-<span class="nc" id="L88">    private Map&lt;Shapes, JButton&gt; buttons = new EnumMap&lt;&gt;(Shapes.class);</span>
+<span class="fc" id="L88">    private Map&lt;Shapes, JButton&gt; buttons = new EnumMap&lt;&gt;(Shapes.class);</span>
 
-<span class="nc" id="L90">    private String nameJsonFile = &quot;shapes.json&quot;;</span>
-<span class="nc" id="L91">    private String nameXMLFile = &quot;shapes.xml&quot;;</span>
+<span class="fc" id="L90">    private String nameJsonFile = &quot;shapes.json&quot;;</span>
+<span class="fc" id="L91">    private String nameXMLFile = &quot;shapes.xml&quot;;</span>
 
 
     /**
@@ -96,54 +96,54 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
      * @param frameName
      */
     public JDrawingFrame(String frameName) {
-<span class="nc" id="L99">        super(frameName);</span>
+<span class="fc" id="L99">        super(frameName);</span>
 
         // Instantiates components
-<span class="nc" id="L102">        toolBar = new JToolBar(&quot;Toolbar&quot;);</span>
-<span class="nc" id="L103">        panel = new JPanel();</span>
-<span class="nc" id="L104">        panel.setBackground(Color.WHITE);</span>
-<span class="nc" id="L105">        panel.setLayout(null);</span>
-<span class="nc" id="L106">        panel.addMouseListener(this);</span>
-<span class="nc" id="L107">        panel.addMouseMotionListener(this);</span>
-<span class="nc" id="L108">        label = new JLabel(&quot; &quot;, SwingConstants.LEFT);</span>
+<span class="fc" id="L102">        toolBar = new JToolBar(&quot;Toolbar&quot;);</span>
+<span class="fc" id="L103">        panel = new JPanel();</span>
+<span class="fc" id="L104">        panel.setBackground(Color.WHITE);</span>
+<span class="fc" id="L105">        panel.setLayout(null);</span>
+<span class="fc" id="L106">        panel.addMouseListener(this);</span>
+<span class="fc" id="L107">        panel.addMouseMotionListener(this);</span>
+<span class="fc" id="L108">        label = new JLabel(&quot; &quot;, SwingConstants.LEFT);</span>
 
         // Fills the panel
-<span class="nc" id="L111">        setLayout(new BorderLayout());</span>
-<span class="nc" id="L112">        add(toolBar, BorderLayout.NORTH);</span>
-<span class="nc" id="L113">        add(panel, BorderLayout.CENTER);</span>
-<span class="nc" id="L114">        add(label, BorderLayout.SOUTH);</span>
+<span class="fc" id="L111">        setLayout(new BorderLayout());</span>
+<span class="fc" id="L112">        add(toolBar, BorderLayout.NORTH);</span>
+<span class="fc" id="L113">        add(panel, BorderLayout.CENTER);</span>
+<span class="fc" id="L114">        add(label, BorderLayout.SOUTH);</span>
 
         // Add shapes in the menu
-<span class="nc" id="L117">        addShape(Shapes.SQUARE, new ImageIcon(getClass().getResource(&quot;images/square.png&quot;)));</span>
-<span class="nc" id="L118">        addShape(Shapes.TRIANGLE, new ImageIcon(getClass().getResource(&quot;images/triangle.png&quot;)));</span>
-<span class="nc" id="L119">        addShape(Shapes.CIRCLE, new ImageIcon(getClass().getResource(&quot;images/circle.png&quot;)));</span>
+<span class="fc" id="L117">        addShape(Shapes.SQUARE, new ImageIcon(getClass().getResource(&quot;images/square.png&quot;)));</span>
+<span class="fc" id="L118">        addShape(Shapes.TRIANGLE, new ImageIcon(getClass().getResource(&quot;images/triangle.png&quot;)));</span>
+<span class="fc" id="L119">        addShape(Shapes.CIRCLE, new ImageIcon(getClass().getResource(&quot;images/circle.png&quot;)));</span>
 
         // Add buttons in the menu
-<span class="nc" id="L122">        groupByCheckBox = new JCheckBox(&quot;Grouper&quot;);</span>
-<span class="nc" id="L123">        toolBar.add(groupByCheckBox);</span>
+<span class="fc" id="L122">        groupByCheckBox = new JCheckBox(&quot;Grouper&quot;);</span>
+<span class="fc" id="L123">        toolBar.add(groupByCheckBox);</span>
 
-<span class="nc" id="L125">        jsonExportButton = new JButton(&quot;Export as Json&quot;);</span>
-<span class="nc" id="L126">        toolBar.add(jsonExportButton);</span>
+<span class="fc" id="L125">        jsonExportButton = new JButton(&quot;Export as Json&quot;);</span>
+<span class="fc" id="L126">        toolBar.add(jsonExportButton);</span>
 
-<span class="nc" id="L128">        xmlExportButton = new JButton(&quot;Export as XML&quot;);</span>
-<span class="nc" id="L129">        toolBar.add(xmlExportButton);</span>
+<span class="fc" id="L128">        xmlExportButton = new JButton(&quot;Export as XML&quot;);</span>
+<span class="fc" id="L129">        toolBar.add(xmlExportButton);</span>
 
-<span class="nc" id="L131">        jsonImportButton = new JButton(&quot;Import as Json&quot;);</span>
-<span class="nc" id="L132">        toolBar.add(jsonImportButton);</span>
+<span class="fc" id="L131">        jsonImportButton = new JButton(&quot;Import as Json&quot;);</span>
+<span class="fc" id="L132">        toolBar.add(jsonImportButton);</span>
 
-<span class="nc" id="L134">        xmlImportButton = new JButton(&quot;Import as XML&quot;);</span>
-<span class="nc" id="L135">        toolBar.add(xmlImportButton);</span>
+<span class="fc" id="L134">        xmlImportButton = new JButton(&quot;Import as XML&quot;);</span>
+<span class="fc" id="L135">        toolBar.add(xmlImportButton);</span>
 
-<span class="nc" id="L137">        setPreferredSize(new Dimension(650, 400));</span>
-<span class="nc" id="L138">        exportButtonAction();</span>
-<span class="nc" id="L139">    }</span>
+<span class="fc" id="L137">        setPreferredSize(new Dimension(650, 400));</span>
+<span class="fc" id="L138">        exportButtonAction();</span>
+<span class="fc" id="L139">    }</span>
 
     private void exportButtonAction() {
-<span class="nc" id="L142">        jsonExportButton.addActionListener(e -&gt; writeShapeOnFile(this.jsonVisitor, this.nameJsonFile) );</span>
+<span class="pc" id="L142">        jsonExportButton.addActionListener(e -&gt; writeShapeOnFile(this.jsonVisitor, this.nameJsonFile) );</span>
 
-<span class="nc" id="L144">        xmlExportButton.addActionListener(e -&gt; writeShapeOnFile(this.xmlVisitor, this.nameXMLFile) );</span>
+<span class="pc" id="L144">        xmlExportButton.addActionListener(e -&gt; writeShapeOnFile(this.xmlVisitor, this.nameXMLFile) );</span>
 
-<span class="nc" id="L146">        jsonImportButton.addActionListener(e -&gt; {</span>
+<span class="fc" id="L146">        jsonImportButton.addActionListener(e -&gt; {</span>
             try {
 <span class="nc" id="L148">                String fileContent = Files.readString(Path.of(this.nameJsonFile));</span>
 <span class="nc" id="L149">                JSONObject jsonObject = new JSONObject(fileContent);</span>
@@ -160,7 +160,7 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
 <span class="nc" id="L160">            }</span>
 <span class="nc" id="L161">        });</span>
 
-<span class="nc" id="L163">        xmlImportButton.addActionListener(e -&gt; {</span>
+<span class="fc" id="L163">        xmlImportButton.addActionListener(e -&gt; {</span>
             try {
 <span class="nc" id="L165">                DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();</span>
 <span class="nc" id="L166">                dbf.setFeature(&quot;http://apache.org/xml/features/disallow-doctype-decl&quot;, true);</span>
@@ -186,7 +186,7 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
 <span class="nc" id="L186">            }</span>
 <span class="nc" id="L187">        });</span>
 
-<span class="nc" id="L189">        groupByCheckBox.addActionListener(e -&gt; {</span>
+<span class="fc" id="L189">        groupByCheckBox.addActionListener(e -&gt; {</span>
 <span class="nc bnc" id="L190" title="All 2 branches missed.">            this.groupBySelected = !this.groupBySelected;</span>
 
 <span class="nc bnc" id="L192" title="All 4 branches missed.">            if(!this.groupBySelected &amp;&amp; !this.shapesListGroupBy.isEmpty()) {</span>
@@ -196,7 +196,7 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
 <span class="nc" id="L196">                reDrawAll();</span>
             }
 <span class="nc" id="L198">        });</span>
-<span class="nc" id="L199">    }</span>
+<span class="fc" id="L199">    }</span>
 
     /**
      * Injects an available &lt;tt&gt;SimpleShape&lt;/tt&gt; into the drawing frame.
@@ -204,20 +204,20 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
      * @param icon The icon associated with the injected &lt;tt&gt;SimpleShape&lt;/tt&gt;.
      */
     private void addShape(Shapes shape, ImageIcon icon) {
-<span class="nc" id="L207">        JButton button = new JButton(icon);</span>
-<span class="nc" id="L208">        button.setBorderPainted(false);</span>
-<span class="nc" id="L209">        buttons.put(shape, button);</span>
-<span class="nc" id="L210">        button.setActionCommand(shape.toString());</span>
-<span class="nc" id="L211">        button.addActionListener(mReusableActionListener);</span>
+<span class="fc" id="L207">        JButton button = new JButton(icon);</span>
+<span class="fc" id="L208">        button.setBorderPainted(false);</span>
+<span class="fc" id="L209">        buttons.put(shape, button);</span>
+<span class="fc" id="L210">        button.setActionCommand(shape.toString());</span>
+<span class="fc" id="L211">        button.addActionListener(mReusableActionListener);</span>
 
-<span class="nc bnc" id="L213" title="All 2 branches missed.">        if (shapeMenuSelected == null) {</span>
+<span class="pc bpc" id="L213" title="1 of 2 branches missed.">        if (shapeMenuSelected == null) {</span>
 <span class="nc" id="L214">            button.doClick();</span>
         }
 
-<span class="nc" id="L217">        toolBar.add(button);</span>
-<span class="nc" id="L218">        toolBar.validate();</span>
-<span class="nc" id="L219">        repaint();</span>
-<span class="nc" id="L220">    }</span>
+<span class="fc" id="L217">        toolBar.add(button);</span>
+<span class="fc" id="L218">        toolBar.validate();</span>
+<span class="fc" id="L219">        repaint();</span>
+<span class="fc" id="L220">    }</span>
 
     /**
      * TO DO Use the factory to abstract shape creation
@@ -333,7 +333,7 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
 <span class="nc" id="L333">        return list;</span>
     }
 
-    private SimpleShape createShape(Shapes type, int x, int y) {
+    public SimpleShape createShape(Shapes type, int x, int y) {
 <span class="nc" id="L337">        Graphics2D g2 = (Graphics2D) panel.getGraphics();</span>
 <span class="nc" id="L338">        SimpleShape shapeReturn = null;</span>
 
@@ -409,7 +409,7 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
      * the drawing frame's currently selected shape when receiving
      * an action event.
      */
-<span class="nc" id="L412">    private class ShapeActionListener implements ActionListener {</span>
+<span class="fc" id="L412">    private class ShapeActionListener implements ActionListener {</span>
 
         public void actionPerformed(ActionEvent evt) {
             // ItÃ¨re sur tous les boutons

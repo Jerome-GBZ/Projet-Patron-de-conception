@@ -50,7 +50,7 @@ import edu.uga.miage.m1.polygons.gui.shapes.Triangle;
  */
 public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionListener {
 
-    private enum Shapes {
+    public enum Shapes {
         SQUARE,
         TRIANGLE,
         CIRCLE,
@@ -333,7 +333,7 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
         return list;
     }
 
-    private SimpleShape createShape(Shapes type, int x, int y) {
+    public SimpleShape createShape(Shapes type, int x, int y) {
         Graphics2D g2 = (Graphics2D) panel.getGraphics();
         SimpleShape shapeReturn = null;
 

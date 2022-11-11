@@ -8,11 +8,11 @@ import edu.uga.miage.m1.polygons.gui.shapes.CompoundShape;
  */
 public class XMLVisitor implements SimpleFile {
 
-<span class="nc" id="L11">    private String representation = null;</span>
+<span class="fc" id="L11">    private String representation = null;</span>
 
-<span class="nc" id="L13">    public XMLVisitor() {</span>
-<span class="nc" id="L14">        representation = &quot;&lt;?xml version=\&quot;1.0\&quot; encoding=\&quot;UTF-8\&quot; ?&gt; &lt;root&gt; &lt;shapes&gt; &quot;;</span>
-<span class="nc" id="L15">    }</span>
+<span class="fc" id="L13">    public XMLVisitor() {</span>
+<span class="fc" id="L14">        representation = &quot;&lt;?xml version=\&quot;1.0\&quot; encoding=\&quot;UTF-8\&quot; ?&gt; &lt;root&gt; &lt;shapes&gt; &quot;;</span>
+<span class="fc" id="L15">    }</span>
 
     public void visit(SimpleShape shape) {
 <span class="nc" id="L18">        String className = shape.getClass().getSimpleName().toLowerCase();</span>
