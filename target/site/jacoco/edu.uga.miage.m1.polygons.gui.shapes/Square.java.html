@@ -36,17 +36,12 @@ import edu.uga.miage.m1.polygons.gui.persistence.Visitor;
  */
 public class Square implements SimpleShape, Visitable {
 
-    int mX;
+    int x;
+    int y;
 
-    int mY;
-
-    boolean stateM;
-
-<span class="fc" id="L45">    public Square(int x, int y) {</span>
-<span class="fc" id="L46">        mX = x;</span>
-<span class="fc" id="L47">        mY = y;</span>
-<span class="fc" id="L48">        stateM = false;</span>
-<span class="fc" id="L49">    }</span>
+<span class="fc" id="L42">    public Square(int x, int y) {</span>
+<span class="fc" id="L43">        moveTo(x,y);</span>
+<span class="fc" id="L44">    }</span>
 
     /**
      * Implements the &lt;tt&gt;SimpleShape.draw()&lt;/tt&gt; method for painting
@@ -54,36 +49,36 @@ public class Square implements SimpleShape, Visitable {
      * @param g2 The graphics object used for painting.
      */
     public void draw(Graphics2D g2, float width) {
-<span class="nc" id="L57">        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);</span>
-<span class="nc" id="L58">        GradientPaint gradient = new GradientPaint((float) mX-25, (float) mY-25, Color.BLUE, (mX + 50), mY, Color.WHITE);</span>
-<span class="nc" id="L59">        g2.setPaint(gradient);</span>
+<span class="nc" id="L52">        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);</span>
+<span class="nc" id="L53">        GradientPaint gradient = new GradientPaint((float) x-25, (float) y-25, Color.BLUE, (x + 50), y, Color.WHITE);</span>
+<span class="nc" id="L54">        g2.setPaint(gradient);</span>
 
-<span class="nc" id="L61">        Rectangle2D square = new Rectangle2D.Double((double) mX-25, (double) mY-25, 50, 50);</span>
-<span class="nc" id="L62">        g2.fill(square);</span>
+<span class="nc" id="L56">        Rectangle2D square = new Rectangle2D.Double((double) x-25, (double) y-25, 50, 50);</span>
+<span class="nc" id="L57">        g2.fill(square);</span>
 
-<span class="nc bnc" id="L64" title="All 2 branches missed.">        if(width == 4.0) {</span>
-<span class="nc" id="L65">            g2.setColor(Color.LIGHT_GRAY);</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">        if(width == 4.0) {</span>
+<span class="nc" id="L60">            g2.setColor(Color.LIGHT_GRAY);</span>
         } else {
-<span class="nc" id="L67">            g2.setColor(Color.BLACK);</span>
+<span class="nc" id="L62">            g2.setColor(Color.BLACK);</span>
         }
 
-<span class="nc" id="L70">        BasicStroke wideStroke = new BasicStroke(width);</span>
-<span class="nc" id="L71">        g2.setStroke(wideStroke);</span>
-<span class="nc" id="L72">        g2.draw(square);</span>
+<span class="nc" id="L65">        BasicStroke wideStroke = new BasicStroke(width);</span>
+<span class="nc" id="L66">        g2.setStroke(wideStroke);</span>
+<span class="nc" id="L67">        g2.draw(square);</span>
 
-<span class="nc" id="L74">        square.contains(mX, mY);</span>
-<span class="nc" id="L75">    }</span>
+<span class="nc" id="L69">        square.contains(x, y);</span>
+<span class="nc" id="L70">    }</span>
 
     @Override
-<span class="nc" id="L78">    public void accept(Visitor visitor) { visitor.visit(this); }</span>
+<span class="nc" id="L73">    public void accept(Visitor visitor) { visitor.visit(this); }</span>
 
-<span class="fc" id="L80">    public int getX() { return mX; }</span>
-<span class="fc" id="L81">    public int getY() { return mY; }</span>
+<span class="fc" id="L75">    public int getX() { return x; }</span>
+<span class="fc" id="L76">    public int getY() { return y; }</span>
 
-<span class="fc" id="L83">    public void moveTo(int x, int y) { mX = x; mY = y; }</span>
+<span class="fc" id="L78">    public void moveTo(int x, int y) { this.x = x; this.y = y; }</span>
 
-<span class="fc bfc" id="L85" title="All 8 branches covered.">    public boolean clickedOnShape(int x, int y) { return this.getX()-25 &lt;= x &amp;&amp; this.getX()+25 &gt;= x &amp;&amp; this.getY()-25 &lt;= y &amp;&amp; this.getY()+25 &gt;= y; }</span>
+<span class="fc bfc" id="L80" title="All 8 branches covered.">    public boolean clickedOnShape(int x, int y) { return this.getX()-25 &lt;= x &amp;&amp; this.getX()+25 &gt;= x &amp;&amp; this.getY()-25 &lt;= y &amp;&amp; this.getY()+25 &gt;= y; }</span>
 
-<span class="fc" id="L87">    public boolean add(SimpleShape shape) { return false; }</span>
+<span class="fc" id="L82">    public boolean add(SimpleShape shape) { return false; }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

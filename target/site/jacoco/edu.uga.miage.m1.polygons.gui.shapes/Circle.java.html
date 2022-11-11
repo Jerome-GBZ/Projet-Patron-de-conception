@@ -30,14 +30,12 @@ import edu.uga.miage.m1.polygons.gui.persistence.Visitor;
 
 public class Circle implements SimpleShape, Visitable {
 
-    int mX;
+    int x;
+    int y;
 
-    int mY;
-
-<span class="fc" id="L37">    public Circle(int x, int y) {</span>
-<span class="fc" id="L38">        mX = x;</span>
-<span class="fc" id="L39">        mY = y;</span>
-<span class="fc" id="L40">    }</span>
+<span class="fc" id="L36">    public Circle(int x, int y) {</span>
+<span class="fc" id="L37">        moveTo(x,y);</span>
+<span class="fc" id="L38">    }</span>
 
     /**
      * Implements the &lt;tt&gt;SimpleShape.draw()&lt;/tt&gt; method for painting
@@ -45,50 +43,50 @@ public class Circle implements SimpleShape, Visitable {
      * @param g2 The graphics object used for painting.
      */
     public void draw(Graphics2D g2, float width) {
-<span class="nc" id="L48">        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);</span>
-<span class="nc" id="L49">        GradientPaint gradient = new GradientPaint((float) mX-25, (float) mY-25, Color.RED, (mX + 50), mY, Color.WHITE);</span>
-<span class="nc" id="L50">        g2.setPaint(gradient);</span>
+<span class="nc" id="L46">        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);</span>
+<span class="nc" id="L47">        GradientPaint gradient = new GradientPaint((float) x-25, (float) y-25, Color.RED, (x + 50), y, Color.WHITE);</span>
+<span class="nc" id="L48">        g2.setPaint(gradient);</span>
 
-<span class="nc" id="L52">        Ellipse2D ellipse = new Ellipse2D.Double((double) mX-25, (double) mY-25, 50, 50);</span>
-<span class="nc" id="L53">        g2.fill(ellipse);</span>
+<span class="nc" id="L50">        Ellipse2D ellipse = new Ellipse2D.Double((double) x-25, (double) y-25, 50, 50);</span>
+<span class="nc" id="L51">        g2.fill(ellipse);</span>
 
-<span class="nc bnc" id="L55" title="All 2 branches missed.">        if(width == 4.0) {</span>
-<span class="nc" id="L56">            g2.setColor(Color.LIGHT_GRAY);</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">        if(width == 4.0) {</span>
+<span class="nc" id="L54">            g2.setColor(Color.LIGHT_GRAY);</span>
         } else {
-<span class="nc" id="L58">            g2.setColor(Color.BLACK);</span>
+<span class="nc" id="L56">            g2.setColor(Color.BLACK);</span>
         }
 
-<span class="nc" id="L61">        BasicStroke wideStroke = new BasicStroke(width);</span>
-<span class="nc" id="L62">        g2.setStroke(wideStroke);</span>
-<span class="nc" id="L63">        g2.draw(ellipse);</span>
-<span class="nc" id="L64">    }</span>
+<span class="nc" id="L59">        BasicStroke wideStroke = new BasicStroke(width);</span>
+<span class="nc" id="L60">        g2.setStroke(wideStroke);</span>
+<span class="nc" id="L61">        g2.draw(ellipse);</span>
+<span class="nc" id="L62">    }</span>
 
     @Override
     public void accept(Visitor visitor) {
-<span class="nc" id="L68">        visitor.visit(this);</span>
-<span class="nc" id="L69">    }</span>
+<span class="nc" id="L66">        visitor.visit(this);</span>
+<span class="nc" id="L67">    }</span>
 
     public int getX() {
-<span class="fc" id="L72">        return mX;</span>
+<span class="fc" id="L70">        return x;</span>
     }
 
     public int getY() {
-<span class="fc" id="L76">        return mY;</span>
+<span class="fc" id="L74">        return y;</span>
     }
 
     @Override
     public void moveTo(int x, int y) {
-<span class="fc" id="L81">        mX = x;</span>
-<span class="fc" id="L82">        mY = y;</span>
-<span class="fc" id="L83">    }</span>
+<span class="fc" id="L79">        this.x = x;</span>
+<span class="fc" id="L80">        this.y = y;</span>
+<span class="fc" id="L81">    }</span>
 
     public boolean clickedOnShape(int x, int y) {
-<span class="fc bfc" id="L86" title="All 8 branches covered.">        return this.getX()-25 &lt;= x &amp;&amp; this.getX()+25 &gt;= x &amp;&amp; this.getY()-25 &lt;= y &amp;&amp; this.getY()+25 &gt;= y;</span>
+<span class="fc bfc" id="L84" title="All 8 branches covered.">        return this.getX()-25 &lt;= x &amp;&amp; this.getX()+25 &gt;= x &amp;&amp; this.getY()-25 &lt;= y &amp;&amp; this.getY()+25 &gt;= y;</span>
     }
 
     @Override
     public boolean add(SimpleShape shape) {
-<span class="fc" id="L91">        return false;</span>
+<span class="fc" id="L89">        return false;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
