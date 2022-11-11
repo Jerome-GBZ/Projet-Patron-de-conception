@@ -14,38 +14,27 @@ public class XMLVisitor implements SimpleFile {
 <span class="nc" id="L14">        representation = &quot;&lt;?xml version=\&quot;1.0\&quot; encoding=\&quot;UTF-8\&quot; ?&gt; &lt;root&gt; &lt;shapes&gt; &quot;;</span>
 <span class="nc" id="L15">    }</span>
 
-    @Override
     public void visit(SimpleShape shape) {
-<span class="nc" id="L19">        String className = shape.getClass().getSimpleName().toLowerCase();</span>
+<span class="nc" id="L18">        String className = shape.getClass().getSimpleName().toLowerCase();</span>
 
-<span class="nc bnc" id="L21" title="All 2 branches missed.">        if(className.equals(&quot;compoundshape&quot;)) {</span>
-<span class="nc" id="L22">            representation += String.format(&quot;&lt;shape&gt; &lt;type&gt;%s&lt;/type&gt; &lt;shapes&gt; &quot;, className);</span>
+<span class="nc bnc" id="L20" title="All 2 branches missed.">        if(className.equals(&quot;compoundshape&quot;)) {</span>
+<span class="nc" id="L21">            representation += String.format(&quot;&lt;shape&gt; &lt;type&gt;%s&lt;/type&gt; &lt;shapes&gt; &quot;, className);</span>
 
-<span class="nc bnc" id="L24" title="All 2 branches missed.">            for (SimpleShape s : ((CompoundShape) shape).getShapes()) {</span>
-<span class="nc" id="L25">                this.visit(s);</span>
-<span class="nc" id="L26">            }</span>
+<span class="nc bnc" id="L23" title="All 2 branches missed.">            for (SimpleShape s : ((CompoundShape) shape).getShapes()) {</span>
+<span class="nc" id="L24">                this.visit(s);</span>
+<span class="nc" id="L25">            }</span>
 
-<span class="nc" id="L28">            representation += &quot;&lt;/shapes&gt; &lt;/shape&gt; &quot;;</span>
+<span class="nc" id="L27">            representation += &quot;&lt;/shapes&gt; &lt;/shape&gt; &quot;;</span>
         } else {
-<span class="nc" id="L30">            representation += String.format(&quot;&lt;shape&gt; &lt;type&gt;%s&lt;/type&gt; &lt;x&gt;%d&lt;/x&gt; &lt;y&gt;%d&lt;/y&gt; &lt;/shape&gt; &quot;, shape.getClass().getSimpleName().toLowerCase(), shape.getX(), shape.getY());</span>
+<span class="nc" id="L29">            representation += String.format(&quot;&lt;shape&gt; &lt;type&gt;%s&lt;/type&gt; &lt;x&gt;%d&lt;/x&gt; &lt;y&gt;%d&lt;/y&gt; &lt;/shape&gt; &quot;, shape.getClass().getSimpleName().toLowerCase(), shape.getX(), shape.getY());</span>
         }
-<span class="nc" id="L32">    }</span>
+<span class="nc" id="L31">    }</span>
 
     /**
      * @return the representation in JSon example for a Triangle:
-     *
-     *         &lt;pre&gt;
-     * {@code
-     *  &lt;shape&gt;
-     *    &lt;type&gt;triangle&lt;/type&gt;
-     *    &lt;x&gt;-25&lt;/x&gt;
-     *    &lt;y&gt;-25&lt;/y&gt;
-     *  &lt;/shape&gt;
-     * }
-     * &lt;/pre&gt;
      */
     public String getRepresentation() {
-<span class="nc" id="L48">        return  representation.concat(&quot;&lt;/shapes&gt; &lt;/root&gt;&quot;);</span>
+<span class="nc" id="L37">        return  representation.concat(&quot;&lt;/shapes&gt; &lt;/root&gt;&quot;);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

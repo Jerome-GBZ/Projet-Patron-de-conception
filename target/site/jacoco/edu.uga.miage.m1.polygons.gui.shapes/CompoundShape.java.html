@@ -31,9 +31,9 @@ public class CompoundShape implements SimpleShape, Visitable {
     protected List&lt;SimpleShape&gt; shapesList;
 
 
-<span class="nc" id="L34">    public CompoundShape(List&lt;SimpleShape&gt; s) {</span>
-<span class="nc" id="L35">        this.shapesList = new ArrayList&lt;&gt;(s);</span>
-<span class="nc" id="L36">    }</span>
+<span class="fc" id="L34">    public CompoundShape(List&lt;SimpleShape&gt; s) {</span>
+<span class="fc" id="L35">        this.shapesList = new ArrayList&lt;&gt;(s);</span>
+<span class="fc" id="L36">    }</span>
 
     public void add(Graphics2D g2, SimpleShape s) {
 <span class="nc" id="L39">        this.shapesList.add(s);</span>
@@ -63,27 +63,27 @@ public class CompoundShape implements SimpleShape, Visitable {
     }
 
     public List&lt;SimpleShape&gt; getShapes() {
-<span class="nc" id="L66">        return shapesList;</span>
+<span class="fc" id="L66">        return shapesList;</span>
     }
 
     @Override
     public void moveTo(int x, int y) {
-<span class="nc bnc" id="L71" title="All 2 branches missed.">        if(shapesList.isEmpty()) {</span>
-<span class="nc" id="L72">            int translationX = x - shapesList.get(0).getX();</span>
-<span class="nc" id="L73">            int translationY = y - shapesList.get(0).getY();</span>
+<span class="pc bpc" id="L71" title="1 of 2 branches missed.">        if(!shapesList.isEmpty()) {</span>
+<span class="fc" id="L72">            int translationX = x - shapesList.get(0).getX();</span>
+<span class="fc" id="L73">            int translationY = y - shapesList.get(0).getY();</span>
 
-<span class="nc" id="L75">            this.getShapes().forEach(shape -&gt; shape.moveTo(shape.getX()+translationX, shape.getY()+translationY) );</span>
+<span class="fc" id="L75">            this.getShapes().forEach(shape -&gt; shape.moveTo(shape.getX()+translationX, shape.getY()+translationY) );</span>
         }
-<span class="nc" id="L77">    }</span>
+<span class="fc" id="L77">    }</span>
 
     public boolean clickedOnShape(int x, int y) {
-<span class="nc" id="L80">        int i = shapesList.size() - 1;</span>
+<span class="fc" id="L80">        int i = shapesList.size() - 1;</span>
 
-<span class="nc bnc" id="L82" title="All 4 branches missed.">        while(i &gt; -1 &amp;&amp; !shapesList.get(i).clickedOnShape(x, y)) {</span>
-<span class="nc" id="L83">            i--;</span>
+<span class="fc bfc" id="L82" title="All 4 branches covered.">        while(i &gt; -1 &amp;&amp; !shapesList.get(i).clickedOnShape(x, y)) {</span>
+<span class="fc" id="L83">            i--;</span>
         }
 
-<span class="nc bnc" id="L86" title="All 2 branches missed.">        return i &gt; -1;</span>
+<span class="fc bfc" id="L86" title="All 2 branches covered.">        return i &gt; -1;</span>
     }
 
     public boolean add(SimpleShape shape) {

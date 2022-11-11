@@ -78,31 +78,17 @@ public class Triangle implements SimpleShape, Visitable {
 <span class="nc" id="L78">        g2.draw(polygon);</span>
 <span class="nc" id="L79">    }</span>
 
-    @Override
-    public void accept(Visitor visitor) {
-<span class="nc" id="L83">        visitor.visit(this);</span>
-<span class="nc" id="L84">    }</span>
 
-    @Override
-    public int getX() {
-<span class="fc" id="L88">        return mX;</span>
-    }
+<span class="nc" id="L82">    public void accept(Visitor visitor) { visitor.visit(this); }</span>
 
-    @Override
-    public int getY() {
-<span class="fc" id="L93">        return mY;</span>
-    }
+<span class="fc" id="L84">    public int getX() { return mX; }</span>
 
-    @Override
-    public void moveTo(int x, int y) {
-<span class="fc" id="L98">        mX = x;</span>
-<span class="fc" id="L99">        mY = y;</span>
-<span class="fc" id="L100">    }</span>
+<span class="fc" id="L86">    public int getY() { return mY; }</span>
 
-    public boolean clickedOnShape(int x, int y) {
-<span class="nc bnc" id="L103" title="All 8 branches missed.">        return this.getX()-25 &lt;= x &amp;&amp; this.getX()+25 &gt;= x &amp;&amp; this.getY()-25 &lt;= y &amp;&amp; this.getY()+25 &gt;= y;</span>
-    }
+<span class="fc" id="L88">    public void moveTo(int x, int y) { mX = x; mY = y; }</span>
 
-<span class="nc" id="L106">    public boolean add(SimpleShape shape) { return false; }</span>
+<span class="fc bfc" id="L90" title="All 8 branches covered.">    public boolean clickedOnShape(int x, int y) { return this.getX()-25 &lt;= x &amp;&amp; this.getX()+25 &gt;= x &amp;&amp; this.getY()-25 &lt;= y &amp;&amp; this.getY()+25 &gt;= y; }</span>
+
+<span class="fc" id="L92">    public boolean add(SimpleShape shape) { return false; }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -33,21 +33,9 @@ public class JSonVisitor implements SimpleFile {
 
     /**
      * @return the representation in JSon example for a Circle
-     *
-     *         <pre>
-     * {@code
-     *  {
-     *     "shape": {
-     *     	  "type": "circle",
-     *        "x": -25,
-     *        "y": -25
-     *     }
-     *  }
-     * }
-     *         </pre>
      */
     public String getRepresentation() {
-        representation = representation.substring(0, representation.length()-2); 
+        representation = representation.substring(0, representation.length()-2);
         return  representation.concat("] }");
     }
 }

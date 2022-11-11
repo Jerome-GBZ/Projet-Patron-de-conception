@@ -87,5 +87,7 @@ public class Circle implements SimpleShape, Visitable {
     }
 
     @Override
-    public boolean add(SimpleShape shape) { return false; }
+    public boolean add(SimpleShape shape) {
+        return false;
+    }
 }

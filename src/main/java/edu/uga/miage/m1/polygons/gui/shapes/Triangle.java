@@ -78,30 +78,16 @@ public class Triangle implements SimpleShape, Visitable {
         g2.draw(polygon);
     }
 
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
 
-    @Override
-    public int getX() {
-        return mX;
-    }
+    public void accept(Visitor visitor) { visitor.visit(this); }
 
-    @Override
-    public int getY() {
-        return mY;
-    }
+    public int getX() { return mX; }
 
-    @Override
-    public void moveTo(int x, int y) {
-        mX = x;
-        mY = y;
-    }
+    public int getY() { return mY; }
 
-    public boolean clickedOnShape(int x, int y) {
-        return this.getX()-25 <= x && this.getX()+25 >= x && this.getY()-25 <= y && this.getY()+25 >= y;
-    }
+    public void moveTo(int x, int y) { mX = x; mY = y; }
+
+    public boolean clickedOnShape(int x, int y) { return this.getX()-25 <= x && this.getX()+25 >= x && this.getY()-25 <= y && this.getY()+25 >= y; }
 
     public boolean add(SimpleShape shape) { return false; }
 }

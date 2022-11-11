@@ -21,4 +21,20 @@ class SquareTest {
         assertEquals(10, s.getX());
         assertEquals(5, s.getY());
     }
+
+    @Test
+    void testClickOnShape() {
+        assertEquals(true, s.clickedOnShape(0,0));
+        assertEquals(true, s.clickedOnShape(25,25));
+        assertEquals(false, s.clickedOnShape(26,26));
+        assertEquals(false, s.clickedOnShape(0,26));
+        assertEquals(false, s.clickedOnShape(26,0));
+        assertEquals(false, s.clickedOnShape(-26,0));
+        assertEquals(false, s.clickedOnShape(0,-26));
+    }
+
+    @Test
+    void testAddShape() {
+        assertEquals(false, s.add(s));
+    }
 }

@@ -20,6 +20,41 @@ class CompoundShapeTest {
         list.add(s);
         CompoundShape cs = new CompoundShape(list);
 
+
+        List<SimpleShape> groupList = cs.getShapes();
+        int x = 200;
+        int y = 50;
+        int translationX = x - groupList.get(0).getX();
+        int translationY = y - groupList.get(0).getY();
+
+        int resCX = c.getX() + translationX;
+        int resCY = c.getY() + translationY;
+        int resSX = s.getX() + translationX;
+        int resSY = s.getY() + translationY;
+
         assertEquals(2, cs.getShapes().size());
+
+        cs.moveTo(x, y);
+
+        assertEquals(resCX, c.getX());
+        assertEquals(resCY, c.getY());
+
+        assertEquals(resSX, s.getX());
+        assertEquals(resSY, s.getY());
+    }
+
+    @Test
+    void testClickOnShape() {
+        list.add(c);
+        list.add(s);
+        CompoundShape cs = new CompoundShape(list);
+
+        assertEquals(true, cs.clickedOnShape(0,0));
+        assertEquals(true, cs.clickedOnShape(25,25));
+        assertEquals(false, cs.clickedOnShape(26,26));
+        assertEquals(false, cs.clickedOnShape(0,26));
+        assertEquals(false, cs.clickedOnShape(26,0));
+        assertEquals(false, cs.clickedOnShape(-26,0));
+        assertEquals(false, cs.clickedOnShape(0,-26));
     }
 }

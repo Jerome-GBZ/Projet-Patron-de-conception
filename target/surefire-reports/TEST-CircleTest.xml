@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="CircleTest" time="0.002" tests="3" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="CircleTest" time="0.005" tests="5" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="18"/>
     <property name="sonar.login" value="6694cec615d0d3612e12b6c0064506453d78894f"/>
@@ -14,7 +14,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="FR"/>
     <property name="sun.boot.library.path" value="/opt/homebrew/Cellar/openjdk/18.0.1.1/libexec/openjdk.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/sinao/Documents/UGA/PC/persistence_g1_3/target/surefire/surefirebooter704667267717794359.jar /Users/sinao/Documents/UGA/PC/persistence_g1_3/target/surefire 2022-11-11T11-48-12_894-jvmRun1 surefire10651645080537681738tmp surefire_016315354387028389377tmp"/>
+    <property name="sun.java.command" value="/Users/sinao/Documents/UGA/PC/persistence_g1_3/target/surefire/surefirebooter9988667275384839412.jar /Users/sinao/Documents/UGA/PC/persistence_g1_3/target/surefire 2022-11-11T13-32-07_511-jvmRun1 surefire15805130109792319681tmp surefire_010011457168191758056tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/Users/sinao/Documents/UGA/PC/persistence_g1_3/target/test-classes:/Users/sinao/Documents/UGA/PC/persistence_g1_3/target/classes:/Users/sinao/.m2/repository/org/json/json/20220924/json-20220924.jar:/Users/sinao/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.4.0/junit-jupiter-engine-5.4.0.jar:/Users/sinao/.m2/repository/org/apiguardian/apiguardian-api/1.0.0/apiguardian-api-1.0.0.jar:/Users/sinao/.m2/repository/org/junit/platform/junit-platform-engine/1.4.0/junit-platform-engine-1.4.0.jar:/Users/sinao/.m2/repository/org/opentest4j/opentest4j/1.1.1/opentest4j-1.1.1.jar:/Users/sinao/.m2/repository/org/junit/platform/junit-platform-commons/1.4.0/junit-platform-commons-1.4.0.jar:/Users/sinao/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.4.0/junit-jupiter-api-5.4.0.jar:"/>
@@ -31,7 +31,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="apple.awt.application.name" value="ForkedBooter"/>
-    <property name="surefire.real.class.path" value="/Users/sinao/Documents/UGA/PC/persistence_g1_3/target/surefire/surefirebooter704667267717794359.jar"/>
+    <property name="surefire.real.class.path" value="/Users/sinao/Documents/UGA/PC/persistence_g1_3/target/surefire/surefirebooter9988667275384839412.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.runtime.version" value="18.0.1.1+0"/>
@@ -59,7 +59,9 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="62.0"/>
   </properties>
-  <testcase name="test_getX" classname="CircleTest" time="0.001"/>
-  <testcase name="test_getY" classname="CircleTest" time="0"/>
+  <testcase name="test_getX" classname="CircleTest" time="0"/>
+  <testcase name="test_getY" classname="CircleTest" time="0.001"/>
+  <testcase name="testAddShape" classname="CircleTest" time="0.001"/>
   <testcase name="test_moveTo" classname="CircleTest" time="0"/>
+  <testcase name="testClickOnShape" classname="CircleTest" time="0.001"/>
 </testsuite>

@@ -83,10 +83,12 @@ public class Circle implements SimpleShape, Visitable {
 <span class="fc" id="L83">    }</span>
 
     public boolean clickedOnShape(int x, int y) {
-<span class="nc bnc" id="L86" title="All 8 branches missed.">        return this.getX()-25 &lt;= x &amp;&amp; this.getX()+25 &gt;= x &amp;&amp; this.getY()-25 &lt;= y &amp;&amp; this.getY()+25 &gt;= y;</span>
+<span class="fc bfc" id="L86" title="All 8 branches covered.">        return this.getX()-25 &lt;= x &amp;&amp; this.getX()+25 &gt;= x &amp;&amp; this.getY()-25 &lt;= y &amp;&amp; this.getY()+25 &gt;= y;</span>
     }
 
     @Override
-<span class="nc" id="L90">    public boolean add(SimpleShape shape) { return false; }</span>
+    public boolean add(SimpleShape shape) {
+<span class="fc" id="L91">        return false;</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -21,4 +21,20 @@ class TriangleTest {
         assertEquals(10, t.getX());
         assertEquals(5, t.getY());
     }
+
+    @Test
+    void testClickOnShape() {
+        assertEquals(true, t.clickedOnShape(0,0));
+        assertEquals(true, t.clickedOnShape(25,25));
+        assertEquals(false, t.clickedOnShape(26,26));
+        assertEquals(false, t.clickedOnShape(0,26));
+        assertEquals(false, t.clickedOnShape(26,0));
+        assertEquals(false, t.clickedOnShape(-26,0));
+        assertEquals(false, t.clickedOnShape(0,-26));
+    }
+
+    @Test
+    void testAddShape() {
+        assertEquals(false, t.add(t));
+    }
 }

@@ -189,7 +189,7 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
 <span class="nc" id="L189">        groupByCheckBox.addActionListener(e -&gt; {</span>
 <span class="nc bnc" id="L190" title="All 2 branches missed.">            this.groupBySelected = !this.groupBySelected;</span>
 
-<span class="nc bnc" id="L192" title="All 4 branches missed.">            if(!this.groupBySelected &amp;&amp; this.shapesListGroupBy.isEmpty()) {</span>
+<span class="nc bnc" id="L192" title="All 4 branches missed.">            if(!this.groupBySelected &amp;&amp; !this.shapesListGroupBy.isEmpty()) {</span>
 <span class="nc" id="L193">                this.shapesList.add(new CompoundShape(this.shapesListGroupBy));</span>
 <span class="nc" id="L194">                this.shapesListGroupBy.clear();</span>
 

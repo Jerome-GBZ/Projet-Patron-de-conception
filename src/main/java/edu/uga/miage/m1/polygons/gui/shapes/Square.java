@@ -75,29 +75,14 @@ public class Square implements SimpleShape, Visitable {
     }
 
     @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
+    public void accept(Visitor visitor) { visitor.visit(this); }
 
-    @Override
-    public int getX() {
-        return mX;
-    }
+    public int getX() { return mX; }
+    public int getY() { return mY; }
 
-    @Override
-    public int getY() {
-        return mY;
-    }
+    public void moveTo(int x, int y) { mX = x; mY = y; }
 
-    @Override
-    public void moveTo(int x, int y) {
-        mX = x;
-        mY = y;
-    }
-
-    public boolean clickedOnShape(int x, int y) {
-        return this.getX()-25 <= x && this.getX()+25 >= x && this.getY()-25 <= y && this.getY()+25 >= y;
-    }
+    public boolean clickedOnShape(int x, int y) { return this.getX()-25 <= x && this.getX()+25 >= x && this.getY()-25 <= y && this.getY()+25 >= y; }
 
     public boolean add(SimpleShape shape) { return false; }
 }

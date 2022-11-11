@@ -14,7 +14,6 @@ public class XMLVisitor implements SimpleFile {
         representation = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?> <root> <shapes> ";
     }
 
-    @Override
     public void visit(SimpleShape shape) {
         String className = shape.getClass().getSimpleName().toLowerCase();
 
@@ -33,16 +32,6 @@ public class XMLVisitor implements SimpleFile {
 
     /**
      * @return the representation in JSon example for a Triangle:
-     *
-     *         <pre>
-     * {@code
-     *  <shape>
-     *    <type>triangle</type>
-     *    <x>-25</x>
-     *    <y>-25</y>
-     *  </shape>
-     * }
-     * </pre>
      */
     public String getRepresentation() {
         return  representation.concat("</shapes> </root>");

@@ -21,4 +21,21 @@ class CircleTest{
         assertEquals(10, c.getX());
         assertEquals(5, c.getY());
     }
+
+    @Test
+    void testClickOnShape() {
+        assertEquals(true, c.clickedOnShape(0,0));
+        assertEquals(true, c.clickedOnShape(25,25));
+        assertEquals(false, c.clickedOnShape(26,26));
+        assertEquals(false, c.clickedOnShape(0,26));
+        assertEquals(false, c.clickedOnShape(26,0));
+        assertEquals(false, c.clickedOnShape(-26,0));
+        assertEquals(false, c.clickedOnShape(0,-26));
+
+    }
+
+    @Test
+    void testAddShape() {
+        assertEquals(false, c.add(c));
+    }
 }

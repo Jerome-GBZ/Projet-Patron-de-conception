@@ -7,7 +7,7 @@ persistence_g1_3,edu.uga.miage.m1.polygons.gui,JDrawingFrame.ShapeActionListener
 persistence_g1_3,edu.uga.miage.m1.polygons.gui,GUIHelper,18,0,0,0,6,0,1,0,1,0
 persistence_g1_3,edu.uga.miage.m1.polygons.gui.persistence,JSonVisitor,111,0,4,0,15,0,5,0,3,0
 persistence_g1_3,edu.uga.miage.m1.polygons.gui.persistence,XMLVisitor,103,0,4,0,14,0,5,0,3,0
-persistence_g1_3,edu.uga.miage.m1.polygons.gui.shapes,Triangle,175,22,12,0,22,9,10,4,4,4
-persistence_g1_3,edu.uga.miage.m1.polygons.gui.shapes,Square,117,25,10,0,17,10,9,4,4,4
-persistence_g1_3,edu.uga.miage.m1.polygons.gui.shapes,CompoundShape,118,0,8,0,24,0,16,0,12,0
-persistence_g1_3,edu.uga.miage.m1.polygons.gui.shapes,Circle,108,22,10,0,16,9,9,4,4,4
+persistence_g1_3,edu.uga.miage.m1.polygons.gui.shapes,Triangle,145,52,4,8,19,9,4,10,2,6
+persistence_g1_3,edu.uga.miage.m1.polygons.gui.shapes,Square,87,55,2,8,14,10,3,10,2,6
+persistence_g1_3,edu.uga.miage.m1.polygons.gui.shapes,CompoundShape,39,79,1,7,11,13,8,8,7,5
+persistence_g1_3,edu.uga.miage.m1.polygons.gui.shapes,Circle,78,52,2,8,14,11,3,10,2,6
