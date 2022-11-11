@@ -9,10 +9,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.Serial;
 import java.util.ArrayList;
@@ -20,6 +18,8 @@ import java.util.EnumMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+
 import javax.swing.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -27,7 +27,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import java.nio.file.Path;
@@ -37,7 +36,6 @@ import org.json.JSONArray;
 import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
 import edu.uga.miage.m1.polygons.gui.persistence.JSonVisitor;
 import edu.uga.miage.m1.polygons.gui.persistence.SimpleFile;
-import edu.uga.miage.m1.polygons.gui.persistence.Visitor;
 import edu.uga.miage.m1.polygons.gui.persistence.XMLVisitor;
 import edu.uga.miage.m1.polygons.gui.shapes.Circle;
 import edu.uga.miage.m1.polygons.gui.shapes.CompoundShape;
@@ -76,7 +74,7 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
     private transient ArrayList<SimpleShape> shapesList = new ArrayList<>();
     private transient List<SimpleShape> shapesListGroupBy = new ArrayList<>();
     private Shapes shapeMenuSelected = Shapes.SQUARE;
-    private SimpleShape shapeSelected = null;
+    private transient SimpleShape shapeSelected = null;
     private boolean groupBySelected = false;
 
     private transient JSonVisitor jsonVisitor = new JSonVisitor();
@@ -141,13 +139,9 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
     }
 
     private void exportButtonAction() {
-        jsonExportButton.addActionListener(e -> {
-            writeShapeOnFile(this.jsonVisitor, this.nameJsonFile);
-        });
+        jsonExportButton.addActionListener(e -> writeShapeOnFile(this.jsonVisitor, this.nameJsonFile) );
 
-        xmlExportButton.addActionListener(e -> {
-            writeShapeOnFile(this.xmlVisitor, this.nameXMLFile);
-        });
+        xmlExportButton.addActionListener(e -> writeShapeOnFile(this.xmlVisitor, this.nameXMLFile) );
 
         jsonImportButton.addActionListener(e -> {
             try {
@@ -157,7 +151,7 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
 
                 List<SimpleShape> list = importShape(shapesJSON);
                 list.forEach(shape -> {
-                    if(shape.getClass().getSimpleName().equals("CompoundShape")) {
+                    if(shape.add(shape)) {
                         this.shapesList.add(shape);
                     }
                 });
@@ -167,7 +161,6 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
         });
 
         xmlImportButton.addActionListener(e -> {
-            // String fileContent = Files.readString(Path.of(nameJsonFile));
             try {
                 DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
                 dbf.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
@@ -196,13 +189,11 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
         groupByCheckBox.addActionListener(e -> {
             this.groupBySelected = !this.groupBySelected;
 
-            if(this.groupBySelected == false) {
-                if (this.shapesListGroupBy.size() > 0) {
-                    this.shapesList.add(new CompoundShape(this.shapesListGroupBy));
-                    this.shapesListGroupBy.clear();
+            if(!this.groupBySelected && !this.shapesListGroupBy.isEmpty()) {
+                this.shapesList.add(new CompoundShape(this.shapesListGroupBy));
+                this.shapesListGroupBy.clear();
 
-                    reDrawAll();
-                }
+                reDrawAll();
             }
         });
     }
@@ -235,22 +226,18 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
      * @param evt The associated mouse event.
      */
     public void mouseClicked(MouseEvent evt) {
-        if(shapeSelected == null && groupBySelected == false) {
+        if(shapeSelected == null && !groupBySelected) {
             if (panel.contains(evt.getX(), evt.getY())) {
                 this.createShape(shapeMenuSelected, evt.getX(), evt.getY());
             }
         } else {
             this.shapeIsSelect(evt.getX(), evt.getY());
 
-            if(this.shapeSelected != null && this.groupBySelected == true) {
+            if(this.shapeSelected != null && this.groupBySelected) {
                 this.shapesList.remove(this.shapeSelected);
                 this.shapesListGroupBy.add(this.shapeSelected);
 
-                // reDrawAll();
-
-                SwingUtilities.invokeLater(() -> {
-                    this.shapesListGroupBy.forEach(shape -> shape.draw((Graphics2D) panel.getGraphics(), (float) 4.0));
-                });
+                SwingUtilities.invokeLater(() -> this.shapesListGroupBy.forEach(shape -> shape.draw((Graphics2D) panel.getGraphics(), (float) 4.0)) );
 
                 this.shapeSelected = null;
             }
@@ -303,7 +290,7 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
      * @param evt The associated mouse event.
      */
     public void mouseDragged(MouseEvent evt) {
-        if(this.shapeSelected != null && this.groupBySelected == false) {
+        if(this.shapeSelected != null && !this.groupBySelected) {
             this.shapeSelected.moveTo(evt.getX(), evt.getY());
 
             reDrawAll();
@@ -313,9 +300,7 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
     private void reDrawAll() {
         panel.repaint();
 
-        SwingUtilities.invokeLater(() -> {
-            this.shapesList.forEach(shape -> { shape.draw((Graphics2D) panel.getGraphics(), (float) 2.0); });
-        });
+        SwingUtilities.invokeLater(() -> this.shapesList.forEach(shape -> shape.draw((Graphics2D) panel.getGraphics(), (float) 2.0) ) );
     }
 
     private void shapeIsSelect(int x, int y) {
@@ -333,9 +318,9 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
 
         shapesJSON.forEach(shapeObject -> {
             JSONObject shape = (JSONObject) shapeObject;
-            String type = shape.getString("type").toLowerCase();
+            String type = shape.getString("type").toUpperCase();
 
-            if(type.equals("compoundshape")) {
+            if(type.equals("COMPOUNDSHAPE")) {
                 JSONArray childrenShapesJSON = shape.getJSONArray("shapes");
                 list.add(new CompoundShape(importShape(childrenShapesJSON)));
             } else {
@@ -372,8 +357,8 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
                 shapeReturn = square;
                 break;
             default:
-                logger.warning("Error Add shape null (type: "+type+")");
-                break;
+            logger.log(Level.WARNING, "Error Add shape null (type: {0})", type);
+            break;
         }
 
         return shapeReturn;
@@ -381,7 +366,7 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
 
     private void writeShapeOnFile(SimpleFile sf, String nameFile) {
         try {
-            this.shapesList.forEach(shape -> sf.visit(shape) );
+            this.shapesList.forEach(sf::visit);
 
             File myObj = new File(nameFile);
             if (myObj.createNewFile()) {
@@ -389,11 +374,20 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
             }
 
             FileWriter myWriter = new FileWriter(nameFile);
-            myWriter.write(sf.getRepresentation());
-            myWriter.close();
+            writeOnFile(sf, myWriter);
 
         } catch (IOException exc) {
             logger.warning("An error occurred.");
+        }
+    }
+
+    private void writeOnFile(SimpleFile sf, FileWriter myWriter) throws IOException {
+        try {
+            myWriter.write(sf.getRepresentation());
+        } catch(Exception e){
+            logger.warning("Error when writting on file.");
+        } finally {
+            myWriter.close();
         }
     }
 

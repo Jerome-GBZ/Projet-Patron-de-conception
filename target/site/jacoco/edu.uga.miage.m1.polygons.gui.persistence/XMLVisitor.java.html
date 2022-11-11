@@ -1,37 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>XMLVisitor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">persistence_g1_3</a> &gt; <a href="index.source.html" class="el_package">edu.uga.miage.m1.polygons.gui.persistence</a> &gt; <span class="el_source">XMLVisitor.java</span></div><h1>XMLVisitor.java</h1><pre class="source lang-java linenums">package edu.uga.miage.m1.polygons.gui.persistence;
 
-import edu.uga.miage.m1.polygons.gui.shapes.Circle;
-import edu.uga.miage.m1.polygons.gui.shapes.Square;
-import edu.uga.miage.m1.polygons.gui.shapes.Triangle;
+import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
+import edu.uga.miage.m1.polygons.gui.shapes.CompoundShape;
 
 /**
  * @author &lt;a href=&quot;mailto:christophe.saint-marcel@univ-grenoble-alpes.fr&quot;&gt;Christophe&lt;/a&gt;
  */
-public class XMLVisitor implements Visitor {
+public class XMLVisitor implements SimpleFile {
 
-<span class="nc" id="L12">    private String representation = null;</span>
+<span class="nc" id="L11">    private String representation = null;</span>
 
-<span class="nc" id="L14">    public XMLVisitor() {</span>
-<span class="nc" id="L15">        representation = &quot;&lt;?xml version=\&quot;1.0\&quot; encoding=\&quot;UTF-8\&quot; ?&gt; &lt;root&gt; &lt;shapes&gt; &quot;;</span>
-<span class="nc" id="L16">    }</span>
-
-    @Override
-    public void visit(Circle circle) {
-<span class="nc" id="L20">        String xmlTriangle = String.format(&quot;&lt;shape&gt; &lt;type&gt;circle&lt;/type&gt; &lt;x&gt;%d&lt;/x&gt; &lt;y&gt;%d&lt;/y&gt; &lt;/shape&gt; &quot;, circle.getX(), circle.getY());</span>
-<span class="nc" id="L21">        representation += xmlTriangle;</span>
-<span class="nc" id="L22">    }</span>
+<span class="nc" id="L13">    public XMLVisitor() {</span>
+<span class="nc" id="L14">        representation = &quot;&lt;?xml version=\&quot;1.0\&quot; encoding=\&quot;UTF-8\&quot; ?&gt; &lt;root&gt; &lt;shapes&gt; &quot;;</span>
+<span class="nc" id="L15">    }</span>
 
     @Override
-    public void visit(Square square) {
-<span class="nc" id="L26">        String xmlTriangle = String.format(&quot;&lt;shape&gt; &lt;type&gt;square&lt;/type&gt; &lt;x&gt;%d&lt;/x&gt; &lt;y&gt;%d&lt;/y&gt; &lt;/shape&gt; &quot;, square.getX(), square.getY());</span>
-<span class="nc" id="L27">        representation += xmlTriangle;</span>
-<span class="nc" id="L28">    }</span>
+    public void visit(SimpleShape shape) {
+<span class="nc" id="L19">        String className = shape.getClass().getSimpleName().toLowerCase();</span>
 
-    @Override
-    public void visit(Triangle triangle) {
-<span class="nc" id="L32">        String xmlTriangle = String.format(&quot;&lt;shape&gt; &lt;type&gt;triangle&lt;/type&gt; &lt;x&gt;%d&lt;/x&gt; &lt;y&gt;%d&lt;/y&gt; &lt;/shape&gt; &quot;, triangle.getX(), triangle.getY());</span>
-<span class="nc" id="L33">        representation += xmlTriangle;</span>
-<span class="nc" id="L34">    }</span>
+<span class="nc bnc" id="L21" title="All 2 branches missed.">        if(className.equals(&quot;compoundshape&quot;)) {</span>
+<span class="nc" id="L22">            representation += String.format(&quot;&lt;shape&gt; &lt;type&gt;%s&lt;/type&gt; &lt;shapes&gt; &quot;, className);</span>
+
+<span class="nc bnc" id="L24" title="All 2 branches missed.">            for (SimpleShape s : ((CompoundShape) shape).getShapes()) {</span>
+<span class="nc" id="L25">                this.visit(s);</span>
+<span class="nc" id="L26">            }</span>
+
+<span class="nc" id="L28">            representation += &quot;&lt;/shapes&gt; &lt;/shape&gt; &quot;;</span>
+        } else {
+<span class="nc" id="L30">            representation += String.format(&quot;&lt;shape&gt; &lt;type&gt;%s&lt;/type&gt; &lt;x&gt;%d&lt;/x&gt; &lt;y&gt;%d&lt;/y&gt; &lt;/shape&gt; &quot;, shape.getClass().getSimpleName().toLowerCase(), shape.getX(), shape.getY());</span>
+        }
+<span class="nc" id="L32">    }</span>
 
     /**
      * @return the representation in JSon example for a Triangle:
@@ -47,7 +45,7 @@ public class XMLVisitor implements Visitor {
      * &lt;/pre&gt;
      */
     public String getRepresentation() {
-<span class="nc" id="L50">        return  representation.concat(&quot;&lt;/shapes&gt; &lt;/root&gt;&quot;);</span>
+<span class="nc" id="L48">        return  representation.concat(&quot;&lt;/shapes&gt; &lt;/root&gt;&quot;);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

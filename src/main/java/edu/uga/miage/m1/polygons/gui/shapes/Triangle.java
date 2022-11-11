@@ -52,7 +52,7 @@ public class Triangle implements SimpleShape, Visitable {
      */
     public void draw(Graphics2D g2, float width) {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        GradientPaint gradient = new GradientPaint(mX-25, mY-25, Color.GREEN,(mX + 50), mY, Color.WHITE);
+        GradientPaint gradient = new GradientPaint((float) mX-25, (float) mY-25, Color.GREEN,(mX + 50), mY, Color.WHITE);
         g2.setPaint(gradient);
 
         int[] xcoords = { mX,      mX - 25, mX + 25 };
@@ -60,7 +60,7 @@ public class Triangle implements SimpleShape, Visitable {
 
         GeneralPath polygon = new GeneralPath(Path2D.WIND_EVEN_ODD, xcoords.length);
 
-        polygon.moveTo(mX, mY-25);
+        polygon.moveTo(mX, (float) mY-25);
         for (int i = 0; i < xcoords.length; i++) {
             polygon.lineTo(xcoords[i], ycoords[i]);
         }
@@ -100,12 +100,8 @@ public class Triangle implements SimpleShape, Visitable {
     }
 
     public boolean clickedOnShape(int x, int y) {
-        if(this.getX()-25 <= x && this.getX()+25 >= x) {
-            if(this.getY()-25 <= y && this.getY()+25 >= y) {
-                return true;
-            }
-        }
-
-        return false;
+        return this.getX()-25 <= x && this.getX()+25 >= x && this.getY()-25 <= y && this.getY()+25 >= y;
     }
+
+    public boolean add(SimpleShape shape) { return false; }
 }

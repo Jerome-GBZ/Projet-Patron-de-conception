@@ -25,7 +25,7 @@ public class XMLVisitor implements SimpleFile {
                 this.visit(s);
             }
 
-            representation += String.format("</shapes> </shape> ");
+            representation += "</shapes> </shape> ";
         } else {
             representation += String.format("<shape> <type>%s</type> <x>%d</x> <y>%d</y> </shape> ", shape.getClass().getSimpleName().toLowerCase(), shape.getX(), shape.getY());
         }

@@ -38,52 +38,71 @@ import edu.uga.miage.m1.polygons.gui.persistence.Visitor;
 public class Triangle implements SimpleShape, Visitable {
 
     int mX;
-
     int mY;
 
-<span class="fc" id="L44">    public Triangle(int x, int y) {</span>
-<span class="fc" id="L45">        mX = x - 25;</span>
-<span class="fc" id="L46">        mY = y - 25;</span>
-<span class="fc" id="L47">    }</span>
+<span class="fc" id="L43">    public Triangle(int x, int y) {</span>
+<span class="fc" id="L44">        mX = x;</span>
+<span class="fc" id="L45">        mY = y;</span>
+<span class="fc" id="L46">    }</span>
 
     /**
      * Implements the &lt;tt&gt;SimpleShape.draw()&lt;/tt&gt; method for painting
      * the shape.
      * @param g2 The graphics object used for painting.
      */
-    public void draw(Graphics2D g2) {
-<span class="nc" id="L55">        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);</span>
-<span class="nc" id="L56">        GradientPaint gradient = new GradientPaint(mX, mY, Color.GREEN,(mX + 50), mY, Color.WHITE);</span>
-<span class="nc" id="L57">        g2.setPaint(gradient);</span>
-<span class="nc" id="L58">        int[] xcoords = { mX + 25, mX, mX + 50 };</span>
-<span class="nc" id="L59">        int[] ycoords = {mY, mY + 50, mY + 50 };</span>
-<span class="nc" id="L60">        GeneralPath polygon = new GeneralPath(Path2D.WIND_EVEN_ODD, xcoords.length);</span>
+    public void draw(Graphics2D g2, float width) {
+<span class="nc" id="L54">        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);</span>
+<span class="nc" id="L55">        GradientPaint gradient = new GradientPaint((float) mX-25, (float) mY-25, Color.GREEN,(mX + 50), mY, Color.WHITE);</span>
+<span class="nc" id="L56">        g2.setPaint(gradient);</span>
 
-<span class="nc" id="L62">        polygon.moveTo(mX + 25.00, mY);</span>
-<span class="nc bnc" id="L63" title="All 2 branches missed.">        for (int i = 0; i &lt; xcoords.length; i++) {</span>
-<span class="nc" id="L64">            polygon.lineTo(xcoords[i], ycoords[i]);</span>
+<span class="nc" id="L58">        int[] xcoords = { mX,      mX - 25, mX + 25 };</span>
+<span class="nc" id="L59">        int[] ycoords = { mY - 25, mY + 25, mY + 25 };</span>
+
+<span class="nc" id="L61">        GeneralPath polygon = new GeneralPath(Path2D.WIND_EVEN_ODD, xcoords.length);</span>
+
+<span class="nc" id="L63">        polygon.moveTo(mX, (float) mY-25);</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">        for (int i = 0; i &lt; xcoords.length; i++) {</span>
+<span class="nc" id="L65">            polygon.lineTo(xcoords[i], ycoords[i]);</span>
         }
-<span class="nc" id="L66">        polygon.closePath();</span>
-<span class="nc" id="L67">        g2.fill(polygon);</span>
-<span class="nc" id="L68">        BasicStroke wideStroke = new BasicStroke(2.0f);</span>
-<span class="nc" id="L69">        g2.setColor(Color.black);</span>
-<span class="nc" id="L70">        g2.setStroke(wideStroke);</span>
-<span class="nc" id="L71">        g2.draw(polygon);</span>
-<span class="nc" id="L72">    }</span>
+<span class="nc" id="L67">        polygon.closePath();</span>
+<span class="nc" id="L68">        g2.fill(polygon);</span>
+
+<span class="nc bnc" id="L70" title="All 2 branches missed.">        if(width == 4.0) {</span>
+<span class="nc" id="L71">            g2.setColor(Color.LIGHT_GRAY);</span>
+        } else {
+<span class="nc" id="L73">            g2.setColor(Color.BLACK);</span>
+        }
+
+<span class="nc" id="L76">        BasicStroke wideStroke = new BasicStroke(width);</span>
+<span class="nc" id="L77">        g2.setStroke(wideStroke);</span>
+<span class="nc" id="L78">        g2.draw(polygon);</span>
+<span class="nc" id="L79">    }</span>
 
     @Override
     public void accept(Visitor visitor) {
-<span class="nc" id="L76">        visitor.visit(this);</span>
-<span class="nc" id="L77">    }</span>
+<span class="nc" id="L83">        visitor.visit(this);</span>
+<span class="nc" id="L84">    }</span>
 
     @Override
     public int getX() {
-<span class="fc" id="L81">        return mX;</span>
+<span class="fc" id="L88">        return mX;</span>
     }
 
     @Override
     public int getY() {
-<span class="fc" id="L86">        return mY;</span>
+<span class="fc" id="L93">        return mY;</span>
     }
+
+    @Override
+    public void moveTo(int x, int y) {
+<span class="fc" id="L98">        mX = x;</span>
+<span class="fc" id="L99">        mY = y;</span>
+<span class="fc" id="L100">    }</span>
+
+    public boolean clickedOnShape(int x, int y) {
+<span class="nc bnc" id="L103" title="All 8 branches missed.">        return this.getX()-25 &lt;= x &amp;&amp; this.getX()+25 &gt;= x &amp;&amp; this.getY()-25 &lt;= y &amp;&amp; this.getY()+25 &gt;= y;</span>
+    }
+
+<span class="nc" id="L106">    public boolean add(SimpleShape shape) { return false; }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

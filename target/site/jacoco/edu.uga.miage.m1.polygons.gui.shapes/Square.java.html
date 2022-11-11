@@ -24,6 +24,7 @@ import java.awt.GradientPaint;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.Rectangle2D;
+
 import edu.uga.miage.m1.polygons.gui.persistence.Visitable;
 import edu.uga.miage.m1.polygons.gui.persistence.Visitor;
 
@@ -39,40 +40,65 @@ public class Square implements SimpleShape, Visitable {
 
     int mY;
 
-<span class="fc" id="L42">    public Square(int x, int y) {</span>
-<span class="fc" id="L43">        mX = x - 25;</span>
-<span class="fc" id="L44">        mY = y - 25;</span>
-<span class="fc" id="L45">    }</span>
+    boolean stateM;
+
+<span class="fc" id="L45">    public Square(int x, int y) {</span>
+<span class="fc" id="L46">        mX = x;</span>
+<span class="fc" id="L47">        mY = y;</span>
+<span class="fc" id="L48">        stateM = false;</span>
+<span class="fc" id="L49">    }</span>
 
     /**
      * Implements the &lt;tt&gt;SimpleShape.draw()&lt;/tt&gt; method for painting
      * the shape.
      * @param g2 The graphics object used for painting.
      */
-    public void draw(Graphics2D g2) {
-<span class="nc" id="L53">        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);</span>
-<span class="nc" id="L54">        GradientPaint gradient = new GradientPaint(mX, mY, Color.BLUE, (mX + 50), mY, Color.WHITE);</span>
-<span class="nc" id="L55">        g2.setPaint(gradient);</span>
-<span class="nc" id="L56">        g2.fill(new Rectangle2D.Double(mX, mY, 50, 50));</span>
-<span class="nc" id="L57">        BasicStroke wideStroke = new BasicStroke(2.0f);</span>
-<span class="nc" id="L58">        g2.setColor(Color.black);</span>
-<span class="nc" id="L59">        g2.setStroke(wideStroke);</span>
-<span class="nc" id="L60">        g2.draw(new Rectangle2D.Double(mX, mY, 50, 50));</span>
-<span class="nc" id="L61">    }</span>
+    public void draw(Graphics2D g2, float width) {
+<span class="nc" id="L57">        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);</span>
+<span class="nc" id="L58">        GradientPaint gradient = new GradientPaint((float) mX-25, (float) mY-25, Color.BLUE, (mX + 50), mY, Color.WHITE);</span>
+<span class="nc" id="L59">        g2.setPaint(gradient);</span>
+
+<span class="nc" id="L61">        Rectangle2D square = new Rectangle2D.Double((double) mX-25, (double) mY-25, 50, 50);</span>
+<span class="nc" id="L62">        g2.fill(square);</span>
+
+<span class="nc bnc" id="L64" title="All 2 branches missed.">        if(width == 4.0) {</span>
+<span class="nc" id="L65">            g2.setColor(Color.LIGHT_GRAY);</span>
+        } else {
+<span class="nc" id="L67">            g2.setColor(Color.BLACK);</span>
+        }
+
+<span class="nc" id="L70">        BasicStroke wideStroke = new BasicStroke(width);</span>
+<span class="nc" id="L71">        g2.setStroke(wideStroke);</span>
+<span class="nc" id="L72">        g2.draw(square);</span>
+
+<span class="nc" id="L74">        square.contains(mX, mY);</span>
+<span class="nc" id="L75">    }</span>
 
     @Override
     public void accept(Visitor visitor) {
-<span class="nc" id="L65">        visitor.visit(this);</span>
-<span class="nc" id="L66">    }</span>
+<span class="nc" id="L79">        visitor.visit(this);</span>
+<span class="nc" id="L80">    }</span>
 
     @Override
     public int getX() {
-<span class="fc" id="L70">        return mX;</span>
+<span class="fc" id="L84">        return mX;</span>
     }
 
     @Override
     public int getY() {
-<span class="fc" id="L75">        return mY;</span>
+<span class="fc" id="L89">        return mY;</span>
     }
+
+    @Override
+    public void moveTo(int x, int y) {
+<span class="fc" id="L94">        mX = x;</span>
+<span class="fc" id="L95">        mY = y;</span>
+<span class="fc" id="L96">    }</span>
+
+    public boolean clickedOnShape(int x, int y) {
+<span class="nc bnc" id="L99" title="All 8 branches missed.">        return this.getX()-25 &lt;= x &amp;&amp; this.getX()+25 &gt;= x &amp;&amp; this.getY()-25 &lt;= y &amp;&amp; this.getY()+25 &gt;= y;</span>
+    }
+
+<span class="nc" id="L102">    public boolean add(SimpleShape shape) { return false; }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

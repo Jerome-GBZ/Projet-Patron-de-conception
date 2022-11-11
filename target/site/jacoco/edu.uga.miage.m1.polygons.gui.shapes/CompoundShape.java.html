@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CompoundShape.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">persistence_g1_3</a> &gt; <a href="index.source.html" class="el_package">edu.uga.miage.m1.polygons.gui.shapes</a> &gt; <span class="el_source">CompoundShape.java</span></div><h1>CompoundShape.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * &quot;License&quot;); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+package edu.uga.miage.m1.polygons.gui.shapes;
+
+import java.awt.Graphics2D;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import edu.uga.miage.m1.polygons.gui.persistence.Visitable;
+import edu.uga.miage.m1.polygons.gui.persistence.Visitor;
+
+public class CompoundShape implements SimpleShape, Visitable {
+
+    protected List&lt;SimpleShape&gt; shapesList;
+
+
+<span class="nc" id="L34">    public CompoundShape(List&lt;SimpleShape&gt; s) {</span>
+<span class="nc" id="L35">        this.shapesList = new ArrayList&lt;&gt;(s);</span>
+<span class="nc" id="L36">    }</span>
+
+    public void add(Graphics2D g2, SimpleShape s) {
+<span class="nc" id="L39">        this.shapesList.add(s);</span>
+<span class="nc" id="L40">        s.draw(g2, getX());</span>
+<span class="nc" id="L41">    }</span>
+
+    /**
+     * Implements the &lt;tt&gt;SimpleShape.draw()&lt;/tt&gt; method for painting
+     * the shape.
+     * @param g2 The graphics object used for painting.
+     */
+    public void draw(Graphics2D g2, float width) {
+<span class="nc" id="L49">        this.shapesList.forEach(shape -&gt; shape.draw(g2, width));</span>
+<span class="nc" id="L50">    }</span>
+
+    @Override
+    public void accept(Visitor visitor) {
+<span class="nc" id="L54">        visitor.visit(this);</span>
+<span class="nc" id="L55">    }</span>
+
+    public int getX() {
+<span class="nc" id="L58">        return 0;</span>
+    }
+
+    public int getY() {
+<span class="nc" id="L62">        return 0;</span>
+    }
+
+    public List&lt;SimpleShape&gt; getShapes() {
+<span class="nc" id="L66">        return shapesList;</span>
+    }
+
+    @Override
+    public void moveTo(int x, int y) {
+<span class="nc bnc" id="L71" title="All 2 branches missed.">        if(shapesList.isEmpty()) {</span>
+<span class="nc" id="L72">            int translationX = x - shapesList.get(0).getX();</span>
+<span class="nc" id="L73">            int translationY = y - shapesList.get(0).getY();</span>
+
+<span class="nc" id="L75">            this.getShapes().forEach(shape -&gt; shape.moveTo(shape.getX()+translationX, shape.getY()+translationY) );</span>
+        }
+<span class="nc" id="L77">    }</span>
+
+    public boolean clickedOnShape(int x, int y) {
+<span class="nc" id="L80">        int i = shapesList.size() - 1;</span>
+
+<span class="nc bnc" id="L82" title="All 4 branches missed.">        while(i &gt; -1 &amp;&amp; !shapesList.get(i).clickedOnShape(x, y)) {</span>
+<span class="nc" id="L83">            i--;</span>
+        }
+
+<span class="nc bnc" id="L86" title="All 2 branches missed.">        return i &gt; -1;</span>
+    }
+
+    public boolean add(SimpleShape shape) {
+<span class="nc" id="L90">        this.shapesList = ((CompoundShape) shape).getShapes();</span>
+
+<span class="nc" id="L92">        return true;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

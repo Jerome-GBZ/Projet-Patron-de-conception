@@ -25,7 +25,7 @@ public class JSonVisitor implements SimpleFile {
                 this.visit(s);
             }
 
-            representation += String.format("]}, ");
+            representation += "]}, ";
         } else {
             representation += String.format("{ \"type\": \"%s\", \"x\": %d, \"y\": %d }, ", className, shape.getX(), shape.getY());
         }

@@ -1,6 +1,8 @@
 edu/uga/miage/m1/polygons/gui/shapes/SimpleShape.class
 edu/uga/miage/m1/polygons/gui/GUIHelper.class
 edu/uga/miage/m1/polygons/gui/persistence/Visitor.class
+edu/uga/miage/m1/polygons/gui/persistence/SimpleFile.class
+edu/uga/miage/m1/polygons/gui/shapes/CompoundShape.class
 edu/uga/miage/m1/polygons/gui/persistence/JSonVisitor.class
 edu/uga/miage/m1/polygons/gui/JDrawingFrame$ShapeActionListener.class
 edu/uga/miage/m1/polygons/gui/persistence/XMLVisitor.class

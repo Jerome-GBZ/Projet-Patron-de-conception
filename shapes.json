@@ -1,1 +1,1 @@
-{ "shapes":[ { "type": "circle", "x": 233, "y": 132 }, { "type": "triangle", "x": 143, "y": 88 }, { "type": "circle", "x": 175, "y": 123 }] }
+{ "shapes":[ { "type": "compoundshape", "shapes": [{ "type": "circle", "x": 276, "y": 71 }, { "type": "triangle", "x": 275, "y": 104 }, ]}] }

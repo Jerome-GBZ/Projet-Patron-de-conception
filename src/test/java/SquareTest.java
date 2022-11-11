@@ -14,4 +14,11 @@ class SquareTest {
     void test_getY (){
         assertEquals(0, s.getY());
     }
+
+    @Test
+    void test_moveTo() {
+        s.moveTo(10, 5);
+        assertEquals(10, s.getX());
+        assertEquals(5, s.getY());
+    }
 }

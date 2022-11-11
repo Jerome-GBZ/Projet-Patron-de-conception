@@ -14,4 +14,11 @@ class TriangleTest {
     void test_getY (){
         assertEquals(0, t.getY());
     }
+
+    @Test
+    void test_moveTo() {
+        t.moveTo(10, 5);
+        assertEquals(10, t.getX());
+        assertEquals(5, t.getY());
+    }
 }

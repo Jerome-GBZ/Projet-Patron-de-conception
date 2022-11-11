@@ -68,13 +68,11 @@ public class CompoundShape implements SimpleShape, Visitable {
 
     @Override
     public void moveTo(int x, int y) {
-        if(shapesList.size() > 0) {
+        if(!shapesList.isEmpty()) {
             int translationX = x - shapesList.get(0).getX();
             int translationY = y - shapesList.get(0).getY();
 
-            this.getShapes().forEach(shape -> {
-                shape.moveTo(shape.getX()+translationX, shape.getY()+translationY);
-            });
+            this.getShapes().forEach(shape -> shape.moveTo(shape.getX()+translationX, shape.getY()+translationY) );
         }
     }
 
@@ -85,10 +83,12 @@ public class CompoundShape implements SimpleShape, Visitable {
             i--;
         }
 
-        if(i > -1) {
-            return true;
-        }
+        return i > -1;
+    }
 
-        return false;
+    public boolean add(SimpleShape shape) {
+        this.shapesList = ((CompoundShape) shape).getShapes();
+
+        return true;
     }
 }

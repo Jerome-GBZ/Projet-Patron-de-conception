@@ -23,4 +23,6 @@ public interface SimpleShape {
     void moveTo(int x, int y);
 
     boolean clickedOnShape(int x, int y);
+
+    boolean add(SimpleShape shape);
 }

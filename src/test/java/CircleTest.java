@@ -14,4 +14,11 @@ class CircleTest{
     void test_getY (){
         assertEquals(0, c.getY());
     }
+
+    @Test
+    void test_moveTo() {
+        c.moveTo(10, 5);
+        assertEquals(10, c.getX());
+        assertEquals(5, c.getY());
+    }
 }

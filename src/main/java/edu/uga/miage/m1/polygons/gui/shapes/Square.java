@@ -24,6 +24,7 @@ import java.awt.GradientPaint;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.Rectangle2D;
+
 import edu.uga.miage.m1.polygons.gui.persistence.Visitable;
 import edu.uga.miage.m1.polygons.gui.persistence.Visitor;
 
@@ -54,10 +55,10 @@ public class Square implements SimpleShape, Visitable {
      */
     public void draw(Graphics2D g2, float width) {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        GradientPaint gradient = new GradientPaint(mX-25, mY-25, Color.BLUE, (mX + 50), mY, Color.WHITE);
+        GradientPaint gradient = new GradientPaint((float) mX-25, (float) mY-25, Color.BLUE, (mX + 50), mY, Color.WHITE);
         g2.setPaint(gradient);
 
-        Rectangle2D square = new Rectangle2D.Double(mX-25, mY-25, 50, 50);
+        Rectangle2D square = new Rectangle2D.Double((double) mX-25, (double) mY-25, 50, 50);
         g2.fill(square);
 
         if(width == 4.0) {
@@ -95,12 +96,8 @@ public class Square implements SimpleShape, Visitable {
     }
 
     public boolean clickedOnShape(int x, int y) {
-        if(this.getX()-25 <= x && this.getX()+25 >= x) {
-            if(this.getY()-25 <= y && this.getY()+25 >= y) {
-                return true;
-            }
-        }
-
-        return false;
+        return this.getX()-25 <= x && this.getX()+25 >= x && this.getY()-25 <= y && this.getY()+25 >= y;
     }
+
+    public boolean add(SimpleShape shape) { return false; }
 }
