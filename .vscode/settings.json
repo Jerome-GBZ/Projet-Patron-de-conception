@@ -1,0 +1,7 @@
+{
+    "sonarlint.connectedMode.project": {
+        "connectionId": "persistence_g1_3",
+        "projectKey": "fr.uga.miage.m1:persistence_g1_3"
+    },
+    "java.configuration.updateBuildConfiguration": "interactive"
+}

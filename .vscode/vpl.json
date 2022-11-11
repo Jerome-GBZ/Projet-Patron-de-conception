@@ -1,0 +1,8 @@
+{
+  "protocol": "https",
+  "hostname": "moodle.caseine.org",
+  "path": "/mod/vpl/view.php",
+  "vplId": "52323",
+  "useWebsocket": false,
+  "useUnsecureURL": false
+}
