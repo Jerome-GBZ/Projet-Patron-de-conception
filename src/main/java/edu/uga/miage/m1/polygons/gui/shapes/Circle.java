@@ -28,13 +28,10 @@ import java.awt.geom.Ellipse2D;
 import edu.uga.miage.m1.polygons.gui.persistence.Visitable;
 import edu.uga.miage.m1.polygons.gui.persistence.Visitor;
 
-public class Circle implements SimpleShape, Visitable {
-
-    int x;
-    int y;
+public class Circle extends Shape implements SimpleShape, Visitable {
 
     public Circle(int x, int y) {
-        moveTo(x,y);
+        super(x, y);
     }
 
     /**
@@ -44,10 +41,10 @@ public class Circle implements SimpleShape, Visitable {
      */
     public void draw(Graphics2D g2, float width) {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        GradientPaint gradient = new GradientPaint((float) x-25, (float) y-25, Color.RED, (x + 50), y, Color.WHITE);
+        GradientPaint gradient = new GradientPaint((float) getX()-25, (float) getY()-25, Color.RED, (getX() + 50), getY(), Color.WHITE);
         g2.setPaint(gradient);
 
-        Ellipse2D ellipse = new Ellipse2D.Double((double) x-25, (double) y-25, 50, 50);
+        Ellipse2D ellipse = new Ellipse2D.Double((double) getX()-25, (double) getY()-25, 50, 50);
         g2.fill(ellipse);
 
         if(width == 4.0) {
@@ -62,30 +59,8 @@ public class Circle implements SimpleShape, Visitable {
     }
 
     @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
+    public void accept(Visitor visitor) { visitor.visit(this); }
 
     @Override
-    public void moveTo(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    public boolean clickedOnShape(int x, int y) {
-        return this.getX()-25 <= x && this.getX()+25 >= x && this.getY()-25 <= y && this.getY()+25 >= y;
-    }
-
-    @Override
-    public boolean add(SimpleShape shape) {
-        return false;
-    }
+    public boolean add(SimpleShape shape) { return false; }
 }

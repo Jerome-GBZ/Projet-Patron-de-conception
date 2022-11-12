@@ -1,4 +1,5 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,5 +57,28 @@ class CompoundShapeTest {
         assertEquals(false, cs.clickedOnShape(26,0));
         assertEquals(false, cs.clickedOnShape(-26,0));
         assertEquals(false, cs.clickedOnShape(0,-26));
+    }
+
+    @Test
+    void testAddShapeCompound() {
+        list.add(c);
+        list.add(s);
+        CompoundShape cs1 = new CompoundShape(list);
+        CompoundShape cs2 = new CompoundShape(new ArrayList<SimpleShape>());
+
+        assertEquals(true, cs2.add(cs1));
+        assertNotNull(cs2.getShapes());
+    }
+
+    @Test
+    void testGetX() {
+        CompoundShape cs = new CompoundShape(list);
+        assertEquals(0, cs.getX());
+    }
+
+    @Test
+    void testGetY() {
+        CompoundShape cs = new CompoundShape(list);
+        assertEquals(0, cs.getY());
     }
 }

@@ -28,8 +28,7 @@ import edu.uga.miage.m1.polygons.gui.persistence.Visitor;
 
 public class CompoundShape implements SimpleShape, Visitable {
 
-    protected List<SimpleShape> shapesList;
-
+    private List<SimpleShape> shapesList;
 
     public CompoundShape(List<SimpleShape> s) {
         this.shapesList = new ArrayList<>(s);
@@ -49,22 +48,7 @@ public class CompoundShape implements SimpleShape, Visitable {
         this.shapesList.forEach(shape -> shape.draw(g2, width));
     }
 
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
-
-    public int getX() {
-        return 0;
-    }
-
-    public int getY() {
-        return 0;
-    }
-
-    public List<SimpleShape> getShapes() {
-        return shapesList;
-    }
+    public List<SimpleShape> getShapes() { return shapesList; }
 
     @Override
     public void moveTo(int x, int y) {
@@ -85,6 +69,15 @@ public class CompoundShape implements SimpleShape, Visitable {
 
         return i > -1;
     }
+
+    @Override
+    public void accept(Visitor visitor) { visitor.visit(this); }
+
+    @Override
+    public int getX() { return 0; }
+
+    @Override
+    public int getY() { return 0; }
 
     public boolean add(SimpleShape shape) {
         this.shapesList = ((CompoundShape) shape).getShapes();

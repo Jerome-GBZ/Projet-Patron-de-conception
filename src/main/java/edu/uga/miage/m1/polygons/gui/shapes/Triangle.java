@@ -35,13 +35,11 @@ import edu.uga.miage.m1.polygons.gui.persistence.Visitor;
  *
  * @author <a href="mailto:christophe.saint-marcel@univ-grenoble-alpes.fr">Christophe</a>
  */
-public class Triangle implements SimpleShape, Visitable {
+public class Triangle extends Shape implements SimpleShape, Visitable {
 
-    int x;
-    int y;
 
     public Triangle(int x, int y) {
-        moveTo(x,y);
+        super(x, y);
     }
 
     /**
@@ -51,15 +49,15 @@ public class Triangle implements SimpleShape, Visitable {
      */
     public void draw(Graphics2D g2, float width) {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        GradientPaint gradient = new GradientPaint((float) x-25, (float) y-25, Color.GREEN,(x + 50), y, Color.WHITE);
+        GradientPaint gradient = new GradientPaint((float) getX()-25, (float) getY()-25, Color.GREEN,(getX() + 50), getY(), Color.WHITE);
         g2.setPaint(gradient);
 
-        int[] xcoords = { x,      x - 25, x + 25 };
-        int[] ycoords = { y - 25, y + 25, y + 25 };
+        int[] xcoords = { getX(), getX()-25, getX()+25 };
+        int[] ycoords = { getY()-25, getY()+25, getY()+25 };
 
         GeneralPath polygon = new GeneralPath(Path2D.WIND_EVEN_ODD, xcoords.length);
 
-        polygon.moveTo(x, (float) y-25);
+        polygon.moveTo(getX(), (float) getY()-25);
         for (int i = 0; i < xcoords.length; i++) {
             polygon.lineTo(xcoords[i], ycoords[i]);
         }
@@ -77,16 +75,8 @@ public class Triangle implements SimpleShape, Visitable {
         g2.draw(polygon);
     }
 
-
     public void accept(Visitor visitor) { visitor.visit(this); }
 
-    public int getX() { return x; }
-
-    public int getY() { return y; }
-
-    public void moveTo(int x, int y) { this.x = x; this.y = y; }
-
-    public boolean clickedOnShape(int x, int y) { return this.getX()-25 <= x && this.getX()+25 >= x && this.getY()-25 <= y && this.getY()+25 >= y; }
-
+    @Override
     public boolean add(SimpleShape shape) { return false; }
 }

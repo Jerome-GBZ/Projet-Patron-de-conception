@@ -16,27 +16,27 @@ public class JSonVisitor implements SimpleFile {
 
     @Override
     public void visit(SimpleShape shape) {
-<span class="nc" id="L19">        String className = shape.getClass().getSimpleName().toLowerCase();</span>
+<span class="fc" id="L19">        String className = shape.getClass().getSimpleName().toLowerCase();</span>
 
-<span class="nc bnc" id="L21" title="All 2 branches missed.">        if(className.equals(&quot;compoundshape&quot;)) {</span>
-<span class="nc" id="L22">            representation += String.format(&quot;{ \&quot;type\&quot;: \&quot;%s\&quot;, \&quot;shapes\&quot;: [&quot;, className);</span>
+<span class="fc bfc" id="L21" title="All 2 branches covered.">        if(className.equals(&quot;compoundshape&quot;)) {</span>
+<span class="fc" id="L22">            representation += String.format(&quot;{ \&quot;type\&quot;: \&quot;%s\&quot;, \&quot;shapes\&quot;: [&quot;, className);</span>
 
-<span class="nc bnc" id="L24" title="All 2 branches missed.">            for (SimpleShape s : ((CompoundShape) shape).getShapes()) {</span>
-<span class="nc" id="L25">                this.visit(s);</span>
-<span class="nc" id="L26">            }</span>
+<span class="fc bfc" id="L24" title="All 2 branches covered.">            for (SimpleShape s : ((CompoundShape) shape).getShapes()) {</span>
+<span class="fc" id="L25">                this.visit(s);</span>
+<span class="fc" id="L26">            }</span>
 
-<span class="nc" id="L28">            representation += &quot;]}, &quot;;</span>
+<span class="fc" id="L28">            representation += &quot;]}, &quot;;</span>
         } else {
-<span class="nc" id="L30">            representation += String.format(&quot;{ \&quot;type\&quot;: \&quot;%s\&quot;, \&quot;x\&quot;: %d, \&quot;y\&quot;: %d }, &quot;, className, shape.getX(), shape.getY());</span>
+<span class="fc" id="L30">            representation += String.format(&quot;{ \&quot;type\&quot;: \&quot;%s\&quot;, \&quot;x\&quot;: %d, \&quot;y\&quot;: %d }, &quot;, className, shape.getX(), shape.getY());</span>
         }
-<span class="nc" id="L32">    }</span>
+<span class="fc" id="L32">    }</span>
 
     /**
      * @return the representation in JSon example for a Circle
      */
     public String getRepresentation() {
-<span class="nc" id="L38">        representation = representation.substring(0, representation.length()-2);</span>
-<span class="nc" id="L39">        return  representation.concat(&quot;] }&quot;);</span>
+<span class="fc" id="L38">        representation = representation.substring(0, representation.length()-2);</span>
+<span class="fc" id="L39">        return  representation.concat(&quot;] }&quot;);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

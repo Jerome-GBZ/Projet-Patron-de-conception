@@ -1,5 +1,7 @@
+JSonVisitorTest.class
+XMLVisitorTest.class
 CircleTest.class
-SquareTest.class
 JDrawingFrameTest.class
 CompoundShapeTest.class
 TriangleTest.class
+SquareTest.class

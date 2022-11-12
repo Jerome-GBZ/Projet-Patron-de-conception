@@ -71,7 +71,7 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
     private final JCheckBox groupByCheckBox;
 
     private transient ActionListener mReusableActionListener = new ShapeActionListener();
-    private transient ArrayList<SimpleShape> shapesList = new ArrayList<>();
+    private transient List<SimpleShape> shapesList = new ArrayList<>();
     private transient List<SimpleShape> shapesListGroupBy = new ArrayList<>();
     private Shapes shapeMenuSelected = Shapes.SQUARE;
     private transient SimpleShape shapeSelected = null;
@@ -176,7 +176,7 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
                     int x = Integer.parseInt(shapeElement.getElementsByTagName("x").item(0).getTextContent());
                     int y = Integer.parseInt(shapeElement.getElementsByTagName("y").item(0).getTextContent());
 
-                    SimpleShape shapeCreated = this.createShape(Shapes.valueOf(type.toUpperCase()), x, y);
+                    SimpleShape shapeCreated = this.createShape(this.getShapes(type), x, y);
                     if(shapeCreated != null) {
                         this.shapesList.add(shapeCreated);
                     }
@@ -326,7 +326,7 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
             } else {
                 int x = shape.getInt("x");
                 int y = shape.getInt("y");
-                list.add(this.createShape(Shapes.valueOf(type), x, y));
+                list.add(this.createShape(this.getShapes(type), x, y));
             }
         });
 
@@ -334,7 +334,7 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
     }
 
     public SimpleShape createShape(Shapes type, int x, int y) {
-        Graphics2D g2 = (Graphics2D) panel.getGraphics();
+        Graphics2D g2 = (Graphics2D) this.getPanel().getGraphics();
         SimpleShape shapeReturn = null;
 
         switch(type) {
@@ -357,8 +357,8 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
                 shapeReturn = square;
                 break;
             default:
-            logger.log(Level.WARNING, "Error Add shape null (type: {0})", type);
-            break;
+                logger.log(Level.WARNING, "Error Add shape null (type: {0})", type);
+                break;
         }
 
         return shapeReturn;
@@ -426,5 +426,17 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
                 btn.repaint();
             }
         }
+    }
+
+    public JPanel getPanel() {
+        return panel;
+    }
+
+    public JToolBar getToolBar() {
+        return toolBar;
+    }
+
+    public Shapes getShapes(String shape) {
+        return Shapes.valueOf(shape.toUpperCase());
     }
 }

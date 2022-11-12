@@ -11,6 +11,7 @@ edu/uga/miage/m1/polygons/gui/persistence/Visitable.class
 edu/uga/miage/m1/polygons/gui/App.class
 edu/uga/miage/m1/polygons/gui/JDrawingFrame$1.class
 edu/uga/miage/m1/polygons/gui/shapes/Triangle.class
+edu/uga/miage/m1/polygons/gui/shapes/Shape.class
 edu/uga/miage/m1/polygons/gui/shapes/Circle.class
 edu/uga/miage/m1/polygons/gui/JDrawingFrame$Shapes.class
 edu/uga/miage/m1/polygons/gui/JDrawingFrame.class
