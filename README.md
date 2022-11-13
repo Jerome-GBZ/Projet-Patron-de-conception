@@ -23,7 +23,7 @@ Créer un affichage graphique de gestion de forme. Le code doit pouvoir etre ada
 
 ## Diagrammes <a id="diagrammes"></a>
 Diagramme de classe
-![Diagrammes de classe](https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/master/Diagrammes/diag_classe.png?raw=true)
+![Diagrammes de classe](https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/master/Diagrammes/diag_class.png?raw=true)
 
 Diagramme de séquence
 ![Diagrammes de séquence](https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/master/Diagrammes/diag_sequence.png?raw=true)
