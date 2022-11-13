@@ -26,9 +26,11 @@ Diagramme de classe
 ![Diagrammes de classe](https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/master/Diagrammes/diag_class.png?raw=true)
 
 Diagramme de séquence
-![Diagrammes de séquence](https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/master/Diagrammes/diag_sequence.png?raw=true)
 
-Le diagramme représente la création d'un carré aux coordonnées (90,90) ainsi qu'un cercle aux coordonnées (120,250). L'utilisateur va grouper ces 2 formes pour en faire qu'une. Puis il va déplacer le groupe en (400,300). Dans cet exemple on partira du principe que l'utilisateur correspond à la classe "JDrawingFrame".
+Dans cet exemple on partira du principe que l'utilisateur correspond à la classe "JDrawingFrame".
+Le diagramme représente la création d'un carré aux coordonnées (90,90) ainsi qu'un cercle aux coordonnées (120,250). On va regrouper ces 2 formes pour en faire qu'une. Puis il va déplacer le groupe en (400,300). 
+
+![Diagrammes de séquence](https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/master/Diagrammes/diag_sequence.png?raw=true)
 
 Etape 1 à 8 :
 ![Image illustration diagramme](https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/master/Diagrammes/Etape-1_a_8.png?raw=true)
