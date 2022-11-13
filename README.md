@@ -11,7 +11,7 @@ persistence_g1_3: 6694cec615d0d3612e12b6c0064506453d78894f
 
 ## Introduction <a id="intro"></a>
 
-Créer un affichage graphique de gestion de forme. Le code doit pouvoir etre adatatif sur le future. Ajouter de nouvelle forme doit etre le plus simple possible. Cela se traduit par la mise en place de 2 patron de conception :
+Créer un affichage graphique de gestion de forme. Le code doit pouvoir être adaptatif sur le futur. Ajouter de nouvelle forme doit être le plus simple possible. Cela se traduit par la mise en place de 2 patrons de conception :
   1. Visiteur
     Une manière de séparer un algorithme d'une structure de données.
   2. Composite
@@ -28,7 +28,7 @@ Diagramme de classe
 Diagramme de séquence
 ![Diagrammes de séquence](https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/master/Diagrammes/diag_sequence.png?raw=true)
 
-Le diagramme représente la création d'un carré aux coordonnées (90,90) ainsi qu'un cercle aux coordonnées (120,250). L'utilisateur va grouper ces 2 formes pour en faire qu'une. Puis il va déplacer le groupe en (400,300). Dans cette exemple on partira du principe que l'utilisateur correspond à la classe "JDrawingFrame".
+Le diagramme représente la création d'un carré aux coordonnées (90,90) ainsi qu'un cercle aux coordonnées (120,250). L'utilisateur va grouper ces 2 formes pour en faire qu'une. Puis il va déplacer le groupe en (400,300). Dans cet exemple on partira du principe que l'utilisateur correspond à la classe "JDrawingFrame".
 
 ## Sonar <a id="sonar"></a>
 ![Sonar dashboard](https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/master/Diagrammes/Sonar.png?raw=true)
@@ -49,7 +49,7 @@ Le diagramme représente la création d'un carré aux coordonnées (90,90) ainsi
 - [x] 0min de dettes techniques
 
 ## Points d'améliorations <a id="improves"></a>
-Avec plus de temps on pourrait améliorer le code pour qui match encore plus avec les 2 patrons de conception. On pourrait aussi redévelopper la partie déplacement de forme. Actuellement à chaque déplacement on repaint toutes la fenetre. Il faudrait dans le future repeintre seulement la forme ou le groupe de forme.
+Avec plus de temps on pourrait améliorer le code pour qui match encore plus avec les 2 patrons de conception. On pourrait aussi redévelopper la partie déplacement de forme. Actuellement à chaque déplacement on repaint toutes la fenêtre. Il faudrait dans le futur repeint seulement la forme ou le groupe de forme.
 
 ## Commandes utiles
 
