@@ -30,8 +30,14 @@ Diagramme de séquence
 
 Le diagramme représente la création d'un carré aux coordonnées (90,90) ainsi qu'un cercle aux coordonnées (120,250). L'utilisateur va grouper ces 2 formes pour en faire qu'une. Puis il va déplacer le groupe en (400,300). Dans cet exemple on partira du principe que l'utilisateur correspond à la classe "JDrawingFrame".
 
+Etape 1 à 8 :
+![Image illustration diagramme](https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/master/Diagrammes/Etape-1_a_8.png?raw=true)
+Etape 9 à 25 :
+![Image illustration diagramme](https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/master/Diagrammes/Etape-9_a_25.png?raw=true)
+
 ## Sonar <a id="sonar"></a>
 ![Sonar dashboard](https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/master/Diagrammes/Sonar.png?raw=true)
+
 
 ## ToDo / Done <a id="todo"></a>
 - [x] Grouper des formes entre elles
