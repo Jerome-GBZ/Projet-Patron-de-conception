@@ -6,7 +6,7 @@ persistence_g1_3: 6694cec615d0d3612e12b6c0064506453d78894f
 3. [Diagrammes](#diagrammes)
 4. [Sonar](#sonar)
 5. [ToDo / Done](#todo)
-6. [Points d'amélioration](#improve)
+6. [Points d'améliorations](#improves)
 
 
 ## Introduction <a id="intro"></a>
@@ -48,7 +48,7 @@ Le diagramme représente la création d'un carré aux coordonnées (90,90) ainsi
 - [ ] 80% de coverage sur Sonar (actuellement 40%)
 - [x] 0min de dettes techniques
 
-## Points d'amélioration <a id="improve"></a>
+## Points d'améliorations <a id="improves"></a>
 Avec plus de temps on pourrait améliorer le code pour qui match encore plus avec les 2 patrons de conception. On pourrait aussi redévelopper la partie déplacement de forme. Actuellement à chaque déplacement on repaint toutes la fenetre. Il faudrait dans le future repeintre seulement la forme ou le groupe de forme.
 
 ## Commandes utiles
