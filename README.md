@@ -3,10 +3,11 @@ persistence_g1_3: 6694cec615d0d3612e12b6c0064506453d78894f
 ## Table des matières
 1. [Introduction](#intro)
 2. [Développeur](#dev)
-3. [Diagrammes](#diagrammes)
-4. [Sonar](#sonar)
-5. [ToDo / Done](#todo)
-6. [Points d'améliorations](#improves)
+3. [Développeur](#dev)
+4. [Diagrammes](#diagrammes)
+5. [Sonar](#sonar)
+6. [ToDo / Done](#todo)
+7. [Points d'améliorations](#improves)
 
 
 ## Introduction <a id="intro"></a>
