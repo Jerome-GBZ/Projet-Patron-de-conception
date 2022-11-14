@@ -1,6 +1,8 @@
 package edu.uga.miage.m1.polygons.gui.shapes;
 
-public class Shape {
+import java.awt.Graphics2D;
+
+public abstract class Shape implements SimpleShape {
     private int x;
     private int y;
 
@@ -32,4 +34,10 @@ public class Shape {
     public boolean clickedOnShape(int x, int y) {
         return this.getX()-25 <= x && this.getX()+25 >= x && this.getY()-25 <= y && this.getY()+25 >= y;
     }
+
+    @Override
+    public boolean add(SimpleShape shape) { return false; }
+
+    @Override
+    public abstract void draw(Graphics2D g2, float width);
 }

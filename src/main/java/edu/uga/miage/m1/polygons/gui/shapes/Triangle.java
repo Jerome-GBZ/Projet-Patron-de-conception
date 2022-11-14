@@ -35,8 +35,7 @@ import edu.uga.miage.m1.polygons.gui.persistence.Visitor;
  *
  * @author <a href="mailto:christophe.saint-marcel@univ-grenoble-alpes.fr">Christophe</a>
  */
-public class Triangle extends Shape implements SimpleShape, Visitable {
-
+public class Triangle extends Shape implements Visitable {
 
     public Triangle(int x, int y) {
         super(x, y);
@@ -47,6 +46,7 @@ public class Triangle extends Shape implements SimpleShape, Visitable {
      * the shape.
      * @param g2 The graphics object used for painting.
      */
+    @Override
     public void draw(Graphics2D g2, float width) {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         GradientPaint gradient = new GradientPaint((float) getX()-25, (float) getY()-25, Color.GREEN,(getX() + 50), getY(), Color.WHITE);
@@ -76,7 +76,4 @@ public class Triangle extends Shape implements SimpleShape, Visitable {
     }
 
     public void accept(Visitor visitor) { visitor.visit(this); }
-
-    @Override
-    public boolean add(SimpleShape shape) { return false; }
 }
