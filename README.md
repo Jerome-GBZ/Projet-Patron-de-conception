@@ -56,6 +56,7 @@ Etape 9 à 25 :
 - [ ] Rendre déplacable un groupe de forme apres import XML
 - [ ] 80% de coverage sur Sonar (actuellement 40%)
 - [x] 0min de dettes techniques
+- [ ] Déplacer un groupe contenant un groupe + une forme ou 2 groupes (pb de coordoné lors du déplacement)
 
 ## Points d'améliorations <a id="improves"></a>
 Avec plus de temps on pourrait améliorer le code pour qui match encore plus avec les 2 patrons de conception. On pourrait aussi redévelopper la partie déplacement de forme. Actuellement à chaque déplacement on repaint toutes la fenêtre. Il faudrait dans le futur repeint seulement la forme ou le groupe de forme.

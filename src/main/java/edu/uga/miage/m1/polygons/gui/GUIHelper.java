@@ -15,6 +15,8 @@ public class GUIHelper {
 
     public static void showOnFrame(String frameName) {
         JFrame frame = new JDrawingFrame(frameName);
+        frame.setResizable(false);
+
         WindowAdapter wa = new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {

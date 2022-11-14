@@ -15,15 +15,17 @@ public class GUIHelper {
 
     public static void showOnFrame(String frameName) {
 <span class="nc" id="L17">        JFrame frame = new JDrawingFrame(frameName);</span>
-<span class="nc" id="L18">        WindowAdapter wa = new WindowAdapter() {</span>
+<span class="nc" id="L18">        frame.setResizable(false);</span>
+
+<span class="nc" id="L20">        WindowAdapter wa = new WindowAdapter() {</span>
             @Override
             public void windowClosing(WindowEvent e) {
-<span class="nc" id="L21">                System.exit(0);</span>
-<span class="nc" id="L22">            }</span>
+<span class="nc" id="L23">                System.exit(0);</span>
+<span class="nc" id="L24">            }</span>
         };
-<span class="nc" id="L24">        frame.addWindowListener(wa);</span>
-<span class="nc" id="L25">        frame.pack();</span>
-<span class="nc" id="L26">        frame.setVisible(true);</span>
-<span class="nc" id="L27">    }</span>
+<span class="nc" id="L26">        frame.addWindowListener(wa);</span>
+<span class="nc" id="L27">        frame.pack();</span>
+<span class="nc" id="L28">        frame.setVisible(true);</span>
+<span class="nc" id="L29">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

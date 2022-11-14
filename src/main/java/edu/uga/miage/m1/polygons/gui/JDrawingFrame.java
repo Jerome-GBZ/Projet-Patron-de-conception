@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -107,6 +108,8 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
         panel.addMouseMotionListener(this);
         label = new JLabel(" ", SwingConstants.LEFT);
 
+        toolBar.setFloatable(false);
+
         // Fills the panel
         setLayout(new BorderLayout());
         add(toolBar, BorderLayout.NORTH);
@@ -134,7 +137,7 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
         xmlImportButton = new JButton("Import as XML");
         toolBar.add(xmlImportButton);
 
-        setPreferredSize(new Dimension(650, 400));
+        setPreferredSize(new Dimension(700, 600));
         exportButtonAction();
     }
 
