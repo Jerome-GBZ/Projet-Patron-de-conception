@@ -3,7 +3,7 @@ persistence_g1_3: 6694cec615d0d3612e12b6c0064506453d78894f
 ## Table des matières
 1. [Introduction](#intro)
 2. [Développeur](#dev)
-3. [Développeur](#dev)
+3. [Conception](#conception)
 4. [Diagrammes](#diagrammes)
 5. [Sonar](#sonar)
 6. [ToDo / Done](#todo)
@@ -22,6 +22,9 @@ Créer un affichage graphique de gestion de forme. Le code doit pouvoir être ad
 - Jérôme G
 - Riad M
 
+## Conception <a id="conception"></a>
+Nous avons fait plusieurs choix durant ce projet. Le premier est de recentrer le x et y d'une forme qui est dans notre cas au centre de la forme. Nous avons aussi décidé de ne pas définir de x et y pour un groupe. Pour déplacer un groupe il faut cliquer et déplacer une forme du groupe pour déplacer l'ensemble.
+
 ## Diagrammes <a id="diagrammes"></a>
 Diagramme de classe
 ![Diagrammes de classe](https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/master/Diagrammes/diag_class.png?raw=true)
@@ -29,7 +32,7 @@ Diagramme de classe
 Diagramme de séquence
 
 Dans cet exemple on partira du principe que l'utilisateur correspond à la classe "JDrawingFrame".
-Le diagramme représente la création d'un carré aux coordonnées (90,90) ainsi qu'un cercle aux coordonnées (120,250). On va regrouper ces 2 formes pour en faire qu'une. Puis il va déplacer le groupe en (400,300). 
+Le diagramme représente la création d'un carré aux coordonnées (90,90) ainsi qu'un cercle aux coordonnées (120,250). On va regrouper ces 2 formes pour en faire qu'une. Puis il va déplacer le groupe en (400,300).
 
 ![Diagrammes de séquence](https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/master/Diagrammes/diag_sequence.png?raw=true)
 

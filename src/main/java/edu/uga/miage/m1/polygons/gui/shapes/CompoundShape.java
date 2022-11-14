@@ -34,11 +34,6 @@ public class CompoundShape implements SimpleShape, Visitable {
         this.shapesList = new ArrayList<>(s);
     }
 
-    public void add(Graphics2D g2, SimpleShape s) {
-        this.shapesList.add(s);
-        s.draw(g2, getX());
-    }
-
     /**
      * Implements the <tt>SimpleShape.draw()</tt> method for painting
      * the shape.
@@ -47,8 +42,6 @@ public class CompoundShape implements SimpleShape, Visitable {
     public void draw(Graphics2D g2, float width) {
         this.shapesList.forEach(shape -> shape.draw(g2, width));
     }
-
-    public List<SimpleShape> getShapes() { return shapesList; }
 
     @Override
     public void moveTo(int x, int y) {
@@ -74,14 +67,22 @@ public class CompoundShape implements SimpleShape, Visitable {
     public void accept(Visitor visitor) { visitor.visit(this); }
 
     @Override
-    public int getX() { return 0; }
+    public int getX() { return -1; }
 
     @Override
-    public int getY() { return 0; }
+    public int getY() { return -1; }
 
+    public List<SimpleShape> getShapes() { return shapesList; }
+
+    @Override
     public boolean add(SimpleShape shape) {
         this.shapesList = ((CompoundShape) shape).getShapes();
 
         return true;
+    }
+
+    public void add(Graphics2D g2, SimpleShape s) {
+        this.shapesList.add(s);
+        s.draw(g2, getX());
     }
 }
