@@ -59,6 +59,8 @@ public class Circle extends Shape implements Visitable {
         g2.draw(ellipse);
     }
 
+    // TODO : virer le draw pour mettre une image qui bouge
+
     @Override
     public void accept(Visitor visitor) { visitor.visit(this); }
 }
