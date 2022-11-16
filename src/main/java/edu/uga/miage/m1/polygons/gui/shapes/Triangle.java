@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package edu.uga.miage.m1.polygons.gui.shapes;
+package edu.uga.miage.m1.polygons.gui.Shapes;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -26,8 +26,8 @@ import java.awt.RenderingHints;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Path2D;
 
-import edu.uga.miage.m1.polygons.gui.persistence.Visitable;
-import edu.uga.miage.m1.polygons.gui.persistence.Visitor;
+import edu.uga.miage.m1.polygons.gui.Persistence.Visitable;
+import edu.uga.miage.m1.polygons.gui.Persistence.Visitor;
 
 /**
  * This inner class implements the triangle <tt>SimpleShape</tt> service.

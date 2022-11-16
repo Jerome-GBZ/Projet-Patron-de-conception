@@ -6,10 +6,12 @@ import javax.swing.JToolBar;
 import org.junit.jupiter.api.Test;
 
 import edu.uga.miage.m1.polygons.gui.JDrawingFrame;
-import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
+import edu.uga.miage.m1.polygons.gui.Factory.ShapeFactory;
+// import edu.uga.miage.m1.polygons.gui.Shapes.SimpleShape;
 
 class JDrawingFrameTest {
-    JDrawingFrame jdf = new JDrawingFrame("test");
+    JDrawingFrame jDrawFrame = new JDrawingFrame("test");
+    ShapeFactory shapeFac = new ShapeFactory();
 
 /*
     @Test
@@ -22,19 +24,19 @@ class JDrawingFrameTest {
 
     @Test
     void testPanel() {
-        assertNotNull(jdf.getPanel());
+        assertNotNull(jDrawFrame.getPanel());
     }
 
     @Test
     void testEnumSahpes() {
-        assertEquals(JDrawingFrame.Shapes.CIRCLE,  jdf.getShapes("circle"));
-        assertEquals(JDrawingFrame.Shapes.SQUARE,  jdf.getShapes("square"));
-        assertEquals(JDrawingFrame.Shapes.TRIANGLE,  jdf.getShapes("triangle"));
+        assertEquals(ShapeFactory.Shapes.CIRCLE,  shapeFac.getShapes("circle"));
+        assertEquals(ShapeFactory.Shapes.SQUARE,  shapeFac.getShapes("square"));
+        assertEquals(ShapeFactory.Shapes.TRIANGLE,  shapeFac.getShapes("triangle"));
     }
 
     @Test
     void testToolBar() {
-        JToolBar toolBar = jdf.getToolBar();
+        JToolBar toolBar = jDrawFrame.getToolBar();
         assertNotNull(toolBar);
     }
 }

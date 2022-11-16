@@ -1,6 +1,7 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
-import edu.uga.miage.m1.polygons.gui.shapes.Circle;
+
+import edu.uga.miage.m1.polygons.gui.Shapes.Circle;
 
 class CircleTest{
     Circle c = new Circle(0, 0);

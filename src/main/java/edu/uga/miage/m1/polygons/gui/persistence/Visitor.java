@@ -1,6 +1,6 @@
-package edu.uga.miage.m1.polygons.gui.persistence;
+package edu.uga.miage.m1.polygons.gui.Persistence;
 
-import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
+import edu.uga.miage.m1.polygons.gui.Shapes.SimpleShape;
 /**
  * You must define a method for each type of Visitable.
  * @author <a href="mailto:christophe.saint-marcel@univ-grenoble-alpes.fr">Christophe</a>

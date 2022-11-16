@@ -16,15 +16,15 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package edu.uga.miage.m1.polygons.gui.shapes;
+package edu.uga.miage.m1.polygons.gui.Shapes;
 
 import java.awt.Graphics2D;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.uga.miage.m1.polygons.gui.persistence.Visitable;
-import edu.uga.miage.m1.polygons.gui.persistence.Visitor;
+import edu.uga.miage.m1.polygons.gui.Persistence.Visitable;
+import edu.uga.miage.m1.polygons.gui.Persistence.Visitor;
 
 public class CompoundShape implements SimpleShape, Visitable {
 

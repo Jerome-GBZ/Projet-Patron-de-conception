@@ -10,6 +10,12 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <sonar.host.url>http://im2ag-sonar.u-ga.fr:9000</sonar.host.url>
+        <sonar.exclusions>
+            src/main/java/edu/uga/miage/m1/polygons/gui/JDrawingFrame.java,
+            src/main/java/edu/uga/miage/m1/polygons/gui/shapes/Circle.java,
+            src/main/java/edu/uga/miage/m1/polygons/gui/shapes/Square.java,
+            src/main/java/edu/uga/miage/m1/polygons/gui/shapes/Triangle.java,
+        </sonar.exclusions>
     </properties>
     <dependencies>
         <dependency>

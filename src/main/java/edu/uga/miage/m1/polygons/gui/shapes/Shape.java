@@ -1,12 +1,10 @@
-package edu.uga.miage.m1.polygons.gui.shapes;
-
-import java.awt.Graphics2D;
+package edu.uga.miage.m1.polygons.gui.Shapes;
 
 public abstract class Shape implements SimpleShape {
     private int x;
     private int y;
 
-    public Shape(int x, int y) {
+    protected Shape(int x, int y) {
         moveTo(x, y);
     }
 
@@ -38,6 +36,4 @@ public abstract class Shape implements SimpleShape {
     @Override
     public boolean add(SimpleShape shape) { return false; }
 
-    @Override
-    public abstract void draw(Graphics2D g2, float width);
 }

@@ -5,10 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-import edu.uga.miage.m1.polygons.gui.shapes.Circle;
-import edu.uga.miage.m1.polygons.gui.shapes.CompoundShape;
-import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
-import edu.uga.miage.m1.polygons.gui.shapes.Square;
+
+import edu.uga.miage.m1.polygons.gui.Shapes.Circle;
+import edu.uga.miage.m1.polygons.gui.Shapes.CompoundShape;
+import edu.uga.miage.m1.polygons.gui.Shapes.SimpleShape;
+import edu.uga.miage.m1.polygons.gui.Shapes.Square;
 
 class CompoundShapeTest {
     Circle c = new Circle(0, 0);
@@ -73,12 +74,12 @@ class CompoundShapeTest {
     @Test
     void testGetX() {
         CompoundShape cs = new CompoundShape(list);
-        assertEquals(0, cs.getX());
+        assertEquals(-1, cs.getX());
     }
 
     @Test
     void testGetY() {
         CompoundShape cs = new CompoundShape(list);
-        assertEquals(0, cs.getY());
+        assertEquals(-1, cs.getY());
     }
 }

@@ -10,8 +10,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serial;
 import java.util.ArrayList;
@@ -19,29 +17,32 @@ import java.util.EnumMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
+
+import java.nio.file.Path;
+import java.nio.file.Files;
 
 import javax.swing.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import java.nio.file.Path;
-import java.nio.file.Files;
 import org.json.JSONObject;
 import org.json.JSONArray;
-import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
-import edu.uga.miage.m1.polygons.gui.persistence.JSonVisitor;
-import edu.uga.miage.m1.polygons.gui.persistence.SimpleFile;
-import edu.uga.miage.m1.polygons.gui.persistence.XMLVisitor;
-import edu.uga.miage.m1.polygons.gui.shapes.Circle;
-import edu.uga.miage.m1.polygons.gui.shapes.CompoundShape;
-import edu.uga.miage.m1.polygons.gui.shapes.Square;
-import edu.uga.miage.m1.polygons.gui.shapes.Triangle;
+
+import edu.uga.miage.m1.polygons.gui.Factory.JSonFactory;
+import edu.uga.miage.m1.polygons.gui.Factory.ShapeFactory;
+import edu.uga.miage.m1.polygons.gui.Factory.ShapeFactory.Shapes;
+import edu.uga.miage.m1.polygons.gui.Factory.FileFactory;
+import edu.uga.miage.m1.polygons.gui.Persistence.JSonVisitor;
+import edu.uga.miage.m1.polygons.gui.Persistence.SimpleFile;
+import edu.uga.miage.m1.polygons.gui.Persistence.XMLVisitor;
+import edu.uga.miage.m1.polygons.gui.Shapes.CompoundShape;
+import edu.uga.miage.m1.polygons.gui.Shapes.SimpleShape;
 
 /**
  * This class represents the main application class, which is a JFrame subclass
@@ -50,13 +51,6 @@ import edu.uga.miage.m1.polygons.gui.shapes.Triangle;
  * @author <a href="mailto:christophe.saint-marcel@univ-grenoble-alpes.fr">Christophe</a>
  */
 public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionListener {
-
-    public enum Shapes {
-        SQUARE,
-        TRIANGLE,
-        CIRCLE,
-        COMPOUNDSHAPE
-    }
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -71,10 +65,14 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
     private final JButton xmlImportButton;
     private final JCheckBox groupByCheckBox;
 
-    private transient ActionListener mReusableActionListener = new ShapeActionListener();
+    private transient ShapeFactory shapeFac = new ShapeFactory();
+    private transient JSonFactory jsonFac = new JSonFactory();
+    private transient FileFactory fileFac = new FileFactory();
+
+    private transient ActionListener reusableActionListener = new ShapeActionListener();
     private transient List<SimpleShape> shapesList = new ArrayList<>();
     private transient List<SimpleShape> shapesListGroupBy = new ArrayList<>();
-    private Shapes shapeMenuSelected = Shapes.SQUARE;
+    private Shapes shapeMenuSelected = shapeFac.getShapes("SQUARE");
     private transient SimpleShape shapeSelected = null;
     private boolean groupBySelected = false;
 
@@ -117,9 +115,9 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
         add(label, BorderLayout.SOUTH);
 
         // Add shapes in the menu
-        addShape(Shapes.SQUARE, new ImageIcon(getClass().getResource("images/square.png")));
-        addShape(Shapes.TRIANGLE, new ImageIcon(getClass().getResource("images/triangle.png")));
-        addShape(Shapes.CIRCLE, new ImageIcon(getClass().getResource("images/circle.png")));
+        addShapeMenu(Shapes.SQUARE, new ImageIcon(getClass().getResource("images/square.png")));
+        addShapeMenu(Shapes.TRIANGLE, new ImageIcon(getClass().getResource("images/triangle.png")));
+        addShapeMenu(Shapes.CIRCLE, new ImageIcon(getClass().getResource("images/circle.png")));
 
         // Add buttons in the menu
         groupByCheckBox = new JCheckBox("Grouper");
@@ -152,12 +150,14 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
                 JSONObject jsonObject = new JSONObject(fileContent);
                 JSONArray shapesJSON = jsonObject.getJSONArray("shapes");
 
-                List<SimpleShape> list = importShape(shapesJSON);
+                List<SimpleShape> list = jsonFac.importShape(shapesJSON);
                 list.forEach(shape -> {
                     if(shape.add(shape)) {
                         this.shapesList.add(shape);
                     }
                 });
+
+                reDrawAll();
             } catch (IOException exp) {
                 logger.warning("JSON Import error : "+exp.getMessage());
             }
@@ -169,9 +169,11 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
                 dbf.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
                 DocumentBuilder db = dbf.newDocumentBuilder();
                 Document xmlDocument = db.parse( Path.of(this.nameXMLFile).toFile().getPath() );
-                NodeList shapes = xmlDocument.getElementsByTagName("shape");
+                NodeList shapes = xmlDocument.getElementsByTagName("shapes");
+                System.out.println(shapes);
 
                 int nbShape = shapes.getLength();
+
                 for (int i = 0; i < nbShape; i++) {
                     Element shapeElement = (Element) shapes.item(i);
 
@@ -179,7 +181,9 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
                     int x = Integer.parseInt(shapeElement.getElementsByTagName("x").item(0).getTextContent());
                     int y = Integer.parseInt(shapeElement.getElementsByTagName("y").item(0).getTextContent());
 
-                    SimpleShape shapeCreated = this.createShape(this.getShapes(type), x, y);
+                    System.out.println(type);
+
+                    SimpleShape shapeCreated = this.createShape(shapeFac.getShapes(type), x, y);
                     if(shapeCreated != null) {
                         this.shapesList.add(shapeCreated);
                     }
@@ -199,19 +203,19 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
                 reDrawAll();
             }
         });
+
+        // panel.addActionListener(e -> {
+        //     System.out.println(e);
+        // });
     }
 
-    /**
-     * Injects an available <tt>SimpleShape</tt> into the drawing frame.
-     * @param name The name of the injected <tt>SimpleShape</tt>.
-     * @param icon The icon associated with the injected <tt>SimpleShape</tt>.
-     */
-    private void addShape(Shapes shape, ImageIcon icon) {
+    private void addShapeMenu(Shapes shape, ImageIcon icon) {
         JButton button = new JButton(icon);
+
         button.setBorderPainted(false);
         buttons.put(shape, button);
         button.setActionCommand(shape.toString());
-        button.addActionListener(mReusableActionListener);
+        button.addActionListener(reusableActionListener);
 
         if (shapeMenuSelected == null) {
             button.doClick();
@@ -222,12 +226,6 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
         repaint();
     }
 
-    /**
-     * TO DO Use the factory to abstract shape creation
-     * Implements method for the <tt>MouseListener</tt> interface to
-     * draw the selected shape into the drawing canvas.
-     * @param evt The associated mouse event.
-     */
     public void mouseClicked(MouseEvent evt) {
         if(shapeSelected == null && !groupBySelected) {
             if (panel.contains(evt.getX(), evt.getY())) {
@@ -247,28 +245,15 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
         }
     }
 
-    /**
-     * Implements an empty method for the <tt>MouseListener</tt> interface.
-     * @param evt The associated mouse event.
-     */
     public void mouseEntered(MouseEvent evt) {
         // EMPTY
     }
 
-    /**
-     * Implements an empty method for the <tt>MouseListener</tt> interface.
-     * @param evt The associated mouse event.
-     */
     public void mouseExited(MouseEvent evt) {
         label.setText(" ");
         label.repaint();
     }
 
-    /**
-     * Implements method for the <tt>MouseListener</tt> interface to initiate
-     * shape dragging.
-     * @param evt The associated mouse event.
-     */
     public void mousePressed(MouseEvent evt) {
         this.shapeIsSelect(evt.getX(), evt.getY());
 
@@ -278,20 +263,10 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
         }
     }
 
-    /**
-     * Implements method for the <tt>MouseListener</tt> interface to complete
-     * shape dragging.
-     * @param evt The associated mouse event.
-     */
     public void mouseReleased(MouseEvent evt) {
         this.shapeSelected = null;
     }
 
-    /**
-     * Implements method for the <tt>MouseMotionListener</tt> interface to
-     * move a dragged shape.
-     * @param evt The associated mouse event.
-     */
     public void mouseDragged(MouseEvent evt) {
         if(this.shapeSelected != null && !this.groupBySelected) {
             this.shapeSelected.moveTo(evt.getX(), evt.getY());
@@ -300,105 +275,6 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
         }
     }
 
-    private void reDrawAll() {
-        panel.repaint();
-
-        SwingUtilities.invokeLater(() -> this.shapesList.forEach(shape -> shape.draw((Graphics2D) panel.getGraphics(), (float) 2.0) ) );
-    }
-
-    private void shapeIsSelect(int x, int y) {
-        int i = this.shapesList.size() - 1;
-
-        while (i > -1 && !this.shapesList.get(i).clickedOnShape(x, y)) { i--; }
-
-        if(i > -1 && this.shapesList.get(i).clickedOnShape(x, y)) {
-            this.shapeSelected = this.shapesList.get(i);
-        }
-    }
-
-    private List<SimpleShape> importShape(JSONArray shapesJSON) {
-        List<SimpleShape> list = new ArrayList<>();
-
-        shapesJSON.forEach(shapeObject -> {
-            JSONObject shape = (JSONObject) shapeObject;
-            String type = shape.getString("type").toUpperCase();
-
-            if(type.equals("COMPOUNDSHAPE")) {
-                JSONArray childrenShapesJSON = shape.getJSONArray("shapes");
-                list.add(new CompoundShape(importShape(childrenShapesJSON)));
-            } else {
-                int x = shape.getInt("x");
-                int y = shape.getInt("y");
-                list.add(this.createShape(this.getShapes(type), x, y));
-            }
-        });
-
-        return list;
-    }
-
-    public SimpleShape createShape(Shapes type, int x, int y) {
-        Graphics2D g2 = (Graphics2D) this.getPanel().getGraphics();
-        SimpleShape shapeReturn = null;
-
-        switch(type) {
-            case CIRCLE:
-                Circle circle = new Circle(x, y);
-                circle.draw(g2, (float) 2.0);
-                this.shapesList.add(circle);
-                shapeReturn = circle;
-                break;
-            case TRIANGLE:
-                Triangle triangle =new Triangle(x, y);
-                triangle.draw(g2, (float) 2.0);
-                this.shapesList.add(triangle);
-                shapeReturn = triangle;
-                break;
-            case SQUARE:
-                Square square = new Square(x, y);
-                square.draw(g2, (float) 2.0);
-                this.shapesList.add(square);
-                shapeReturn = square;
-                break;
-            default:
-                logger.log(Level.WARNING, "Error Add shape null (type: {0})", type);
-                break;
-        }
-
-        return shapeReturn;
-    }
-
-    private void writeShapeOnFile(SimpleFile sf, String nameFile) {
-        try {
-            this.shapesList.forEach(sf::visit);
-
-            File myObj = new File(nameFile);
-            if (myObj.createNewFile()) {
-                logger.info("File created: " + myObj.getName());
-            }
-
-            FileWriter myWriter = new FileWriter(nameFile);
-            writeOnFile(sf, myWriter);
-
-        } catch (IOException exc) {
-            logger.warning("An error occurred.");
-        }
-    }
-
-    private void writeOnFile(SimpleFile sf, FileWriter myWriter) throws IOException {
-        try {
-            myWriter.write(sf.getRepresentation());
-        } catch(Exception e){
-            logger.warning("Error when writting on file.");
-        } finally {
-            myWriter.close();
-        }
-    }
-
-    /**
-     * Implements an empty method for the <tt>MouseMotionListener</tt>
-     * interface.
-     * @param evt The associated mouse event.
-     */
     public void mouseMoved(MouseEvent evt) {
         modifyLabel(evt);
     }
@@ -431,15 +307,37 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
         }
     }
 
+    private void shapeIsSelect(int x, int y) {
+        shapeSelected = shapeFac.shapeIsSelect(shapesList, x, y);
+    }
+
+    public SimpleShape createShape(Shapes type, int x, int y) {
+        Graphics2D g2 = (Graphics2D) this.getPanel().getGraphics();
+        SimpleShape shapeReturn = shapeFac.createSimpleShape(type, x, y);
+
+        if(shapeReturn != null) {
+            shapeReturn.draw(g2, (float) 2.0);
+            shapesList.add(shapeReturn);
+        }
+
+        return shapeReturn;
+    }
+
+    private void writeShapeOnFile(SimpleFile sf, String nameFile) {
+        fileFac.writeOnFile(shapesList, sf, nameFile);
+    }
+
+    private void reDrawAll() {
+        panel.repaint();
+
+        SwingUtilities.invokeLater(() -> this.shapesList.forEach(shape -> shape.draw((Graphics2D) panel.getGraphics(), (float) 2.0) ) );
+    }
+
     public JPanel getPanel() {
         return panel;
     }
 
     public JToolBar getToolBar() {
         return toolBar;
-    }
-
-    public Shapes getShapes(String shape) {
-        return Shapes.valueOf(shape.toUpperCase());
     }
 }
