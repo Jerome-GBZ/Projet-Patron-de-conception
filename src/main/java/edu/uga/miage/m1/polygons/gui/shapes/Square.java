@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package edu.uga.miage.m1.polygons.gui.Shapes;
+package edu.uga.miage.m1.polygons.gui.shapes;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -25,8 +25,8 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.Rectangle2D;
 
-import edu.uga.miage.m1.polygons.gui.Persistence.Visitable;
-import edu.uga.miage.m1.polygons.gui.Persistence.Visitor;
+import edu.uga.miage.m1.polygons.gui.persistence.Visitable;
+import edu.uga.miage.m1.polygons.gui.persistence.Visitor;
 
 /**
  * This class implements the square <tt>SimpleShape</tt> extension.

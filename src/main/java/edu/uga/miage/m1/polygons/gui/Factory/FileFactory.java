@@ -1,9 +1,9 @@
-package edu.uga.miage.m1.polygons.gui.Factory;
+package edu.uga.miage.m1.polygons.gui.factory;
 
 import java.util.List;
 
-import edu.uga.miage.m1.polygons.gui.Persistence.SimpleFile;
-import edu.uga.miage.m1.polygons.gui.Shapes.SimpleShape;
+import edu.uga.miage.m1.polygons.gui.persistence.SimpleFile;
+import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
 
 import java.io.File;
 import java.io.FileWriter;

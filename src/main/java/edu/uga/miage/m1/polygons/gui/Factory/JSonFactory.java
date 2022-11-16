@@ -1,11 +1,12 @@
-package edu.uga.miage.m1.polygons.gui.Factory;
-
-import edu.uga.miage.m1.polygons.gui.Shapes.CompoundShape;
-import edu.uga.miage.m1.polygons.gui.Shapes.SimpleShape;
+package edu.uga.miage.m1.polygons.gui.factory;
 
 import java.util.List;
 import java.util.ArrayList;
 import org.json.JSONObject;
+
+import edu.uga.miage.m1.polygons.gui.shapes.CompoundShape;
+import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
+
 import org.json.JSONArray;
 
 

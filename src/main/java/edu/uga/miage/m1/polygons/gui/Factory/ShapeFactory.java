@@ -1,8 +1,8 @@
-package edu.uga.miage.m1.polygons.gui.Factory;
+package edu.uga.miage.m1.polygons.gui.factory;
 
 import java.util.List;
 
-import edu.uga.miage.m1.polygons.gui.Shapes.*;
+import edu.uga.miage.m1.polygons.gui.shapes.*;
 
 public class ShapeFactory {
     public enum Shapes {

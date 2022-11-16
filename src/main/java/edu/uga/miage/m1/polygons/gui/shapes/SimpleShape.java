@@ -1,4 +1,4 @@
-package edu.uga.miage.m1.polygons.gui.Shapes;
+package edu.uga.miage.m1.polygons.gui.shapes;
 
 import java.awt.Graphics2D;
 

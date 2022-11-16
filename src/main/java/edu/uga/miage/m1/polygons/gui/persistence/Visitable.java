@@ -1,4 +1,4 @@
-package edu.uga.miage.m1.polygons.gui.Persistence;
+package edu.uga.miage.m1.polygons.gui.persistence;
 
 /**
  * If you accept to be visited, implement this Interface!

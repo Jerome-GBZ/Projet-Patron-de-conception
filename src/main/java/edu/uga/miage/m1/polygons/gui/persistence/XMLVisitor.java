@@ -1,7 +1,7 @@
-package edu.uga.miage.m1.polygons.gui.Persistence;
+package edu.uga.miage.m1.polygons.gui.persistence;
 
-import edu.uga.miage.m1.polygons.gui.Shapes.CompoundShape;
-import edu.uga.miage.m1.polygons.gui.Shapes.SimpleShape;
+import edu.uga.miage.m1.polygons.gui.shapes.CompoundShape;
+import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
 
 /**
  * @author <a href="mailto:christophe.saint-marcel@univ-grenoble-alpes.fr">Christophe</a>

@@ -1,7 +1,7 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
-import edu.uga.miage.m1.polygons.gui.Shapes.Triangle;
+import edu.uga.miage.m1.polygons.gui.shapes.Triangle;
 
 class TriangleTest {
     Triangle t = new Triangle(0, 0);

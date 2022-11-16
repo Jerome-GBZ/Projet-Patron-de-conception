@@ -1,4 +1,4 @@
-package edu.uga.miage.m1.polygons.gui.Shapes;
+package edu.uga.miage.m1.polygons.gui.shapes;
 
 public abstract class Shape implements SimpleShape {
     private int x;

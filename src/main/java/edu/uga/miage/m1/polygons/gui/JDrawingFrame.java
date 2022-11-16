@@ -34,15 +34,15 @@ import org.xml.sax.SAXException;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
-import edu.uga.miage.m1.polygons.gui.Factory.JSonFactory;
-import edu.uga.miage.m1.polygons.gui.Factory.ShapeFactory;
-import edu.uga.miage.m1.polygons.gui.Factory.ShapeFactory.Shapes;
-import edu.uga.miage.m1.polygons.gui.Factory.FileFactory;
-import edu.uga.miage.m1.polygons.gui.Persistence.JSonVisitor;
-import edu.uga.miage.m1.polygons.gui.Persistence.SimpleFile;
-import edu.uga.miage.m1.polygons.gui.Persistence.XMLVisitor;
-import edu.uga.miage.m1.polygons.gui.Shapes.CompoundShape;
-import edu.uga.miage.m1.polygons.gui.Shapes.SimpleShape;
+import edu.uga.miage.m1.polygons.gui.factory.JSonFactory;
+import edu.uga.miage.m1.polygons.gui.factory.ShapeFactory;
+import edu.uga.miage.m1.polygons.gui.factory.ShapeFactory.Shapes;
+import edu.uga.miage.m1.polygons.gui.persistence.JSonVisitor;
+import edu.uga.miage.m1.polygons.gui.persistence.SimpleFile;
+import edu.uga.miage.m1.polygons.gui.persistence.XMLVisitor;
+import edu.uga.miage.m1.polygons.gui.shapes.CompoundShape;
+import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
+import edu.uga.miage.m1.polygons.gui.factory.FileFactory;
 
 /**
  * This class represents the main application class, which is a JFrame subclass
