@@ -2,7 +2,7 @@ package edu.uga.miage.m1.polygons.gui.commands;
 
 import java.util.ArrayList;
 import java.util.List;
-import edu.uga.miage.m1.polygons.gui.commands.Command;
+
 import edu.uga.miage.m1.polygons.gui.commands.CommandUndo.TypesCommands;
 import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
 
@@ -43,5 +43,9 @@ public class CommandHistory {
 
     public void add(TypesCommands typeC, SimpleShape oldShape, SimpleShape newShape) {
         history.add(new CommandUndo(typeC, oldShape, newShape));
+    }
+
+    public List<Command> getHistory() {
+        return history;
     }
 }
