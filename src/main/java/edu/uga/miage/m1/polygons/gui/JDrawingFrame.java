@@ -179,7 +179,6 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
                 DocumentBuilder db = dbf.newDocumentBuilder();
                 Document xmlDocument = db.parse( Path.of(this.nameXMLFile).toFile().getPath() );
                 NodeList shapes = xmlDocument.getElementsByTagName("shapes");
-                System.out.println(shapes);
 
                 int nbShape = shapes.getLength();
 
@@ -189,8 +188,6 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
                     String type = shapeElement.getElementsByTagName("type").item(0).getTextContent();
                     int x = Integer.parseInt(shapeElement.getElementsByTagName("x").item(0).getTextContent());
                     int y = Integer.parseInt(shapeElement.getElementsByTagName("y").item(0).getTextContent());
-
-                    System.out.println(type);
 
                     SimpleShape shapeCreated = this.createShape(shapeFac.getShapes(type), x, y);
                     if(shapeCreated != null) {
@@ -327,11 +324,6 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
         shapeSelected = shapeFac.shapeIsSelect(shapesList, x, y);
         if(shapeSelected != null) {
             oldShapeSelected = shapeFac.createSimpleShape(shapeFac.getShapes(shapeSelected.getClass().getSimpleName()), shapeSelected.getX(), shapeSelected.getY());
-            // System.out.println("shapeIsSelect");
-            // System.out.println(shapesList.get(0));
-            // System.out.println(oldShapeSelected);
-            // System.out.println(shapeSelected);
-            // System.out.println("");
         }
     }
 
@@ -343,18 +335,7 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
             shapeReturn.draw(g2, (float) 2.0);
             shapesList.add(shapeReturn);
 
-            // System.out.println("createShape");
-            // System.out.println(shapesList.get(0));
-            // System.out.println(shapeReturn);
-            // System.out.println("");
-
             cmdHist.add(TypesCommands.CREATE, null, shapeReturn);
-
-            System.out.println("shapesList");
-            shapesList.forEach(s -> {
-                System.out.println(s);
-            });
-            System.out.println("");
         }
 
         return shapeReturn;

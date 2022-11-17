@@ -27,13 +27,10 @@ public class CommandHistory {
             pop(lastCommand);
 
             if(!isEmpty()) {
-                int i = history.size() - 1;
-                while(i > -1 && lastCommand.getNewShape() != history.get(i).getNewShape()) {
-                    i--;
-                }
-
-                if(i > -1 ) {
-                    history.get(i).setNewShape(lastCommand.getOldShape());
+                for (Command cmd : history) {
+                    if(lastCommand.getNewShape() == cmd.getNewShape()) {
+                        cmd.setNewShape(lastCommand.getOldShape());
+                    }
                 }
             }
         }
