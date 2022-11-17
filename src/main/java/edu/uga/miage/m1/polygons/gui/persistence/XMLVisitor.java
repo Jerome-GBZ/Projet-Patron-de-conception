@@ -18,7 +18,7 @@ public class XMLVisitor implements SimpleFile {
         String className = shape.getClass().getSimpleName().toLowerCase();
 
         if(className.equals("compoundshape")) {
-            representation += String.format("<shape> <type>%s</type> <shapes> ", className);
+            representation += String.format("<shape type='%s'> <shapes> ", className);
 
             for (SimpleShape s : ((CompoundShape) shape).getShapes()) {
                 this.visit(s);
@@ -26,7 +26,7 @@ public class XMLVisitor implements SimpleFile {
 
             representation += "</shapes> </shape> ";
         } else {
-            representation += String.format("<shape> <type>%s</type> <x>%d</x> <y>%d</y> </shape> ", shape.getClass().getSimpleName().toLowerCase(), shape.getX(), shape.getY());
+            representation += String.format("<shape type='%s'> <x>%d</x> <y>%d</y> </shape> ", shape.getClass().getSimpleName().toLowerCase(), shape.getX(), shape.getY());
         }
     }
 

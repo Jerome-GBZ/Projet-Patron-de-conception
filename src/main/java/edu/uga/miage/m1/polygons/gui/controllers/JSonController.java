@@ -1,16 +1,18 @@
-package edu.uga.miage.m1.polygons.gui.factory;
+package edu.uga.miage.m1.polygons.gui.controllers;
 
 import java.util.List;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import org.json.JSONObject;
+import org.json.JSONArray;
 
+import edu.uga.miage.m1.polygons.gui.factories.ShapeFactory;
 import edu.uga.miage.m1.polygons.gui.shapes.CompoundShape;
 import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
 
-import org.json.JSONArray;
-
-
-public class JSonFactory {
+public class JSonController {
     public List<SimpleShape> importShape(JSONArray shapesJSON) {
         List<SimpleShape> list = new ArrayList<>();
         ShapeFactory shapeFac = new ShapeFactory();
@@ -30,5 +32,13 @@ public class JSonFactory {
         });
 
         return list;
+    }
+
+    public List<SimpleShape> getJSonFile(String nameJsonFile) throws IOException {
+        String fileContent = Files.readString(Path.of(nameJsonFile));
+        JSONObject jsonObject = new JSONObject(fileContent);
+        JSONArray shapesJSON = jsonObject.getJSONArray("shapes");
+
+        return importShape(shapesJSON);
     }
 }

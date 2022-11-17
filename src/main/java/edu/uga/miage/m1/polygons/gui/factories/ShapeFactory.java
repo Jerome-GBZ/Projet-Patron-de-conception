@@ -1,4 +1,4 @@
-package edu.uga.miage.m1.polygons.gui.factory;
+package edu.uga.miage.m1.polygons.gui.factories;
 
 import java.util.List;
 

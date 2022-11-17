@@ -1,4 +1,4 @@
-package edu.uga.miage.m1.polygons.gui.factory;
+package edu.uga.miage.m1.polygons.gui.controllers;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import java.io.IOException;
 
 import java.util.logging.Logger;
 
-public class FileFactory {
+public class FileController {
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
     public void writeOnFile(List<SimpleShape> shapesList, SimpleFile sf, String nameFile) {
