@@ -1,7 +1,11 @@
-JSonVisitorTest.class
-XMLVisitorTest.class
-CircleTest.class
+files/XMLVisitorTest.class
+shapes/SquareTest.class
+factories/JSonFactoryTest.class
+factories/ShapeFactoryTest.class
 JDrawingFrameTest.class
-CompoundShapeTest.class
-TriangleTest.class
-SquareTest.class
+shapes/TriangleTest.class
+shapes/CompoundShapeTest.class
+shapes/CircleTest.class
+files/JSonVisitorTest.class
+factories/FileFactoryTest.class
+commands/CommandHistoryTest.class
