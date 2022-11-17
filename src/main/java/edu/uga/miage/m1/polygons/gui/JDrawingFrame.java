@@ -43,7 +43,7 @@ import edu.uga.miage.m1.polygons.gui.persistence.XMLVisitor;
 import edu.uga.miage.m1.polygons.gui.shapes.CompoundShape;
 import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
 import edu.uga.miage.m1.polygons.gui.commands.CommandHistory;
-import edu.uga.miage.m1.polygons.gui.commands.Command.TypesCommands;
+import edu.uga.miage.m1.polygons.gui.commands.CommandUndo.TypesCommands;
 import edu.uga.miage.m1.polygons.gui.factory.FileFactory;
 
 /**
@@ -276,12 +276,6 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
     public void mouseReleased(MouseEvent evt) {
         if(shapeSelected != null && oldShapeSelected != null ) {
             cmdHist.add(TypesCommands.MOVE, oldShapeSelected, shapeSelected);
-
-            System.out.println("shapesList");
-            shapesList.forEach(s -> {
-                System.out.println(s);
-            });
-            System.out.println("");
 
             reDrawAll();
         }
