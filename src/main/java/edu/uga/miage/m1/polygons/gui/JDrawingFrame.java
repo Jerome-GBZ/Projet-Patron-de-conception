@@ -42,8 +42,8 @@ import edu.uga.miage.m1.polygons.gui.persistence.SimpleFile;
 import edu.uga.miage.m1.polygons.gui.persistence.XMLVisitor;
 import edu.uga.miage.m1.polygons.gui.shapes.CompoundShape;
 import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
-import edu.uga.miage.m1.polygons.gui.commands.CommandHistory;
-import edu.uga.miage.m1.polygons.gui.commands.CommandUndo.TypesCommands;
+import edu.uga.miage.m1.polygons.gui.command.CommandHistory;
+import edu.uga.miage.m1.polygons.gui.command.CommandUndo.TypesCommands;
 import edu.uga.miage.m1.polygons.gui.factory.FileFactory;
 
 /**
