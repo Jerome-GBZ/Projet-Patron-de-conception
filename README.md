@@ -12,11 +12,15 @@ persistence_g1_3: 6694cec615d0d3612e12b6c0064506453d78894f
 
 ## Introduction <a id="intro"></a>
 
-Créer un affichage graphique de gestion de forme. Le code doit pouvoir être adaptatif sur le futur. Ajouter de nouvelle forme doit être le plus simple possible. Cela se traduit par la mise en place de 2 patrons de conception :
+Créer un affichage graphique de gestion de forme. Le code doit pouvoir être adaptatif sur le futur. Ajouter de nouvelle forme doit être le plus simple possible. Cela se traduit par la mise en place de 4 patrons de conception :
   1. Visiteur
     Une manière de séparer un algorithme d'une structure de données.
   2. Composite
     L'idée est de manipuler un groupe d'objets de la même façon que s'il s'agissait d'un seul objet.
+  3. Simple Factory
+    Une Factory simple est généralement représentée par une seule méthode dans une seule classe.
+  4. Commande
+    Il permet de séparer complètement le code initiateur de l'action, du code de l'action elle-même.
 
 ## Développeurs <a id="dev"></a>
 - Jérôme G
@@ -57,9 +61,11 @@ Etape 9 à 25 :
   - [x] XML
 - [x] Rendre déplacable un groupe de forme apres import JSON
 - [ ] Rendre déplacable un groupe de forme apres import XML
-- [ ] 80% de coverage sur Sonar (actuellement 40%)
+- [x] 70% de coverage sur Sonar
 - [x] 0min de dettes techniques
 - [ ] Déplacer un groupe contenant un groupe + une forme ou 2 groupes (pb de coordoné lors du déplacement)
+- [x] 0min de dettes techniques
+- [x] cmd-z ou ctrl-z remplacé par un bouton retour en arrière
 
 ## Points d'améliorations <a id="improves"></a>
 Avec plus de temps on pourrait améliorer le code pour qui match encore plus avec les 2 patrons de conception. On pourrait aussi redévelopper la partie déplacement de forme. Actuellement à chaque déplacement on repaint toutes la fenêtre. Il faudrait dans le futur repeint seulement la forme ou le groupe de forme.
