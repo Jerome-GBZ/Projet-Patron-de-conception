@@ -2,6 +2,8 @@ package edu.uga.miage.m1.polygons.gui.factory;
 
 import java.util.List;
 
+import edu.uga.miage.m1.polygons.gui.commands.CommandHistory;
+import edu.uga.miage.m1.polygons.gui.commands.Command.TypesCommands;
 import edu.uga.miage.m1.polygons.gui.shapes.*;
 
 public class ShapeFactory {

@@ -42,6 +42,8 @@ import edu.uga.miage.m1.polygons.gui.persistence.SimpleFile;
 import edu.uga.miage.m1.polygons.gui.persistence.XMLVisitor;
 import edu.uga.miage.m1.polygons.gui.shapes.CompoundShape;
 import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
+import edu.uga.miage.m1.polygons.gui.commands.CommandHistory;
+import edu.uga.miage.m1.polygons.gui.commands.Command.TypesCommands;
 import edu.uga.miage.m1.polygons.gui.factory.FileFactory;
 
 /**
@@ -59,6 +61,7 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
     private final JPanel panel;
     private final JLabel label;
 
+    private final JButton undoButton;
     private final JButton jsonExportButton;
     private final JButton xmlExportButton;
     private final JButton jsonImportButton;
@@ -68,12 +71,14 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
     private transient ShapeFactory shapeFac = new ShapeFactory();
     private transient JSonFactory jsonFac = new JSonFactory();
     private transient FileFactory fileFac = new FileFactory();
+    private transient CommandHistory cmdHist = new CommandHistory();
 
     private transient ActionListener reusableActionListener = new ShapeActionListener();
     private transient List<SimpleShape> shapesList = new ArrayList<>();
     private transient List<SimpleShape> shapesListGroupBy = new ArrayList<>();
     private Shapes shapeMenuSelected = shapeFac.getShapes("SQUARE");
     private transient SimpleShape shapeSelected = null;
+    private transient SimpleShape oldShapeSelected = null;
     private boolean groupBySelected = false;
 
     private transient JSonVisitor jsonVisitor = new JSonVisitor();
@@ -134,6 +139,10 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
 
         xmlImportButton = new JButton("Import as XML");
         toolBar.add(xmlImportButton);
+
+        Icon icon = new ImageIcon(getClass().getResource("icons/undo.png"));
+        undoButton = new JButton(icon);
+        toolBar.add(undoButton);
 
         setPreferredSize(new Dimension(700, 600));
         exportButtonAction();
@@ -204,9 +213,10 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
             }
         });
 
-        // panel.addActionListener(e -> {
-        //     System.out.println(e);
-        // });
+        undoButton.addActionListener(e -> {
+            shapesList = cmdHist.undo(shapesList);
+            reDrawAll();
+        });
     }
 
     private void addShapeMenu(Shapes shape, ImageIcon icon) {
@@ -264,12 +274,24 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
     }
 
     public void mouseReleased(MouseEvent evt) {
+        if(shapeSelected != null && oldShapeSelected != null ) {
+            cmdHist.add(TypesCommands.MOVE, oldShapeSelected, shapeSelected);
+
+            System.out.println("shapesList");
+            shapesList.forEach(s -> {
+                System.out.println(s);
+            });
+            System.out.println("");
+
+            reDrawAll();
+        }
+
         this.shapeSelected = null;
     }
 
     public void mouseDragged(MouseEvent evt) {
-        if(this.shapeSelected != null && !this.groupBySelected) {
-            this.shapeSelected.moveTo(evt.getX(), evt.getY());
+        if(shapeSelected != null && !this.groupBySelected) {
+            shapeSelected.moveTo(evt.getX(), evt.getY());
 
             reDrawAll();
         }
@@ -309,6 +331,14 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
 
     private void shapeIsSelect(int x, int y) {
         shapeSelected = shapeFac.shapeIsSelect(shapesList, x, y);
+        if(shapeSelected != null) {
+            oldShapeSelected = shapeFac.createSimpleShape(shapeFac.getShapes(shapeSelected.getClass().getSimpleName()), shapeSelected.getX(), shapeSelected.getY());
+            // System.out.println("shapeIsSelect");
+            // System.out.println(shapesList.get(0));
+            // System.out.println(oldShapeSelected);
+            // System.out.println(shapeSelected);
+            // System.out.println("");
+        }
     }
 
     public SimpleShape createShape(Shapes type, int x, int y) {
@@ -318,6 +348,19 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
         if(shapeReturn != null) {
             shapeReturn.draw(g2, (float) 2.0);
             shapesList.add(shapeReturn);
+
+            // System.out.println("createShape");
+            // System.out.println(shapesList.get(0));
+            // System.out.println(shapeReturn);
+            // System.out.println("");
+
+            cmdHist.add(TypesCommands.CREATE, null, shapeReturn);
+
+            System.out.println("shapesList");
+            shapesList.forEach(s -> {
+                System.out.println(s);
+            });
+            System.out.println("");
         }
 
         return shapeReturn;
