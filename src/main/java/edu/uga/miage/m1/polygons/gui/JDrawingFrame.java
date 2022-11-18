@@ -326,6 +326,7 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
     }
 
     private void writeShapeOnFile(SimpleFile sf, String nameFile) {
+        sf.clear();
         fileController.writeOnFile(shapesList, sf, nameFile);
     }
 
