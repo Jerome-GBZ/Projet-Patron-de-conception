@@ -12,23 +12,17 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.IOException;
 import java.io.Serial;
+import java.util.logging.Logger;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import java.nio.file.Path;
-
 import javax.swing.*;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import edu.uga.miage.m1.polygons.gui.persistence.JSonVisitor;
@@ -36,13 +30,14 @@ import edu.uga.miage.m1.polygons.gui.persistence.SimpleFile;
 import edu.uga.miage.m1.polygons.gui.persistence.XMLVisitor;
 import edu.uga.miage.m1.polygons.gui.shapes.CompoundShape;
 import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
-import edu.uga.miage.m1.polygons.gui.command.CommandHistory;
-import edu.uga.miage.m1.polygons.gui.command.CommandUndo.TypesCommands;
+import edu.uga.miage.m1.polygons.gui.command.CreateCommand;
+import edu.uga.miage.m1.polygons.gui.command.MoveCommand;
 import edu.uga.miage.m1.polygons.gui.controllers.FileController;
+import edu.uga.miage.m1.polygons.gui.controllers.HistoryController;
 import edu.uga.miage.m1.polygons.gui.controllers.JSonController;
+import edu.uga.miage.m1.polygons.gui.controllers.ShapeController;
 import edu.uga.miage.m1.polygons.gui.controllers.XMLController;
-import edu.uga.miage.m1.polygons.gui.factories.ShapeFactory;
-import edu.uga.miage.m1.polygons.gui.factories.ShapeFactory.Shapes;
+import edu.uga.miage.m1.polygons.gui.controllers.ShapeController.Shapes;
 
 /**
  * This class represents the main application class, which is a JFrame subclass
@@ -66,32 +61,33 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
     private final JButton xmlImportButton;
     private final JCheckBox groupByCheckBox;
 
-<span class="fc" id="L69">    private transient ShapeFactory shapeFac = new ShapeFactory();</span>
-<span class="fc" id="L70">    private transient JSonController jsonController = new JSonController();</span>
-<span class="fc" id="L71">    private transient XMLController xmlController = new XMLController();</span>
-<span class="fc" id="L72">    private transient FileController fileController = new FileController();</span>
-<span class="fc" id="L73">    private transient CommandHistory cmdHist = new CommandHistory();</span>
+<span class="fc" id="L64">    private transient ShapeController shapeController = new ShapeController();</span>
+<span class="fc" id="L65">    private transient HistoryController histController = new HistoryController();</span>
+<span class="fc" id="L66">    private transient JSonController jsonController = new JSonController();</span>
+<span class="fc" id="L67">    private transient XMLController xmlController = new XMLController();</span>
+<span class="fc" id="L68">    private transient FileController fileController = new FileController();</span>
 
-<span class="fc" id="L75">    private transient ActionListener reusableActionListener = new ShapeActionListener();</span>
-<span class="fc" id="L76">    private transient List&lt;SimpleShape&gt; shapesList = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L77">    private transient List&lt;SimpleShape&gt; shapesListGroupBy = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L78">    private Shapes shapeMenuSelected = shapeFac.getShapes(&quot;SQUARE&quot;);</span>
-<span class="fc" id="L79">    private transient SimpleShape shapeSelected = null;</span>
-<span class="fc" id="L80">    private transient SimpleShape oldShapeSelected = null;</span>
-<span class="fc" id="L81">    private boolean groupBySelected = false;</span>
+<span class="fc" id="L70">    private transient ActionListener reusableActionListener = new ShapeActionListener();</span>
+<span class="fc" id="L71">    private Shapes shapeMenuSelected = shapeController.getShapes(&quot;SQUARE&quot;);</span>
 
-<span class="fc" id="L83">    private transient JSonVisitor jsonVisitor = new JSonVisitor();</span>
-<span class="fc" id="L84">    private transient XMLVisitor  xmlVisitor  = new XMLVisitor();</span>
+<span class="fc" id="L73">    private transient List&lt;SimpleShape&gt; shapesList = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L74">    private transient List&lt;SimpleShape&gt; shapesListGroupBy = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L75">    private transient SimpleShape shapeSelected = null;</span>
+<span class="fc" id="L76">    private transient SimpleShape oldShapeSelected = null;</span>
+<span class="fc" id="L77">    private boolean groupBySelected = false;</span>
 
-<span class="fc" id="L86">    private transient java.util.logging.Logger logger =  java.util.logging.Logger.getLogger(this.getClass().getName());</span>
+<span class="fc" id="L79">    private transient JSonVisitor jsonVisitor = new JSonVisitor();</span>
+<span class="fc" id="L80">    private transient XMLVisitor  xmlVisitor  = new XMLVisitor();</span>
+
+<span class="fc" id="L82">    private String nameJsonFile = &quot;shapes.json&quot;;</span>
+<span class="fc" id="L83">    private String nameXMLFile = &quot;shapes.xml&quot;;</span>
+
+<span class="fc" id="L85">    private transient Logger logger = Logger.getLogger(this.getClass().getName());</span>
 
     /**
      * Tracks buttons to manage the background.
      */
-<span class="fc" id="L91">    private Map&lt;Shapes, JButton&gt; buttons = new EnumMap&lt;&gt;(Shapes.class);</span>
-
-<span class="fc" id="L93">    private String nameJsonFile = &quot;shapes.json&quot;;</span>
-<span class="fc" id="L94">    private String nameXMLFile = &quot;shapes.xml&quot;;</span>
+<span class="fc" id="L90">    private Map&lt;Shapes, JButton&gt; buttons = new EnumMap&lt;&gt;(Shapes.class);</span>
 
 
     /**
@@ -101,250 +97,248 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
      * @throws ParserConfigurationException
      */
     public JDrawingFrame(String frameName) {
-<span class="fc" id="L104">        super(frameName);</span>
+<span class="fc" id="L100">        super(frameName);</span>
 
         // Instantiates components
-<span class="fc" id="L107">        toolBar = new JToolBar(&quot;Toolbar&quot;);</span>
-<span class="fc" id="L108">        panel = new JPanel();</span>
-<span class="fc" id="L109">        panel.setBackground(Color.WHITE);</span>
-<span class="fc" id="L110">        panel.setLayout(null);</span>
-<span class="fc" id="L111">        panel.addMouseListener(this);</span>
-<span class="fc" id="L112">        panel.addMouseMotionListener(this);</span>
-<span class="fc" id="L113">        label = new JLabel(&quot; &quot;, SwingConstants.LEFT);</span>
+<span class="fc" id="L103">        toolBar = new JToolBar(&quot;Toolbar&quot;);</span>
+<span class="fc" id="L104">        panel = new JPanel();</span>
+<span class="fc" id="L105">        panel.setBackground(Color.WHITE);</span>
+<span class="fc" id="L106">        panel.setLayout(null);</span>
+<span class="fc" id="L107">        panel.addMouseListener(this);</span>
+<span class="fc" id="L108">        panel.addMouseMotionListener(this);</span>
+<span class="fc" id="L109">        label = new JLabel(&quot; &quot;, SwingConstants.LEFT);</span>
 
-<span class="fc" id="L115">        toolBar.setFloatable(false);</span>
+<span class="fc" id="L111">        toolBar.setFloatable(false);</span>
 
         // Fills the panel
-<span class="fc" id="L118">        setLayout(new BorderLayout());</span>
-<span class="fc" id="L119">        add(toolBar, BorderLayout.NORTH);</span>
-<span class="fc" id="L120">        add(panel, BorderLayout.CENTER);</span>
-<span class="fc" id="L121">        add(label, BorderLayout.SOUTH);</span>
+<span class="fc" id="L114">        setLayout(new BorderLayout());</span>
+<span class="fc" id="L115">        add(toolBar, BorderLayout.NORTH);</span>
+<span class="fc" id="L116">        add(panel, BorderLayout.CENTER);</span>
+<span class="fc" id="L117">        add(label, BorderLayout.SOUTH);</span>
 
         // Add shapes in the menu
-<span class="fc" id="L124">        addShapeMenu(Shapes.SQUARE, new ImageIcon(getClass().getResource(&quot;images/square.png&quot;)));</span>
-<span class="fc" id="L125">        addShapeMenu(Shapes.TRIANGLE, new ImageIcon(getClass().getResource(&quot;images/triangle.png&quot;)));</span>
-<span class="fc" id="L126">        addShapeMenu(Shapes.CIRCLE, new ImageIcon(getClass().getResource(&quot;images/circle.png&quot;)));</span>
+<span class="fc" id="L120">        addShapeMenu(Shapes.SQUARE, new ImageIcon(getClass().getResource(&quot;images/square.png&quot;)));</span>
+<span class="fc" id="L121">        addShapeMenu(Shapes.TRIANGLE, new ImageIcon(getClass().getResource(&quot;images/triangle.png&quot;)));</span>
+<span class="fc" id="L122">        addShapeMenu(Shapes.CIRCLE, new ImageIcon(getClass().getResource(&quot;images/circle.png&quot;)));</span>
 
         // Add buttons in the menu
-<span class="fc" id="L129">        groupByCheckBox = new JCheckBox(&quot;Grouper&quot;);</span>
-<span class="fc" id="L130">        toolBar.add(groupByCheckBox);</span>
+<span class="fc" id="L125">        groupByCheckBox = new JCheckBox(&quot;Grouper&quot;);</span>
+<span class="fc" id="L126">        toolBar.add(groupByCheckBox);</span>
 
-<span class="fc" id="L132">        jsonExportButton = new JButton(&quot;Export as Json&quot;);</span>
-<span class="fc" id="L133">        toolBar.add(jsonExportButton);</span>
+<span class="fc" id="L128">        jsonExportButton = new JButton(&quot;Export as Json&quot;);</span>
+<span class="fc" id="L129">        toolBar.add(jsonExportButton);</span>
 
-<span class="fc" id="L135">        xmlExportButton = new JButton(&quot;Export as XML&quot;);</span>
-<span class="fc" id="L136">        toolBar.add(xmlExportButton);</span>
+<span class="fc" id="L131">        xmlExportButton = new JButton(&quot;Export as XML&quot;);</span>
+<span class="fc" id="L132">        toolBar.add(xmlExportButton);</span>
 
-<span class="fc" id="L138">        jsonImportButton = new JButton(&quot;Import as Json&quot;);</span>
-<span class="fc" id="L139">        toolBar.add(jsonImportButton);</span>
+<span class="fc" id="L134">        jsonImportButton = new JButton(&quot;Import as Json&quot;);</span>
+<span class="fc" id="L135">        toolBar.add(jsonImportButton);</span>
 
-<span class="fc" id="L141">        xmlImportButton = new JButton(&quot;Import as XML&quot;);</span>
-<span class="fc" id="L142">        toolBar.add(xmlImportButton);</span>
+<span class="fc" id="L137">        xmlImportButton = new JButton(&quot;Import as XML&quot;);</span>
+<span class="fc" id="L138">        toolBar.add(xmlImportButton);</span>
 
-<span class="fc" id="L144">        Icon icon = new ImageIcon(getClass().getResource(&quot;icons/undo.png&quot;));</span>
-<span class="fc" id="L145">        undoButton = new JButton(icon);</span>
-<span class="fc" id="L146">        toolBar.add(undoButton);</span>
+<span class="fc" id="L140">        Icon icon = new ImageIcon(getClass().getResource(&quot;icons/undo.png&quot;));</span>
+<span class="fc" id="L141">        undoButton = new JButton(icon);</span>
+<span class="fc" id="L142">        toolBar.add(undoButton);</span>
 
-<span class="fc" id="L148">        setPreferredSize(new Dimension(700, 600));</span>
-<span class="fc" id="L149">        exportButtonAction();</span>
-<span class="fc" id="L150">    }</span>
+<span class="fc" id="L144">        setPreferredSize(new Dimension(700, 600));</span>
+<span class="fc" id="L145">        exportButtonAction();</span>
+<span class="fc" id="L146">    }</span>
 
     private void exportButtonAction() {
-<span class="pc" id="L153">        jsonExportButton.addActionListener(e -&gt; writeShapeOnFile(this.jsonVisitor, this.nameJsonFile) );</span>
+<span class="pc" id="L149">        jsonExportButton.addActionListener(e -&gt; writeShapeOnFile(this.jsonVisitor, this.nameJsonFile) );</span>
 
-<span class="pc" id="L155">        xmlExportButton.addActionListener(e -&gt; writeShapeOnFile(this.xmlVisitor, this.nameXMLFile) );</span>
+<span class="pc" id="L151">        xmlExportButton.addActionListener(e -&gt; writeShapeOnFile(this.xmlVisitor, this.nameXMLFile) );</span>
 
-<span class="fc" id="L157">        jsonImportButton.addActionListener(e -&gt; {</span>
+<span class="fc" id="L153">        jsonImportButton.addActionListener(e -&gt; {</span>
             try {
-<span class="nc" id="L159">                List&lt;SimpleShape&gt; list = jsonController.getJSonFile(nameJsonFile);</span>
+<span class="nc" id="L155">                List&lt;SimpleShape&gt; list = jsonController.getJSonFile(nameJsonFile);</span>
 
-<span class="nc" id="L161">                list.forEach(shape -&gt; {</span>
-<span class="nc bnc" id="L162" title="All 2 branches missed.">                    if(shape.add(shape)) {</span>
-<span class="nc" id="L163">                        this.shapesList.add(shape);</span>
+<span class="nc" id="L157">                list.forEach(shape -&gt; {</span>
+<span class="nc bnc" id="L158" title="All 2 branches missed.">                    if(shape.add(shape)) {</span>
+<span class="nc" id="L159">                        this.shapesList.add(shape);</span>
                     }
-<span class="nc" id="L165">                });</span>
+<span class="nc" id="L161">                });</span>
 
-<span class="nc" id="L167">                reDrawAll();</span>
-<span class="nc" id="L168">            } catch (IOException exp) {</span>
-<span class="nc" id="L169">                logger.warning(&quot;JSon Import error: &quot; + exp.getMessage());</span>
-<span class="nc" id="L170">            }</span>
-<span class="nc" id="L171">        });</span>
+<span class="nc" id="L163">                reDrawAll();</span>
+<span class="nc" id="L164">            } catch (IOException exp) {</span>
+<span class="nc" id="L165">                logger.warning(&quot;JSon Import error: &quot; + exp.getMessage());</span>
+<span class="nc" id="L166">            }</span>
+<span class="nc" id="L167">        });</span>
 
-<span class="fc" id="L173">        xmlImportButton.addActionListener(e -&gt; {</span>
+<span class="fc" id="L169">        xmlImportButton.addActionListener(e -&gt; {</span>
             try {
-<span class="nc" id="L175">                List&lt;SimpleShape&gt; list = xmlController.getXMLFile(nameXMLFile);</span>
-                // System.out.println(list.size());
+<span class="nc" id="L171">                List&lt;SimpleShape&gt; list = xmlController.getXMLFile(nameXMLFile);</span>
 
-<span class="nc" id="L178">                list.forEach(shape -&gt; {</span>
-                    // System.out.println(shape);
+<span class="nc" id="L173">                list.forEach(shape -&gt; {</span>
+<span class="nc" id="L174">                    shapesList.add(shape);</span>
+<span class="nc" id="L175">                });</span>
 
-<span class="nc" id="L181">                    shapesList.add(shape);</span>
-<span class="nc" id="L182">                });</span>
+<span class="nc" id="L177">                reDrawAll();</span>
+<span class="nc" id="L178">            } catch (IOException | ParserConfigurationException | SAXException | XPathExpressionException exp) {</span>
+<span class="nc" id="L179">                logger.warning(&quot;XML Import error: &quot; + exp.getMessage());</span>
+<span class="nc" id="L180">            }</span>
+<span class="nc" id="L181">        });</span>
 
-<span class="nc" id="L184">                reDrawAll();</span>
-<span class="nc" id="L185">            } catch (IOException | ParserConfigurationException | SAXException | XPathExpressionException exp) {</span>
-<span class="nc" id="L186">                logger.warning(&quot;XML Import error: &quot; + exp.getMessage());</span>
-<span class="nc" id="L187">            }</span>
-<span class="nc" id="L188">        });</span>
+<span class="fc" id="L183">        groupByCheckBox.addActionListener(e -&gt; {</span>
+<span class="nc bnc" id="L184" title="All 2 branches missed.">            this.groupBySelected = !this.groupBySelected;</span>
 
-<span class="fc" id="L190">        groupByCheckBox.addActionListener(e -&gt; {</span>
-<span class="nc bnc" id="L191" title="All 2 branches missed.">            this.groupBySelected = !this.groupBySelected;</span>
+<span class="nc bnc" id="L186" title="All 4 branches missed.">            if(!this.groupBySelected &amp;&amp; !this.shapesListGroupBy.isEmpty()) {</span>
+<span class="nc" id="L187">                this.shapesList.add(new CompoundShape(this.shapesListGroupBy));</span>
+<span class="nc" id="L188">                this.shapesListGroupBy.clear();</span>
 
-<span class="nc bnc" id="L193" title="All 4 branches missed.">            if(!this.groupBySelected &amp;&amp; !this.shapesListGroupBy.isEmpty()) {</span>
-<span class="nc" id="L194">                this.shapesList.add(new CompoundShape(this.shapesListGroupBy));</span>
-<span class="nc" id="L195">                this.shapesListGroupBy.clear();</span>
-
-<span class="nc" id="L197">                reDrawAll();</span>
+<span class="nc" id="L190">                reDrawAll();</span>
             }
-<span class="nc" id="L199">        });</span>
+<span class="nc" id="L192">        });</span>
 
-<span class="fc" id="L201">        undoButton.addActionListener(e -&gt; {</span>
-<span class="nc" id="L202">            shapesList = cmdHist.undo(shapesList);</span>
-<span class="nc" id="L203">            reDrawAll();</span>
-<span class="nc" id="L204">        });</span>
-<span class="fc" id="L205">    }</span>
+<span class="fc" id="L194">        undoButton.addActionListener(e -&gt; {</span>
+<span class="nc" id="L195">            shapesList = histController.undo(shapesList);</span>
+<span class="nc" id="L196">            reDrawAll();</span>
+<span class="nc" id="L197">        });</span>
+<span class="fc" id="L198">    }</span>
 
     private void addShapeMenu(Shapes shape, ImageIcon icon) {
-<span class="fc" id="L208">        JButton button = new JButton(icon);</span>
+<span class="fc" id="L201">        JButton button = new JButton(icon);</span>
 
-<span class="fc" id="L210">        button.setBorderPainted(false);</span>
-<span class="fc" id="L211">        buttons.put(shape, button);</span>
-<span class="fc" id="L212">        button.setActionCommand(shape.toString());</span>
-<span class="fc" id="L213">        button.addActionListener(reusableActionListener);</span>
+<span class="fc" id="L203">        button.setBorderPainted(false);</span>
+<span class="fc" id="L204">        buttons.put(shape, button);</span>
+<span class="fc" id="L205">        button.setActionCommand(shape.toString());</span>
+<span class="fc" id="L206">        button.addActionListener(reusableActionListener);</span>
 
-<span class="pc bpc" id="L215" title="1 of 2 branches missed.">        if (shapeMenuSelected == null) {</span>
-<span class="nc" id="L216">            button.doClick();</span>
+<span class="pc bpc" id="L208" title="1 of 2 branches missed.">        if (shapeMenuSelected == null) {</span>
+<span class="nc" id="L209">            button.doClick();</span>
         }
 
-<span class="fc" id="L219">        toolBar.add(button);</span>
-<span class="fc" id="L220">        toolBar.validate();</span>
-<span class="fc" id="L221">        repaint();</span>
-<span class="fc" id="L222">    }</span>
+<span class="fc" id="L212">        toolBar.add(button);</span>
+<span class="fc" id="L213">        toolBar.validate();</span>
+<span class="fc" id="L214">        repaint();</span>
+<span class="fc" id="L215">    }</span>
 
     public void mouseClicked(MouseEvent evt) {
-<span class="nc bnc" id="L225" title="All 4 branches missed.">        if(shapeSelected == null &amp;&amp; !groupBySelected) {</span>
-<span class="nc bnc" id="L226" title="All 2 branches missed.">            if (panel.contains(evt.getX(), evt.getY())) {</span>
-<span class="nc" id="L227">                this.createShape(shapeMenuSelected, evt.getX(), evt.getY());</span>
+<span class="nc bnc" id="L218" title="All 4 branches missed.">        if(shapeSelected == null &amp;&amp; !groupBySelected) {</span>
+<span class="nc bnc" id="L219" title="All 2 branches missed.">            if (panel.contains(evt.getX(), evt.getY())) {</span>
+<span class="nc" id="L220">                this.createShape(shapeMenuSelected, evt.getX(), evt.getY());</span>
             }
         } else {
-<span class="nc" id="L230">            this.shapeIsSelect(evt.getX(), evt.getY());</span>
+<span class="nc" id="L223">            this.shapeIsSelect(evt.getX(), evt.getY());</span>
 
-<span class="nc bnc" id="L232" title="All 4 branches missed.">            if(this.shapeSelected != null &amp;&amp; this.groupBySelected) {</span>
-<span class="nc" id="L233">                this.shapesList.remove(this.shapeSelected);</span>
-<span class="nc" id="L234">                this.shapesListGroupBy.add(this.shapeSelected);</span>
+<span class="nc bnc" id="L225" title="All 4 branches missed.">            if(this.shapeSelected != null &amp;&amp; this.groupBySelected) {</span>
+<span class="nc" id="L226">                this.shapesList.remove(this.shapeSelected);</span>
+<span class="nc" id="L227">                this.shapesListGroupBy.add(this.shapeSelected);</span>
 
-<span class="nc" id="L236">                SwingUtilities.invokeLater(() -&gt; this.shapesListGroupBy.forEach(shape -&gt; shape.draw((Graphics2D) panel.getGraphics(), (float) 4.0)) );</span>
+<span class="nc" id="L229">                SwingUtilities.invokeLater(() -&gt; this.shapesListGroupBy.forEach(shape -&gt; shape.draw((Graphics2D) panel.getGraphics(), (float) 4.0)) );</span>
 
-<span class="nc" id="L238">                this.shapeSelected = null;</span>
+<span class="nc" id="L231">                this.shapeSelected = null;</span>
             }
         }
-<span class="nc" id="L241">    }</span>
+<span class="nc" id="L234">    }</span>
 
     public void mouseEntered(MouseEvent evt) {
         // EMPTY
-<span class="nc" id="L245">    }</span>
+<span class="nc" id="L238">    }</span>
 
     public void mouseExited(MouseEvent evt) {
-<span class="nc" id="L248">        label.setText(&quot; &quot;);</span>
-<span class="nc" id="L249">        label.repaint();</span>
-<span class="nc" id="L250">    }</span>
+<span class="nc" id="L241">        label.setText(&quot; &quot;);</span>
+<span class="nc" id="L242">        label.repaint();</span>
+<span class="nc" id="L243">    }</span>
 
     public void mousePressed(MouseEvent evt) {
-<span class="nc" id="L253">        this.shapeIsSelect(evt.getX(), evt.getY());</span>
+<span class="nc" id="L246">        this.shapeIsSelect(evt.getX(), evt.getY());</span>
 
-<span class="nc bnc" id="L255" title="All 2 branches missed.">        if(this.shapeSelected != null) {</span>
-<span class="nc" id="L256">            this.shapesList.remove(this.shapeSelected);</span>
-<span class="nc" id="L257">            this.shapesList.add(this.shapeSelected);</span>
+<span class="nc bnc" id="L248" title="All 2 branches missed.">        if(this.shapeSelected != null) {</span>
+<span class="nc" id="L249">            this.shapesList.remove(this.shapeSelected);</span>
+<span class="nc" id="L250">            this.shapesList.add(this.shapeSelected);</span>
         }
-<span class="nc" id="L259">    }</span>
+<span class="nc" id="L252">    }</span>
 
     public void mouseReleased(MouseEvent evt) {
-<span class="nc bnc" id="L262" title="All 4 branches missed.">        if(shapeSelected != null &amp;&amp; oldShapeSelected != null ) {</span>
-<span class="nc" id="L263">            cmdHist.add(TypesCommands.MOVE, oldShapeSelected, shapeSelected);</span>
+<span class="nc bnc" id="L255" title="All 4 branches missed.">        if(shapeSelected != null &amp;&amp; oldShapeSelected != null ) {</span>
+<span class="nc" id="L256">            histController.add(new MoveCommand(oldShapeSelected, shapeSelected));</span>
 
-<span class="nc" id="L265">            reDrawAll();</span>
+<span class="nc" id="L258">            reDrawAll();</span>
         }
 
-<span class="nc" id="L268">        this.shapeSelected = null;</span>
-<span class="nc" id="L269">    }</span>
+<span class="nc" id="L261">        this.shapeSelected = null;</span>
+<span class="nc" id="L262">    }</span>
 
     public void mouseDragged(MouseEvent evt) {
-<span class="nc bnc" id="L272" title="All 4 branches missed.">        if(shapeSelected != null &amp;&amp; !this.groupBySelected) {</span>
-<span class="nc" id="L273">            shapeSelected.moveTo(evt.getX(), evt.getY());</span>
+<span class="nc bnc" id="L265" title="All 4 branches missed.">        if(shapeSelected != null &amp;&amp; !this.groupBySelected) {</span>
+<span class="nc" id="L266">            shapeSelected.moveTo(evt.getX(), evt.getY());</span>
 
-<span class="nc" id="L275">            reDrawAll();</span>
+<span class="nc" id="L268">            reDrawAll();</span>
         }
-<span class="nc" id="L277">    }</span>
+<span class="nc" id="L270">    }</span>
 
     public void mouseMoved(MouseEvent evt) {
-<span class="nc" id="L280">        modifyLabel(evt);</span>
-<span class="nc" id="L281">    }</span>
+<span class="nc" id="L273">        modifyLabel(evt);</span>
+<span class="nc" id="L274">    }</span>
 
     private void modifyLabel(MouseEvent evt) {
-<span class="nc" id="L284">        label.setText(&quot;(&quot; + evt.getX() + &quot;,&quot; + evt.getY() + &quot;)&quot;);</span>
-<span class="nc" id="L285">    }</span>
+<span class="nc" id="L277">        label.setText(&quot;(&quot; + evt.getX() + &quot;,&quot; + evt.getY() + &quot;)&quot;);</span>
+<span class="nc" id="L278">    }</span>
 
     /**
      * Simple action listener for shape tool bar buttons that sets
      * the drawing frame's currently selected shape when receiving
      * an action event.
      */
-<span class="fc" id="L292">    private class ShapeActionListener implements ActionListener {</span>
+<span class="fc" id="L285">    private class ShapeActionListener implements ActionListener {</span>
 
         public void actionPerformed(ActionEvent evt) {
             // ItÃ¨re sur tous les boutons
-<span class="nc" id="L296">            Iterator&lt;Shapes&gt; keys = buttons.keySet().iterator();</span>
-<span class="nc bnc" id="L297" title="All 2 branches missed.">            while (keys.hasNext()) {</span>
-<span class="nc" id="L298">                Shapes shape = keys.next();</span>
-<span class="nc" id="L299">                JButton btn = buttons.get(shape);</span>
-<span class="nc bnc" id="L300" title="All 2 branches missed.">                if (evt.getActionCommand().equals(shape.toString())) {</span>
-<span class="nc" id="L301">                    btn.setBorderPainted(true);</span>
-<span class="nc" id="L302">                    shapeMenuSelected = shape;</span>
+<span class="nc" id="L289">            Iterator&lt;Shapes&gt; keys = buttons.keySet().iterator();</span>
+<span class="nc bnc" id="L290" title="All 2 branches missed.">            while (keys.hasNext()) {</span>
+<span class="nc" id="L291">                Shapes shape = keys.next();</span>
+<span class="nc" id="L292">                JButton btn = buttons.get(shape);</span>
+<span class="nc bnc" id="L293" title="All 2 branches missed.">                if (evt.getActionCommand().equals(shape.toString())) {</span>
+<span class="nc" id="L294">                    btn.setBorderPainted(true);</span>
+<span class="nc" id="L295">                    shapeMenuSelected = shape;</span>
                 } else {
-<span class="nc" id="L304">                    btn.setBorderPainted(false);</span>
+<span class="nc" id="L297">                    btn.setBorderPainted(false);</span>
                 }
-<span class="nc" id="L306">                btn.repaint();</span>
-<span class="nc" id="L307">            }</span>
-<span class="nc" id="L308">        }</span>
+<span class="nc" id="L299">                btn.repaint();</span>
+<span class="nc" id="L300">            }</span>
+<span class="nc" id="L301">        }</span>
     }
 
     private void shapeIsSelect(int x, int y) {
-<span class="nc" id="L312">        shapeSelected = shapeFac.shapeIsSelect(shapesList, x, y);</span>
-<span class="nc bnc" id="L313" title="All 2 branches missed.">        if(shapeSelected != null) {</span>
-<span class="nc" id="L314">            oldShapeSelected = shapeFac.createSimpleShape(shapeFac.getShapes(shapeSelected.getClass().getSimpleName()), shapeSelected.getX(), shapeSelected.getY());</span>
+<span class="nc" id="L305">        shapeSelected = shapeController.shapeIsSelect(shapesList, x, y);</span>
+<span class="nc bnc" id="L306" title="All 2 branches missed.">        if(shapeSelected != null) {</span>
+<span class="nc" id="L307">            oldShapeSelected = shapeController.createSimpleShape(shapeController.getShapes(shapeSelected.getClass().getSimpleName()), shapeSelected.getX(), shapeSelected.getY());</span>
         }
-<span class="nc" id="L316">    }</span>
+<span class="nc" id="L309">    }</span>
 
     public SimpleShape createShape(Shapes type, int x, int y) {
-<span class="nc" id="L319">        Graphics2D g2 = (Graphics2D) this.getPanel().getGraphics();</span>
-<span class="nc" id="L320">        SimpleShape shapeReturn = shapeFac.createSimpleShape(type, x, y);</span>
+<span class="nc" id="L312">        Graphics2D g2 = (Graphics2D) this.getPanel().getGraphics();</span>
+<span class="nc" id="L313">        SimpleShape shapeReturn = shapeController.createSimpleShape(type, x, y);</span>
 
-<span class="nc bnc" id="L322" title="All 2 branches missed.">        if(shapeReturn != null) {</span>
-<span class="nc" id="L323">            shapeReturn.draw(g2, (float) 2.0);</span>
-<span class="nc" id="L324">            shapesList.add(shapeReturn);</span>
+<span class="nc bnc" id="L315" title="All 2 branches missed.">        if(shapeReturn != null) {</span>
+<span class="nc" id="L316">            shapeReturn.draw(g2, (float) 2.0);</span>
+<span class="nc" id="L317">            shapesList.add(shapeReturn);</span>
 
-<span class="nc" id="L326">            cmdHist.add(TypesCommands.CREATE, null, shapeReturn);</span>
+<span class="nc" id="L319">            histController.add(new CreateCommand(null, shapeReturn));</span>
         }
 
-<span class="nc" id="L329">        return shapeReturn;</span>
+<span class="nc" id="L322">        return shapeReturn;</span>
     }
 
     private void writeShapeOnFile(SimpleFile sf, String nameFile) {
-<span class="nc" id="L333">        fileController.writeOnFile(shapesList, sf, nameFile);</span>
-<span class="nc" id="L334">    }</span>
+<span class="nc" id="L326">        sf.clear();</span>
+<span class="nc" id="L327">        fileController.writeOnFile(shapesList, sf, nameFile);</span>
+<span class="nc" id="L328">    }</span>
 
     private void reDrawAll() {
-<span class="nc" id="L337">        panel.repaint();</span>
+<span class="nc" id="L331">        panel.repaint();</span>
 
-<span class="nc" id="L339">        SwingUtilities.invokeLater(() -&gt; this.shapesList.forEach(shape -&gt; shape.draw((Graphics2D) panel.getGraphics(), (float) 2.0) ) );</span>
-<span class="nc" id="L340">    }</span>
+<span class="nc" id="L333">        SwingUtilities.invokeLater(() -&gt; this.shapesList.forEach(shape -&gt; shape.draw((Graphics2D) panel.getGraphics(), (float) 2.0) ) );</span>
+<span class="nc" id="L334">    }</span>
 
     public JPanel getPanel() {
-<span class="fc" id="L343">        return panel;</span>
+<span class="fc" id="L337">        return panel;</span>
     }
 
     public JToolBar getToolBar() {
-<span class="fc" id="L347">        return toolBar;</span>
+<span class="fc" id="L341">        return toolBar;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

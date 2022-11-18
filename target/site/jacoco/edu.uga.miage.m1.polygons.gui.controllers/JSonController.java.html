@@ -5,17 +5,17 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+
 import org.json.JSONObject;
 import org.json.JSONArray;
 
-import edu.uga.miage.m1.polygons.gui.factories.ShapeFactory;
 import edu.uga.miage.m1.polygons.gui.shapes.CompoundShape;
 import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
 
 <span class="fc" id="L15">public class JSonController {</span>
-    public List&lt;SimpleShape&gt; importShape(JSONArray shapesJSON) {
+    private List&lt;SimpleShape&gt; importShape(JSONArray shapesJSON) {
 <span class="nc" id="L17">        List&lt;SimpleShape&gt; list = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L18">        ShapeFactory shapeFac = new ShapeFactory();</span>
+<span class="nc" id="L18">        ShapeController shapeController = new ShapeController();</span>
 
 <span class="nc" id="L20">        shapesJSON.forEach(shapeObject -&gt; {</span>
 <span class="nc" id="L21">            JSONObject shape = (JSONObject) shapeObject;</span>
@@ -27,7 +27,7 @@ import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
 <span class="nc" id="L27">            } else {</span>
 <span class="nc" id="L28">                int x = shape.getInt(&quot;x&quot;);</span>
 <span class="nc" id="L29">                int y = shape.getInt(&quot;y&quot;);</span>
-<span class="nc" id="L30">                list.add(shapeFac.createSimpleShape(shapeFac.getShapes(type), x, y));</span>
+<span class="nc" id="L30">                list.add(shapeController.createSimpleShape(shapeController.getShapes(type), x, y));</span>
             }
 <span class="nc" id="L32">        });</span>
 

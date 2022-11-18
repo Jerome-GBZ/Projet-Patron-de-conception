@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ShapeController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">persistence_g1_3</a> &gt; <a href="index.source.html" class="el_package">edu.uga.miage.m1.polygons.gui.controllers</a> &gt; <span class="el_source">ShapeController.java</span></div><h1>ShapeController.java</h1><pre class="source lang-java linenums">package edu.uga.miage.m1.polygons.gui.controllers;
+
+import java.util.List;
+
+import edu.uga.miage.m1.polygons.gui.factories.ShapeFactory;
+import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
+
+<span class="fc" id="L8">public class ShapeController {</span>
+<span class="fc" id="L9">    private ShapeFactory shapeFac = new ShapeFactory();</span>
+
+<span class="fc" id="L11">    public enum Shapes {</span>
+<span class="fc" id="L12">        SQUARE,</span>
+<span class="fc" id="L13">        TRIANGLE,</span>
+<span class="fc" id="L14">        CIRCLE,</span>
+<span class="fc" id="L15">        COMPOUNDSHAPE</span>
+    }
+
+    public Shapes getShapes(String type) {
+<span class="fc" id="L19">        return Shapes.valueOf(type.toUpperCase());</span>
+    }
+
+    public SimpleShape shapeIsSelect(List&lt;SimpleShape&gt; shapesList, int x, int y) {
+<span class="nc" id="L23">        int i = shapesList.size() - 1;</span>
+
+<span class="nc bnc" id="L25" title="All 4 branches missed.">        while (i &gt; -1 &amp;&amp; !shapesList.get(i).clickedOnShape(x, y)) { i--; }</span>
+
+<span class="nc bnc" id="L27" title="All 2 branches missed.">        return i &gt; -1 ? shapesList.get(i) : null;</span>
+    }
+
+    public SimpleShape createSimpleShape(Shapes type, int x, int y) {
+<span class="nc" id="L31">        return shapeFac.createSimpleShape(type, x, y);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
