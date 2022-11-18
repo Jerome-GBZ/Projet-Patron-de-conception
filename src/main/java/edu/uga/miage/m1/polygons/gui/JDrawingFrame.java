@@ -12,23 +12,17 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.IOException;
 import java.io.Serial;
+import java.util.logging.Logger;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import java.nio.file.Path;
-
 import javax.swing.*;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import edu.uga.miage.m1.polygons.gui.persistence.JSonVisitor;
@@ -66,16 +60,18 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
     private final JButton xmlImportButton;
     private final JCheckBox groupByCheckBox;
 
+    private transient CommandHistory cmdHist = new CommandHistory();
     private transient ShapeFactory shapeFac = new ShapeFactory();
+
     private transient JSonController jsonController = new JSonController();
     private transient XMLController xmlController = new XMLController();
     private transient FileController fileController = new FileController();
-    private transient CommandHistory cmdHist = new CommandHistory();
 
     private transient ActionListener reusableActionListener = new ShapeActionListener();
+    private Shapes shapeMenuSelected = shapeFac.getShapes("SQUARE");
+
     private transient List<SimpleShape> shapesList = new ArrayList<>();
     private transient List<SimpleShape> shapesListGroupBy = new ArrayList<>();
-    private Shapes shapeMenuSelected = shapeFac.getShapes("SQUARE");
     private transient SimpleShape shapeSelected = null;
     private transient SimpleShape oldShapeSelected = null;
     private boolean groupBySelected = false;
@@ -83,15 +79,15 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
     private transient JSonVisitor jsonVisitor = new JSonVisitor();
     private transient XMLVisitor  xmlVisitor  = new XMLVisitor();
 
-    private transient java.util.logging.Logger logger =  java.util.logging.Logger.getLogger(this.getClass().getName());
+    private String nameJsonFile = "shapes.json";
+    private String nameXMLFile = "shapes.xml";
+
+    private transient Logger logger = Logger.getLogger(this.getClass().getName());
 
     /**
      * Tracks buttons to manage the background.
      */
     private Map<Shapes, JButton> buttons = new EnumMap<>(Shapes.class);
-
-    private String nameJsonFile = "shapes.json";
-    private String nameXMLFile = "shapes.xml";
 
 
     /**

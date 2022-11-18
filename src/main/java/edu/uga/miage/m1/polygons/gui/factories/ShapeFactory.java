@@ -4,7 +4,7 @@ import java.util.List;
 
 import edu.uga.miage.m1.polygons.gui.shapes.*;
 
-public class ShapeFactory {
+public class ShapeFactory implements SimpleShapeFactory {
     public enum Shapes {
         SQUARE,
         TRIANGLE,
