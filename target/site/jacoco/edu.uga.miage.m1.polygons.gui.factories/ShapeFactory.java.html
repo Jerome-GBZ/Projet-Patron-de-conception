@@ -7,21 +7,21 @@ import edu.uga.miage.m1.polygons.gui.controllers.ShapeController.Shapes;
     public SimpleShape createSimpleShape(Shapes type, int x, int y) {
         SimpleShape shape;
 
-<span class="nc bnc" id="L10" title="All 4 branches missed.">        switch(type) {</span>
+<span class="fc bfc" id="L10" title="All 4 branches covered.">        switch(type) {</span>
             case TRIANGLE:
-<span class="nc" id="L12">                shape = new Triangle(x, y);</span>
-<span class="nc" id="L13">                break;</span>
+<span class="fc" id="L12">                shape = new Triangle(x, y);</span>
+<span class="fc" id="L13">                break;</span>
             case CIRCLE:
-<span class="nc" id="L15">                shape = new Circle(x, y);</span>
-<span class="nc" id="L16">                break;</span>
+<span class="fc" id="L15">                shape = new Circle(x, y);</span>
+<span class="fc" id="L16">                break;</span>
             case SQUARE:
-<span class="nc" id="L18">                shape = new Square(x, y);</span>
-<span class="nc" id="L19">                break;</span>
+<span class="fc" id="L18">                shape = new Square(x, y);</span>
+<span class="fc" id="L19">                break;</span>
             default:
-<span class="nc" id="L21">                shape = null;</span>
+<span class="fc" id="L21">                shape = null;</span>
         }
 
-<span class="nc" id="L24">        return shape;</span>
+<span class="fc" id="L24">        return shape;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -40,6 +40,14 @@ class CommandHistoryTest {
     }
 
     @Test
+    void testUndoHistoryEmpty() {
+        List<SimpleShape> shapesList = new ArrayList<>();
+        shapesList = cmdHist.undo(shapesList);
+
+        assertEquals(true, cmdHist.isEmpty());
+    }
+
+    @Test
     void testUndo() {
         List<SimpleShape> shapesList = new ArrayList<>();
 

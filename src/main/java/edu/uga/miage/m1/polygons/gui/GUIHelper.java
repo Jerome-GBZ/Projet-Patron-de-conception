@@ -9,7 +9,7 @@ import javax.swing.JFrame;
  */
 public class GUIHelper {
 
-    private GUIHelper(){
+    private GUIHelper() {
 
     }
 

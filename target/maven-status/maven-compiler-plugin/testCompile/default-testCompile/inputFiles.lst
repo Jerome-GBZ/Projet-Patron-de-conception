@@ -1,11 +1,14 @@
-/Users/sinao/Documents/UGA/PC/persistence_g1_3/src/test/java/controllers/JSonControllerTest.java
 /Users/sinao/Documents/UGA/PC/persistence_g1_3/src/test/java/controllers/FileControllerTest.java
 /Users/sinao/Documents/UGA/PC/persistence_g1_3/src/test/java/JDrawingFrameTest.java
-/Users/sinao/Documents/UGA/PC/persistence_g1_3/src/test/java/visitors/JSonVisitorTest.java
 /Users/sinao/Documents/UGA/PC/persistence_g1_3/src/test/java/shapes/CompoundShapeTest.java
 /Users/sinao/Documents/UGA/PC/persistence_g1_3/src/test/java/commands/CommandHistoryTest.java
+/Users/sinao/Documents/UGA/PC/persistence_g1_3/src/test/java/controllers/XMLControllerTest.java
 /Users/sinao/Documents/UGA/PC/persistence_g1_3/src/test/java/visitors/XMLVisitorTest.java
+/Users/sinao/Documents/UGA/PC/persistence_g1_3/src/test/java/GUIHelperTest.java
+/Users/sinao/Documents/UGA/PC/persistence_g1_3/src/test/java/factories/ShapeFactoryTest.java
+/Users/sinao/Documents/UGA/PC/persistence_g1_3/src/test/java/controllers/JSonControllerTest.java
+/Users/sinao/Documents/UGA/PC/persistence_g1_3/src/test/java/commands/ShapeControllerTest.java
+/Users/sinao/Documents/UGA/PC/persistence_g1_3/src/test/java/visitors/JSonVisitorTest.java
 /Users/sinao/Documents/UGA/PC/persistence_g1_3/src/test/java/shapes/SquareTest.java
 /Users/sinao/Documents/UGA/PC/persistence_g1_3/src/test/java/shapes/TriangleTest.java
-/Users/sinao/Documents/UGA/PC/persistence_g1_3/src/test/java/factories/ShapeFactoryTest.java
 /Users/sinao/Documents/UGA/PC/persistence_g1_3/src/test/java/shapes/CircleTest.java

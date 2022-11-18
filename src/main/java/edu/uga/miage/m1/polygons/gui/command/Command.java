@@ -8,7 +8,7 @@ public abstract class Command {
     private SimpleShape oldShape;
     private SimpleShape newShape;
 
-    public Command(SimpleShape oldS, SimpleShape newS) {
+    protected Command(SimpleShape oldS, SimpleShape newS) {
         oldShape = oldS;
         newShape = newS;
     }
@@ -23,10 +23,6 @@ public abstract class Command {
 
     public void setNewShape(SimpleShape newShape) {
         this.newShape = newShape;
-    }
-
-    public void setOldShape(SimpleShape oldShape) {
-        this.oldShape = oldShape;
     }
 
     public abstract List<SimpleShape> execute(List<SimpleShape> shapesList);

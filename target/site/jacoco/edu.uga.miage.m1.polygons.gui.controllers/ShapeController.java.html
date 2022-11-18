@@ -20,15 +20,15 @@ import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
     }
 
     public SimpleShape shapeIsSelect(List&lt;SimpleShape&gt; shapesList, int x, int y) {
-<span class="nc" id="L23">        int i = shapesList.size() - 1;</span>
+<span class="fc" id="L23">        int i = shapesList.size() - 1;</span>
 
-<span class="nc bnc" id="L25" title="All 4 branches missed.">        while (i &gt; -1 &amp;&amp; !shapesList.get(i).clickedOnShape(x, y)) { i--; }</span>
+<span class="fc bfc" id="L25" title="All 4 branches covered.">        while (i &gt; -1 &amp;&amp; !shapesList.get(i).clickedOnShape(x, y)) { i--; }</span>
 
-<span class="nc bnc" id="L27" title="All 2 branches missed.">        return i &gt; -1 ? shapesList.get(i) : null;</span>
+<span class="fc bfc" id="L27" title="All 2 branches covered.">        return i &gt; -1 ? shapesList.get(i) : null;</span>
     }
 
     public SimpleShape createSimpleShape(Shapes type, int x, int y) {
-<span class="nc" id="L31">        return shapeFac.createSimpleShape(type, x, y);</span>
+<span class="fc" id="L31">        return shapeFac.createSimpleShape(type, x, y);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

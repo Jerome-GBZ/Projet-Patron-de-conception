@@ -26,55 +26,53 @@ import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
 <span class="fc" id="L26">    private ShapeController shapeController = new ShapeController();</span>
 
     private List&lt;SimpleShape&gt; importShape(Document xmlDocument) throws XPathExpressionException {
-<span class="nc" id="L29">        List&lt;SimpleShape&gt; list = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L29">        List&lt;SimpleShape&gt; list = new ArrayList&lt;&gt;();</span>
 
-<span class="nc" id="L31">        XPath xPath = XPathFactory.newInstance().newXPath();</span>
-<span class="nc" id="L32">        NodeList compoundshapeList = (NodeList) xPath.compile(&quot;//shape[@type='compoundshape']/shapes&quot;).evaluate(xmlDocument, XPathConstants.NODESET);</span>
+<span class="fc" id="L31">        XPath xPath = XPathFactory.newInstance().newXPath();</span>
+<span class="fc" id="L32">        NodeList compoundshapeList = (NodeList) xPath.compile(&quot;//shape[@type='compoundshape']/shapes&quot;).evaluate(xmlDocument, XPathConstants.NODESET);</span>
 
-<span class="nc bnc" id="L34" title="All 2 branches missed.">        if(compoundshapeList.getLength() &gt; 0) {</span>
-<span class="nc bnc" id="L35" title="All 2 branches missed.">            for (int i = 0; i &lt; compoundshapeList.getLength(); i++) {</span>
-<span class="nc" id="L36">                CompoundShape cShape = new CompoundShape(new ArrayList&lt;SimpleShape&gt;());</span>
-<span class="nc" id="L37">                NodeList shapes = ((Element) compoundshapeList.item(i)).getChildNodes();</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        if(compoundshapeList.getLength() &gt; 0) {</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">            for (int i = 0; i &lt; compoundshapeList.getLength(); i++) {</span>
+<span class="fc" id="L36">                CompoundShape cShape = new CompoundShape(new ArrayList&lt;&gt;());</span>
+<span class="fc" id="L37">                NodeList shapes = ((Element) compoundshapeList.item(i)).getChildNodes();</span>
 
-<span class="nc bnc" id="L39" title="All 2 branches missed.">                for (int j = 1; j &lt; shapes.getLength(); j += 2) {</span>
-<span class="nc" id="L40">                    cShape.addShape(getSimpleShape( (Element) shapes.item(i) ));</span>
+<span class="fc bfc" id="L39" title="All 2 branches covered.">                for (int j = 1; j &lt; shapes.getLength(); j += 2) {</span>
+<span class="fc" id="L40">                    cShape.addShape(getSimpleShape( (Element) shapes.item(j) ));</span>
                 }
 
-<span class="nc bnc" id="L43" title="All 2 branches missed.">                if (cShape.getShapes().size() &gt; 1) {</span>
-<span class="nc" id="L44">                    list.add(cShape);</span>
+<span class="pc bpc" id="L43" title="1 of 2 branches missed.">                if (cShape.getShapes().size() &gt; 1) {</span>
+<span class="fc" id="L44">                    list.add(cShape);</span>
 <span class="nc bnc" id="L45" title="All 2 branches missed.">                } else if(cShape.getShapes().size() == 1) {</span>
 <span class="nc" id="L46">                    list.add(cShape.getShapes().get(0));</span>
                 }
             }
         }
 
-<span class="nc" id="L51">        NodeList shapeList = (NodeList) xPath.compile(&quot;/root/shapes/shape[not(@type='compoundshape')]&quot;).evaluate(xmlDocument, XPathConstants.NODESET);</span>
+<span class="fc" id="L51">        NodeList shapeList = (NodeList) xPath.compile(&quot;/root/shapes/shape[not(@type='compoundshape')]&quot;).evaluate(xmlDocument, XPathConstants.NODESET);</span>
 
-<span class="nc bnc" id="L53" title="All 2 branches missed.">        for (int i = 0; i &lt; shapeList.getLength(); i++) {</span>
-<span class="nc" id="L54">            list.add(getSimpleShape( (Element) shapeList.item(i) ));</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        for (int i = 0; i &lt; shapeList.getLength(); i++) {</span>
+<span class="fc" id="L54">            list.add(getSimpleShape( (Element) shapeList.item(i) ));</span>
         }
 
-<span class="nc" id="L57">        return list;</span>
+<span class="fc" id="L57">        return list;</span>
     }
 
     public List&lt;SimpleShape&gt; getXMLFile(String nameXMLFile) throws IOException, ParserConfigurationException, SAXException, XPathExpressionException {
-<span class="nc" id="L61">        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();</span>
-<span class="nc" id="L62">        dbf.setFeature(&quot;http://apache.org/xml/features/disallow-doctype-decl&quot;, true);</span>
+<span class="fc" id="L61">        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();</span>
+<span class="fc" id="L62">        dbf.setFeature(&quot;http://apache.org/xml/features/disallow-doctype-decl&quot;, true);</span>
 
-<span class="nc" id="L64">        DocumentBuilder db = dbf.newDocumentBuilder();</span>
-<span class="nc" id="L65">        Document xmlDocument = db.parse( Path.of(nameXMLFile).toFile().getPath() );</span>
+<span class="fc" id="L64">        DocumentBuilder db = dbf.newDocumentBuilder();</span>
+<span class="fc" id="L65">        Document xmlDocument = db.parse( Path.of(nameXMLFile).toFile().getPath() );</span>
 
-<span class="nc" id="L67">        return importShape(xmlDocument);</span>
+<span class="fc" id="L67">        return importShape(xmlDocument);</span>
     }
 
     private SimpleShape getSimpleShape(Element shapeElement) {
-<span class="nc" id="L71">        String type = shapeElement.getAttribute(&quot;type&quot;);</span>
-<span class="nc" id="L72">        int x = Integer.parseInt(shapeElement.getElementsByTagName(&quot;x&quot;).item(0).getTextContent());</span>
-<span class="nc" id="L73">        int y = Integer.parseInt(shapeElement.getElementsByTagName(&quot;y&quot;).item(0).getTextContent());</span>
+<span class="fc" id="L71">        String type = shapeElement.getAttribute(&quot;type&quot;);</span>
+<span class="fc" id="L72">        int x = Integer.parseInt(shapeElement.getElementsByTagName(&quot;x&quot;).item(0).getTextContent());</span>
+<span class="fc" id="L73">        int y = Integer.parseInt(shapeElement.getElementsByTagName(&quot;y&quot;).item(0).getTextContent());</span>
 
-<span class="nc" id="L75">        SimpleShape shape = shapeController.createSimpleShape(shapeController.getShapes(type), x, y);</span>
-
-<span class="nc" id="L77">        return shape;</span>
+<span class="fc" id="L75">        return shapeController.createSimpleShape(shapeController.getShapes(type), x, y);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

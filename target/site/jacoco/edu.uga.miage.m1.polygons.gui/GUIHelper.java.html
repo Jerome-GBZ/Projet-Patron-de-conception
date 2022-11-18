@@ -9,24 +9,24 @@ import javax.swing.JFrame;
  */
 public class GUIHelper {
 
-    private GUIHelper(){
+    private GUIHelper() {
 
     }
 
     public static void showOnFrame(String frameName) {
-<span class="nc" id="L17">        JFrame frame = new JDrawingFrame(frameName);</span>
-<span class="nc" id="L18">        frame.setResizable(false);</span>
+<span class="fc" id="L17">        JFrame frame = new JDrawingFrame(frameName);</span>
+<span class="fc" id="L18">        frame.setResizable(false);</span>
 
-<span class="nc" id="L20">        WindowAdapter wa = new WindowAdapter() {</span>
+<span class="fc" id="L20">        WindowAdapter wa = new WindowAdapter() {</span>
             @Override
             public void windowClosing(WindowEvent e) {
 <span class="nc" id="L23">                System.exit(0);</span>
 <span class="nc" id="L24">            }</span>
         };
 
-<span class="nc" id="L27">        frame.addWindowListener(wa);</span>
-<span class="nc" id="L28">        frame.pack();</span>
-<span class="nc" id="L29">        frame.setVisible(true);</span>
-<span class="nc" id="L30">    }</span>
+<span class="fc" id="L27">        frame.addWindowListener(wa);</span>
+<span class="fc" id="L28">        frame.pack();</span>
+<span class="fc" id="L29">        frame.setVisible(true);</span>
+<span class="fc" id="L30">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

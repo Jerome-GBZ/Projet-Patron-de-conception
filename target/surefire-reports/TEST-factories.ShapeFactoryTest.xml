@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="factories.ShapeFactoryTest" time="0.003" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="factories.ShapeFactoryTest" time="0.005" tests="5" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="18"/>
     <property name="sonar.login" value="6694cec615d0d3612e12b6c0064506453d78894f"/>
     <property name="sonar.host.url" value="http://im2ag-sonar.u-ga.fr:9000"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
     <property name="java.class.path" value="/Users/sinao/Documents/UGA/PC/persistence_g1_3/target/test-classes:/Users/sinao/Documents/UGA/PC/persistence_g1_3/target/classes:/Users/sinao/.m2/repository/org/json/json/20220924/json-20220924.jar:/Users/sinao/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.4.0/junit-jupiter-engine-5.4.0.jar:/Users/sinao/.m2/repository/org/apiguardian/apiguardian-api/1.0.0/apiguardian-api-1.0.0.jar:/Users/sinao/.m2/repository/org/junit/platform/junit-platform-engine/1.4.0/junit-platform-engine-1.4.0.jar:/Users/sinao/.m2/repository/org/opentest4j/opentest4j/1.1.1/opentest4j-1.1.1.jar:/Users/sinao/.m2/repository/org/junit/platform/junit-platform-commons/1.4.0/junit-platform-commons-1.4.0.jar:/Users/sinao/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.4.0/junit-jupiter-api-5.4.0.jar:"/>
+    <property name="sun.awt.enableExtraMouseButtons" value="true"/>
     <property name="java.vm.vendor" value="Homebrew"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.vendor.url" value="https://github.com/Homebrew/homebrew-core/issues"/>
+    <property name="user.timezone" value="Europe/Paris"/>
     <property name="os.name" value="Mac OS X"/>
     <property name="java.vm.specification.version" value="18"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="FR"/>
     <property name="sun.boot.library.path" value="/opt/homebrew/Cellar/openjdk/18.0.1.1/libexec/openjdk.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/sinao/Documents/UGA/PC/persistence_g1_3/target/surefire/surefirebooter1756477328635178881.jar /Users/sinao/Documents/UGA/PC/persistence_g1_3/target/surefire 2022-11-18T22-09-10_045-jvmRun1 surefire17278539278560423436tmp surefire_02284164979076391295tmp"/>
+    <property name="sun.java.command" value="/Users/sinao/Documents/UGA/PC/persistence_g1_3/target/surefire/surefirebooter14920749485495454557.jar /Users/sinao/Documents/UGA/PC/persistence_g1_3/target/surefire 2022-11-18T23-17-16_149-jvmRun1 surefire6126332911208460394tmp surefire_05635728710065520478tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/Users/sinao/Documents/UGA/PC/persistence_g1_3/target/test-classes:/Users/sinao/Documents/UGA/PC/persistence_g1_3/target/classes:/Users/sinao/.m2/repository/org/json/json/20220924/json-20220924.jar:/Users/sinao/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.4.0/junit-jupiter-engine-5.4.0.jar:/Users/sinao/.m2/repository/org/apiguardian/apiguardian-api/1.0.0/apiguardian-api-1.0.0.jar:/Users/sinao/.m2/repository/org/junit/platform/junit-platform-engine/1.4.0/junit-platform-engine-1.4.0.jar:/Users/sinao/.m2/repository/org/opentest4j/opentest4j/1.1.1/opentest4j-1.1.1.jar:/Users/sinao/.m2/repository/org/junit/platform/junit-platform-commons/1.4.0/junit-platform-commons-1.4.0.jar:/Users/sinao/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.4.0/junit-jupiter-api-5.4.0.jar:"/>
@@ -31,7 +33,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="apple.awt.application.name" value="ForkedBooter"/>
-    <property name="surefire.real.class.path" value="/Users/sinao/Documents/UGA/PC/persistence_g1_3/target/surefire/surefirebooter1756477328635178881.jar"/>
+    <property name="surefire.real.class.path" value="/Users/sinao/Documents/UGA/PC/persistence_g1_3/target/surefire/surefirebooter14920749485495454557.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.runtime.version" value="18.0.1.1+0"/>
@@ -59,5 +61,9 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="62.0"/>
   </properties>
-  <testcase name="testConstructorShapeFactory" classname="factories.ShapeFactoryTest" time="0.002"/>
+  <testcase name="testConstrucCompoundShape" classname="factories.ShapeFactoryTest" time="0.003"/>
+  <testcase name="testConstructorShapeFactory" classname="factories.ShapeFactoryTest" time="0"/>
+  <testcase name="testConstrucCircle" classname="factories.ShapeFactoryTest" time="0"/>
+  <testcase name="testConstrucSquare" classname="factories.ShapeFactoryTest" time="0"/>
+  <testcase name="testConstrucTriangle" classname="factories.ShapeFactoryTest" time="0"/>
 </testsuite>

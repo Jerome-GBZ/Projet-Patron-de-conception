@@ -8,7 +8,7 @@ public abstract class Command {
     private SimpleShape oldShape;
     private SimpleShape newShape;
 
-<span class="fc" id="L11">    public Command(SimpleShape oldS, SimpleShape newS) {</span>
+<span class="fc" id="L11">    protected Command(SimpleShape oldS, SimpleShape newS) {</span>
 <span class="fc" id="L12">        oldShape = oldS;</span>
 <span class="fc" id="L13">        newShape = newS;</span>
 <span class="fc" id="L14">    }</span>
@@ -24,10 +24,6 @@ public abstract class Command {
     public void setNewShape(SimpleShape newShape) {
 <span class="fc" id="L25">        this.newShape = newShape;</span>
 <span class="fc" id="L26">    }</span>
-
-    public void setOldShape(SimpleShape oldShape) {
-<span class="nc" id="L29">        this.oldShape = oldShape;</span>
-<span class="nc" id="L30">    }</span>
 
     public abstract List&lt;SimpleShape&gt; execute(List&lt;SimpleShape&gt; shapesList);
 }

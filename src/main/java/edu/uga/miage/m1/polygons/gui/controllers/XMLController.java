@@ -33,11 +33,11 @@ public class XMLController {
 
         if(compoundshapeList.getLength() > 0) {
             for (int i = 0; i < compoundshapeList.getLength(); i++) {
-                CompoundShape cShape = new CompoundShape(new ArrayList<SimpleShape>());
+                CompoundShape cShape = new CompoundShape(new ArrayList<>());
                 NodeList shapes = ((Element) compoundshapeList.item(i)).getChildNodes();
 
                 for (int j = 1; j < shapes.getLength(); j += 2) {
-                    cShape.addShape(getSimpleShape( (Element) shapes.item(i) ));
+                    cShape.addShape(getSimpleShape( (Element) shapes.item(j) ));
                 }
 
                 if (cShape.getShapes().size() > 1) {
@@ -72,8 +72,6 @@ public class XMLController {
         int x = Integer.parseInt(shapeElement.getElementsByTagName("x").item(0).getTextContent());
         int y = Integer.parseInt(shapeElement.getElementsByTagName("y").item(0).getTextContent());
 
-        SimpleShape shape = shapeController.createSimpleShape(shapeController.getShapes(type), x, y);
-
-        return shape;
+        return shapeController.createSimpleShape(shapeController.getShapes(type), x, y);
     }
 }

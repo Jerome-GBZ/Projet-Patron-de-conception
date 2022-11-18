@@ -21,20 +21,20 @@ public class FileController {
             File myObj = new File(nameFile);
             if(myObj.createNewFile()) { logger.info("File created."); }
 
-            FileWriter myWriter = new FileWriter(nameFile);
-            writeOnFile(sf, myWriter);
+            FileWriter writer = new FileWriter(nameFile);
+            writeOnFile(sf, writer);
         } catch (IOException exc) {
             logger.warning("An error occurred.");
         }
     }
 
-    private void writeOnFile(SimpleFile sf, FileWriter myWriter) throws IOException {
+    private void writeOnFile(SimpleFile sf, FileWriter writer) throws IOException {
         try {
-            myWriter.write(sf.getRepresentation());
+            writer.write(sf.getRepresentation());
         } catch(Exception e){
             logger.warning("Error when writting on file.");
         } finally {
-            myWriter.close();
+            writer.close();
         }
     }
 }

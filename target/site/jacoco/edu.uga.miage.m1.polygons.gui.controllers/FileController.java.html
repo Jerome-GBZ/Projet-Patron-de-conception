@@ -16,26 +16,26 @@ import java.util.logging.Logger;
 
     public void writeOnFile(List&lt;SimpleShape&gt; shapesList, SimpleFile sf, String nameFile) {
         try {
-<span class="nc" id="L19">            shapesList.forEach(sf::visit);</span>
+<span class="fc" id="L19">            shapesList.forEach(sf::visit);</span>
 
-<span class="nc" id="L21">            File myObj = new File(nameFile);</span>
-<span class="nc bnc" id="L22" title="All 2 branches missed.">            if(myObj.createNewFile()) { logger.info(&quot;File created.&quot;); }</span>
+<span class="fc" id="L21">            File myObj = new File(nameFile);</span>
+<span class="fc bfc" id="L22" title="All 2 branches covered.">            if(myObj.createNewFile()) { logger.info(&quot;File created.&quot;); }</span>
 
-<span class="nc" id="L24">            FileWriter myWriter = new FileWriter(nameFile);</span>
-<span class="nc" id="L25">            writeOnFile(sf, myWriter);</span>
+<span class="fc" id="L24">            FileWriter writer = new FileWriter(nameFile);</span>
+<span class="fc" id="L25">            writeOnFile(sf, writer);</span>
 <span class="nc" id="L26">        } catch (IOException exc) {</span>
 <span class="nc" id="L27">            logger.warning(&quot;An error occurred.&quot;);</span>
-<span class="nc" id="L28">        }</span>
-<span class="nc" id="L29">    }</span>
+<span class="fc" id="L28">        }</span>
+<span class="fc" id="L29">    }</span>
 
-    private void writeOnFile(SimpleFile sf, FileWriter myWriter) throws IOException {
+    private void writeOnFile(SimpleFile sf, FileWriter writer) throws IOException {
         try {
-<span class="nc" id="L33">            myWriter.write(sf.getRepresentation());</span>
+<span class="fc" id="L33">            writer.write(sf.getRepresentation());</span>
 <span class="nc" id="L34">        } catch(Exception e){</span>
 <span class="nc" id="L35">            logger.warning(&quot;Error when writting on file.&quot;);</span>
         } finally {
-<span class="nc" id="L37">            myWriter.close();</span>
+<span class="fc" id="L37">            writer.close();</span>
         }
-<span class="nc" id="L39">    }</span>
+<span class="fc" id="L39">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
