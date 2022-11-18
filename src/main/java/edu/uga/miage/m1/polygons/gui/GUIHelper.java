@@ -23,6 +23,7 @@ public class GUIHelper {
                 System.exit(0);
             }
         };
+
         frame.addWindowListener(wa);
         frame.pack();
         frame.setVisible(true);

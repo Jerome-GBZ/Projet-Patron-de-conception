@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+
 import org.json.JSONObject;
 import org.json.JSONArray;
 
@@ -13,7 +14,7 @@ import edu.uga.miage.m1.polygons.gui.shapes.CompoundShape;
 import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
 
 public class JSonController {
-    public List<SimpleShape> importShape(JSONArray shapesJSON) {
+    private List<SimpleShape> importShape(JSONArray shapesJSON) {
         List<SimpleShape> list = new ArrayList<>();
         ShapeFactory shapeFac = new ShapeFactory();
 
