@@ -169,11 +169,8 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
         xmlImportButton.addActionListener(e -> {
             try {
                 List<SimpleShape> list = xmlController.getXMLFile(nameXMLFile);
-                // System.out.println(list.size());
 
                 list.forEach(shape -> {
-                    // System.out.println(shape);
-
                     shapesList.add(shape);
                 });
 

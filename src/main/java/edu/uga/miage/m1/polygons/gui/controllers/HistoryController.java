@@ -36,7 +36,6 @@ public class HistoryController {
     }
 
     public void add(Command c) {
-        System.out.println(c.getClass().getSimpleName());
         history.add(c);
     }
 

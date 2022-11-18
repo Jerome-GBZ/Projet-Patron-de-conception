@@ -32,7 +32,6 @@ public class XMLController {
         NodeList compoundshapeList = (NodeList) xPath.compile("//shape[@type='compoundshape']/shapes").evaluate(xmlDocument, XPathConstants.NODESET);
 
         if(compoundshapeList.getLength() > 0) {
-            System.out.println(compoundshapeList.getLength());
             for (int i = 0; i < compoundshapeList.getLength(); i++) {
                 CompoundShape cShape = new CompoundShape(new ArrayList<SimpleShape>());
                 NodeList shapes = ((Element) compoundshapeList.item(i)).getChildNodes();
