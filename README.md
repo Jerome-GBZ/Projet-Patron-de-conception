@@ -61,14 +61,14 @@ Etape 9 à 25 :
   - [x] XML
 - [x] Rendre déplacable un groupe de forme apres import JSON
 - [ ] Rendre déplacable un groupe de forme apres import XML
-- [x] 70% de coverage sur Sonar
+- [x] 90% de coverage sur Sonar
 - [x] 0min de dettes techniques
 - [ ] Déplacer un groupe contenant un groupe + une forme ou 2 groupes (pb de coordoné lors du déplacement)
 - [x] 0min de dettes techniques
 - [x] cmd-z ou ctrl-z remplacé par un bouton retour en arrière
 
 ## Points d'améliorations <a id="improves"></a>
-Avec plus de temps on pourrait améliorer le code pour qui match encore plus avec les 2 patrons de conception. On pourrait aussi redévelopper la partie déplacement de forme. Actuellement à chaque déplacement on repaint toutes la fenêtre. Il faudrait dans le futur repeint seulement la forme ou le groupe de forme.
+Avec plus de temps on pourrait améliorer le code pour qui match encore plus avec les 4 patrons de conception. On pourrait aussi redévelopper la partie déplacement de forme. Actuellement à chaque déplacement on repaint toutes la fenêtre. Il faudrait dans le futur repeint seulement la forme ou le groupe de forme.
 
 ## Commandes utiles
 
