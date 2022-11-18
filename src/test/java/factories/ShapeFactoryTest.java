@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
 
-import edu.uga.miage.m1.polygons.gui.factory.ShapeFactory;
+import edu.uga.miage.m1.polygons.gui.factories.ShapeFactory;
 
 class ShapeFactoryTest {
 

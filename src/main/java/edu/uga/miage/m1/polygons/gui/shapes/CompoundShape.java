@@ -85,4 +85,8 @@ public class CompoundShape implements SimpleShape, Visitable {
         this.shapesList.add(s);
         s.draw(g2, getX());
     }
+
+    public void addShape(SimpleShape s) {
+        this.shapesList.add(s);
+    }
 }

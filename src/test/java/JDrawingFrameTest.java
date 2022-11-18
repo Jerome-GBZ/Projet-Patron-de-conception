@@ -6,7 +6,7 @@ import javax.swing.JToolBar;
 import org.junit.jupiter.api.Test;
 
 import edu.uga.miage.m1.polygons.gui.JDrawingFrame;
-import edu.uga.miage.m1.polygons.gui.factory.ShapeFactory;
+import edu.uga.miage.m1.polygons.gui.factories.ShapeFactory;
 
 class JDrawingFrameTest {
     JDrawingFrame jDrawFrame = new JDrawingFrame("test");

@@ -3,8 +3,18 @@
     {
       "type": "compoundshape",
       "shapes": [
-        { "type": "triangle", "x": 320, "y": 106 },
-        { "type": "square", "x": 245, "y": 188 }
+        {
+          "type": "compoundshape",
+          "shapes": [
+            { "type": "circle", "x": 130, "y": 130 }
+          ]
+        }, {
+          "type": "compoundshape",
+          "shapes": [
+            { "type": "triangle", "x": 50, "y": 50 },
+            { "type": "square", "x": 100, "y": 100 }
+          ]
+        }
       ]
     }
   ]
