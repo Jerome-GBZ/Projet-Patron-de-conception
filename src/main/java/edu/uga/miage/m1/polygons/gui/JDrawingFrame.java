@@ -30,13 +30,15 @@ import edu.uga.miage.m1.polygons.gui.persistence.SimpleFile;
 import edu.uga.miage.m1.polygons.gui.persistence.XMLVisitor;
 import edu.uga.miage.m1.polygons.gui.shapes.CompoundShape;
 import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
-import edu.uga.miage.m1.polygons.gui.command.CommandHistory;
-import edu.uga.miage.m1.polygons.gui.command.CommandUndo.TypesCommands;
+import edu.uga.miage.m1.polygons.gui.command.CreateCommand;
+import edu.uga.miage.m1.polygons.gui.command.MoveCommand;
 import edu.uga.miage.m1.polygons.gui.controllers.FileController;
+import edu.uga.miage.m1.polygons.gui.controllers.HistoryController;
 import edu.uga.miage.m1.polygons.gui.controllers.JSonController;
+import edu.uga.miage.m1.polygons.gui.controllers.ShapeController;
 import edu.uga.miage.m1.polygons.gui.controllers.XMLController;
 import edu.uga.miage.m1.polygons.gui.factories.ShapeFactory;
-import edu.uga.miage.m1.polygons.gui.factories.ShapeFactory.Shapes;
+import edu.uga.miage.m1.polygons.gui.controllers.ShapeController.Shapes;
 
 /**
  * This class represents the main application class, which is a JFrame subclass
@@ -60,15 +62,14 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
     private final JButton xmlImportButton;
     private final JCheckBox groupByCheckBox;
 
-    private transient CommandHistory cmdHist = new CommandHistory();
-    private transient ShapeFactory shapeFac = new ShapeFactory();
-
+    private transient ShapeController shapeController = new ShapeController();
+    private transient HistoryController histController = new HistoryController();
     private transient JSonController jsonController = new JSonController();
     private transient XMLController xmlController = new XMLController();
     private transient FileController fileController = new FileController();
 
     private transient ActionListener reusableActionListener = new ShapeActionListener();
-    private Shapes shapeMenuSelected = shapeFac.getShapes("SQUARE");
+    private Shapes shapeMenuSelected = shapeController.getShapes("SQUARE");
 
     private transient List<SimpleShape> shapesList = new ArrayList<>();
     private transient List<SimpleShape> shapesListGroupBy = new ArrayList<>();
@@ -195,7 +196,7 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
         });
 
         undoButton.addActionListener(e -> {
-            shapesList = cmdHist.undo(shapesList);
+            shapesList = histController.undo(shapesList);
             reDrawAll();
         });
     }
@@ -256,7 +257,7 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
 
     public void mouseReleased(MouseEvent evt) {
         if(shapeSelected != null && oldShapeSelected != null ) {
-            cmdHist.add(TypesCommands.MOVE, oldShapeSelected, shapeSelected);
+            histController.add(new MoveCommand(oldShapeSelected, shapeSelected));
 
             reDrawAll();
         }
@@ -305,21 +306,21 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
     }
 
     private void shapeIsSelect(int x, int y) {
-        shapeSelected = shapeFac.shapeIsSelect(shapesList, x, y);
+        shapeSelected = shapeController.shapeIsSelect(shapesList, x, y);
         if(shapeSelected != null) {
-            oldShapeSelected = shapeFac.createSimpleShape(shapeFac.getShapes(shapeSelected.getClass().getSimpleName()), shapeSelected.getX(), shapeSelected.getY());
+            oldShapeSelected = shapeController.createSimpleShape(shapeController.getShapes(shapeSelected.getClass().getSimpleName()), shapeSelected.getX(), shapeSelected.getY());
         }
     }
 
     public SimpleShape createShape(Shapes type, int x, int y) {
         Graphics2D g2 = (Graphics2D) this.getPanel().getGraphics();
-        SimpleShape shapeReturn = shapeFac.createSimpleShape(type, x, y);
+        SimpleShape shapeReturn = shapeController.createSimpleShape(type, x, y);
 
         if(shapeReturn != null) {
             shapeReturn.draw(g2, (float) 2.0);
             shapesList.add(shapeReturn);
 
-            cmdHist.add(TypesCommands.CREATE, null, shapeReturn);
+            histController.add(new CreateCommand(null, shapeReturn));
         }
 
         return shapeReturn;

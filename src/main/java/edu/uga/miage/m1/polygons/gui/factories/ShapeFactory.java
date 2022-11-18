@@ -1,17 +1,9 @@
 package edu.uga.miage.m1.polygons.gui.factories;
 
-import java.util.List;
-
 import edu.uga.miage.m1.polygons.gui.shapes.*;
+import edu.uga.miage.m1.polygons.gui.controllers.ShapeController.Shapes;
 
 public class ShapeFactory implements SimpleShapeFactory {
-    public enum Shapes {
-        SQUARE,
-        TRIANGLE,
-        CIRCLE,
-        COMPOUNDSHAPE
-    }
-
     public SimpleShape createSimpleShape(Shapes type, int x, int y) {
         SimpleShape shape;
 
@@ -30,17 +22,5 @@ public class ShapeFactory implements SimpleShapeFactory {
         }
 
         return shape;
-    }
-
-    public Shapes getShapes(String type) {
-        return Shapes.valueOf(type.toUpperCase());
-    }
-
-    public SimpleShape shapeIsSelect(List<SimpleShape> shapesList, int x, int y) {
-        int i = shapesList.size() - 1;
-
-        while (i > -1 && !shapesList.get(i).clickedOnShape(x, y)) { i--; }
-
-        return i > -1 ? shapesList.get(i) : null;
     }
 }

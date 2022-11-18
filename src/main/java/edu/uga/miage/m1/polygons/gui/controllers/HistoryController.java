@@ -1,17 +1,14 @@
-package edu.uga.miage.m1.polygons.gui.command;
+package edu.uga.miage.m1.polygons.gui.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.uga.miage.m1.polygons.gui.command.CommandUndo.TypesCommands;
+import edu.uga.miage.m1.polygons.gui.command.Command;
 import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
 
-public class CommandHistory {
+public class HistoryController {
     private List<Command> history = new ArrayList<>();
 
-    /*
-     * Remove last element of history
-     */
     public void pop(Command lastC) {
         history.remove(lastC);
     }
@@ -23,7 +20,7 @@ public class CommandHistory {
     public List<SimpleShape> undo(List<SimpleShape> shapesList) {
         if(!isEmpty()) {
             Command lastCommand = history.get(history.size() - 1);
-            shapesList = lastCommand.makeAction(shapesList);
+            shapesList = lastCommand.execute(shapesList);
             pop(lastCommand);
 
             if(!isEmpty()) {
@@ -38,8 +35,9 @@ public class CommandHistory {
         return shapesList;
     }
 
-    public void add(TypesCommands typeC, SimpleShape oldShape, SimpleShape newShape) {
-        history.add(new CommandUndo(typeC, oldShape, newShape));
+    public void add(Command c) {
+        System.out.println(c.getClass().getSimpleName());
+        history.add(c);
     }
 
     public List<Command> getHistory() {

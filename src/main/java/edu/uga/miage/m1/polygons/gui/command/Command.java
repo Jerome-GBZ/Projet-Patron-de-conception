@@ -2,19 +2,32 @@ package edu.uga.miage.m1.polygons.gui.command;
 
 import java.util.List;
 
-import edu.uga.miage.m1.polygons.gui.command.CommandUndo.TypesCommands;
 import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
 
-public interface Command {
-    TypesCommands getTypeCommand();
+public abstract class Command {
+    private SimpleShape oldShape;
+    private SimpleShape newShape;
 
-    SimpleShape getOldShape();
+    public Command(SimpleShape oldS, SimpleShape newS) {
+        oldShape = oldS;
+        newShape = newS;
+    }
 
-    SimpleShape getNewShape();
+    public SimpleShape getOldShape() {
+        return oldShape;
+    }
 
-    void setNewShape(SimpleShape newShape);
+    public SimpleShape getNewShape() {
+        return newShape;
+    }
 
-    void setOldShape(SimpleShape oldShape);
+    public void setNewShape(SimpleShape newShape) {
+        this.newShape = newShape;
+    }
 
-    List<SimpleShape> makeAction(List<SimpleShape> shapesList);
+    public void setOldShape(SimpleShape oldShape) {
+        this.oldShape = oldShape;
+    }
+
+    public abstract List<SimpleShape> execute(List<SimpleShape> shapesList);
 }

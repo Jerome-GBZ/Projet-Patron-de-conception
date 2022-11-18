@@ -18,15 +18,15 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
-import edu.uga.miage.m1.polygons.gui.factories.ShapeFactory;
 import edu.uga.miage.m1.polygons.gui.shapes.CompoundShape;
 import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
 
 public class XMLController {
 
+    private ShapeController shapeController = new ShapeController();
+
     private List<SimpleShape> importShape(Document xmlDocument) throws XPathExpressionException {
         List<SimpleShape> list = new ArrayList<>();
-        ShapeFactory shapeFac = new ShapeFactory();
 
         XPath xPath = XPathFactory.newInstance().newXPath();
         NodeList compoundshapeList = (NodeList) xPath.compile("//shape[@type='compoundshape']/shapes").evaluate(xmlDocument, XPathConstants.NODESET);
@@ -35,18 +35,10 @@ public class XMLController {
             System.out.println(compoundshapeList.getLength());
             for (int i = 0; i < compoundshapeList.getLength(); i++) {
                 CompoundShape cShape = new CompoundShape(new ArrayList<SimpleShape>());
-
-                Element shapeElement = (Element) compoundshapeList.item(i);
-                NodeList shapes = shapeElement.getChildNodes();
+                NodeList shapes = ((Element) compoundshapeList.item(i)).getChildNodes();
 
                 for (int j = 1; j < shapes.getLength(); j += 2) {
-                    Element shape = (Element) shapes.item(j);
-
-                    String type = shape.getAttribute("type");
-                    int x = Integer.parseInt(shape.getElementsByTagName("x").item(0).getTextContent());
-                    int y = Integer.parseInt(shape.getElementsByTagName("y").item(0).getTextContent());
-
-                    cShape.addShape(shapeFac.createSimpleShape(shapeFac.getShapes(type), x, y));
+                    cShape.addShape(getSimpleShape( (Element) shapes.item(i) ));
                 }
 
                 if (cShape.getShapes().size() > 1) {
@@ -60,17 +52,7 @@ public class XMLController {
         NodeList shapeList = (NodeList) xPath.compile("/root/shapes/shape[not(@type='compoundshape')]").evaluate(xmlDocument, XPathConstants.NODESET);
 
         for (int i = 0; i < shapeList.getLength(); i++) {
-            Element shapeElement = (Element) shapeList.item(i);
-
-            String type = shapeElement.getAttribute("type");
-            int x = Integer.parseInt(shapeElement.getElementsByTagName("x").item(0).getTextContent());
-            int y = Integer.parseInt(shapeElement.getElementsByTagName("y").item(0).getTextContent());
-
-            SimpleShape shapeCreated = shapeFac.createSimpleShape(shapeFac.getShapes(type), x, y);
-
-            if(shapeCreated != null) {
-                list.add(shapeCreated);
-            }
+            list.add(getSimpleShape( (Element) shapeList.item(i) ));
         }
 
         return list;
@@ -79,9 +61,20 @@ public class XMLController {
     public List<SimpleShape> getXMLFile(String nameXMLFile) throws IOException, ParserConfigurationException, SAXException, XPathExpressionException {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         dbf.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+
         DocumentBuilder db = dbf.newDocumentBuilder();
         Document xmlDocument = db.parse( Path.of(nameXMLFile).toFile().getPath() );
 
         return importShape(xmlDocument);
+    }
+
+    private SimpleShape getSimpleShape(Element shapeElement) {
+        String type = shapeElement.getAttribute("type");
+        int x = Integer.parseInt(shapeElement.getElementsByTagName("x").item(0).getTextContent());
+        int y = Integer.parseInt(shapeElement.getElementsByTagName("y").item(0).getTextContent());
+
+        SimpleShape shape = shapeController.createSimpleShape(shapeController.getShapes(type), x, y);
+
+        return shape;
     }
 }

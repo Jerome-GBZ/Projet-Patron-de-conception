@@ -9,14 +9,13 @@ import java.util.ArrayList;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
-import edu.uga.miage.m1.polygons.gui.factories.ShapeFactory;
 import edu.uga.miage.m1.polygons.gui.shapes.CompoundShape;
 import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
 
 public class JSonController {
     private List<SimpleShape> importShape(JSONArray shapesJSON) {
         List<SimpleShape> list = new ArrayList<>();
-        ShapeFactory shapeFac = new ShapeFactory();
+        ShapeController shapeController = new ShapeController();
 
         shapesJSON.forEach(shapeObject -> {
             JSONObject shape = (JSONObject) shapeObject;
@@ -28,7 +27,7 @@ public class JSonController {
             } else {
                 int x = shape.getInt("x");
                 int y = shape.getInt("y");
-                list.add(shapeFac.createSimpleShape(shapeFac.getShapes(type), x, y));
+                list.add(shapeController.createSimpleShape(shapeController.getShapes(type), x, y));
             }
         });
 
