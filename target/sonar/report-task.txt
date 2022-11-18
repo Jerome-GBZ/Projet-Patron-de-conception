@@ -2,5 +2,5 @@ projectKey=persistence_g1_3
 serverUrl=http://im2ag-sonar.u-ga.fr:9000
 serverVersion=9.1.0.47736
 dashboardUrl=http://im2ag-sonar.u-ga.fr:9000/dashboard?id=persistence_g1_3
-ceTaskId=AYSM0XcWitHa5w2M3e3A
-ceTaskUrl=http://im2ag-sonar.u-ga.fr:9000/api/ce/task?id=AYSM0XcWitHa5w2M3e3A
+ceTaskId=AYSM2C1QitHa5w2M3e3C
+ceTaskUrl=http://im2ag-sonar.u-ga.fr:9000/api/ce/task?id=AYSM2C1QitHa5w2M3e3C

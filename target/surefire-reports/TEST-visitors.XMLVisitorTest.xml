@@ -14,7 +14,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="FR"/>
     <property name="sun.boot.library.path" value="/opt/homebrew/Cellar/openjdk/18.0.1.1/libexec/openjdk.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/sinao/Documents/UGA/PC/persistence_g1_3/target/surefire/surefirebooter14920749485495454557.jar /Users/sinao/Documents/UGA/PC/persistence_g1_3/target/surefire 2022-11-18T23-17-16_149-jvmRun1 surefire6126332911208460394tmp surefire_05635728710065520478tmp"/>
+    <property name="sun.java.command" value="/Users/sinao/Documents/UGA/PC/persistence_g1_3/target/surefire/surefirebooter9915376138215069914.jar /Users/sinao/Documents/UGA/PC/persistence_g1_3/target/surefire 2022-11-18T23-24-37_463-jvmRun1 surefire5998549020494463170tmp surefire_017773436683689398437tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/Users/sinao/Documents/UGA/PC/persistence_g1_3/target/test-classes:/Users/sinao/Documents/UGA/PC/persistence_g1_3/target/classes:/Users/sinao/.m2/repository/org/json/json/20220924/json-20220924.jar:/Users/sinao/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.4.0/junit-jupiter-engine-5.4.0.jar:/Users/sinao/.m2/repository/org/apiguardian/apiguardian-api/1.0.0/apiguardian-api-1.0.0.jar:/Users/sinao/.m2/repository/org/junit/platform/junit-platform-engine/1.4.0/junit-platform-engine-1.4.0.jar:/Users/sinao/.m2/repository/org/opentest4j/opentest4j/1.1.1/opentest4j-1.1.1.jar:/Users/sinao/.m2/repository/org/junit/platform/junit-platform-commons/1.4.0/junit-platform-commons-1.4.0.jar:/Users/sinao/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.4.0/junit-jupiter-api-5.4.0.jar:"/>
@@ -31,7 +31,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="apple.awt.application.name" value="ForkedBooter"/>
-    <property name="surefire.real.class.path" value="/Users/sinao/Documents/UGA/PC/persistence_g1_3/target/surefire/surefirebooter14920749485495454557.jar"/>
+    <property name="surefire.real.class.path" value="/Users/sinao/Documents/UGA/PC/persistence_g1_3/target/surefire/surefirebooter9915376138215069914.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.runtime.version" value="18.0.1.1+0"/>
@@ -59,6 +59,6 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="62.0"/>
   </properties>
-  <testcase name="testVisitClasic" classname="visitors.XMLVisitorTest" time="0.001"/>
-  <testcase name="testVisitGroup" classname="visitors.XMLVisitorTest" time="0.001"/>
+  <testcase name="testVisitClasic" classname="visitors.XMLVisitorTest" time="0"/>
+  <testcase name="testVisitGroup" classname="visitors.XMLVisitorTest" time="0"/>
 </testsuite>

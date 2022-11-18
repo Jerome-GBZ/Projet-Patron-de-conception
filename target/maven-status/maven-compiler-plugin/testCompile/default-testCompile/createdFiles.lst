@@ -1,5 +1,4 @@
 visitors/XMLVisitorTest.class
-GUIHelperTest.class
 shapes/CircleTest.class
 controllers/JSonControllerTest.class
 visitors/JSonVisitorTest.class
@@ -12,3 +11,4 @@ factories/ShapeFactoryTest.class
 JDrawingFrameTest.class
 shapes/TriangleTest.class
 shapes/CompoundShapeTest.class
+controllers/SimpleShape.class
