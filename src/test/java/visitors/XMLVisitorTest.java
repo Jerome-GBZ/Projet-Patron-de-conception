@@ -24,7 +24,7 @@ class XMLVisitorTest {
         assertNotNull(c);
         visitor.visit(c);
 
-        String expectedR = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?> <root> <shapes> <shape> <type>circle</type> <x>50</x> <y>200</y> </shape> </shapes> </root>";
+        String expectedR = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?> <root> <shapes> <shape type='circle'> <x>50</x> <y>200</y> </shape> </shapes> </root>";
         assertEquals(expectedR, visitor.getRepresentation());
     }
 
@@ -41,7 +41,7 @@ class XMLVisitorTest {
 
         visitor.visit(cs);
 
-        String expectedR = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?> <root> <shapes> <shape> <type>compoundshape</type> <shapes> <shape> <type>circle</type> <x>50</x> <y>200</y> </shape> <shape> <type>square</type> <x>100</x> <y>100</y> </shape> </shapes> </shape> </shapes> </root>";
+        String expectedR = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?> <root> <shapes> <shape type='compoundshape'> <shapes> <shape type='circle'> <x>50</x> <y>200</y> </shape> <shape type='square'> <x>100</x> <y>100</y> </shape> </shapes> </shape> </shapes> </root>";
         assertEquals(expectedR, visitor.getRepresentation());
     }
 }

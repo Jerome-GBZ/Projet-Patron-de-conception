@@ -1,1 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" ?> <root> <shapes> <shape type='triangle'> <x>212</x> <y>137</y> </shape> <shape type='circle'> <x>288</x> <y>229</y> </shape> <shape type='compoundshape'> <shapes> <shape type='circle'> <x>303</x> <y>133</y> </shape> <shape type='triangle'> <x>221</x> <y>187</y> </shape> <shape type='triangle'> <x>520</x> <y>157</y> </shape> <shape type='circle'> <x>556</x> <y>265</y> </shape> </shapes> </shape> </shapes> </root>
+<?xml version="1.0" encoding="UTF-8" ?> <root> <shapes> <shape type='circle'> <x>279</x> <y>117</y> </shape> </shapes> </root>

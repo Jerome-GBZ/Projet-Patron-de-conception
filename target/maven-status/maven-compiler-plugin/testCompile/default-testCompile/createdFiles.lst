@@ -1,11 +1,11 @@
-files/XMLVisitorTest.class
+visitors/XMLVisitorTest.class
 shapes/SquareTest.class
-factories/JSonFactoryTest.class
+controllers/FileControllerTest.class
 factories/ShapeFactoryTest.class
 JDrawingFrameTest.class
 shapes/TriangleTest.class
 shapes/CompoundShapeTest.class
 shapes/CircleTest.class
-files/JSonVisitorTest.class
-factories/FileFactoryTest.class
+controllers/JSonControllerTest.class
+visitors/JSonVisitorTest.class
 commands/CommandHistoryTest.class

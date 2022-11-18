@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>XMLController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">persistence_g1_3</a> &gt; <a href="index.source.html" class="el_package">edu.uga.miage.m1.polygons.gui.controllers</a> &gt; <span class="el_source">XMLController.java</span></div><h1>XMLController.java</h1><pre class="source lang-java linenums">package edu.uga.miage.m1.polygons.gui.controllers;
+
+import java.util.List;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import javax.swing.text.html.HTMLDocument.RunElement;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+
+import edu.uga.miage.m1.polygons.gui.factories.ShapeFactory;
+import edu.uga.miage.m1.polygons.gui.shapes.CompoundShape;
+import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
+
+<span class="fc" id="L28">public class XMLController {</span>
+
+    public List&lt;SimpleShape&gt; importShape(Document xmlDocument) throws XPathExpressionException {
+<span class="nc" id="L31">        List&lt;SimpleShape&gt; list = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L32">        ShapeFactory shapeFac = new ShapeFactory();</span>
+
+<span class="nc" id="L34">        XPath xPath = XPathFactory.newInstance().newXPath();</span>
+<span class="nc" id="L35">        NodeList compoundshapeList = (NodeList) xPath.compile(&quot;//shape[@type='compoundshape']/shapes&quot;).evaluate(xmlDocument, XPathConstants.NODESET);</span>
+
+<span class="nc bnc" id="L37" title="All 2 branches missed.">        if(compoundshapeList.getLength() &gt; 0) {</span>
+<span class="nc" id="L38">            System.out.println(compoundshapeList.getLength());</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">            for (int i = 0; i &lt; compoundshapeList.getLength(); i++) {</span>
+<span class="nc" id="L40">                CompoundShape cShape = new CompoundShape(new ArrayList&lt;SimpleShape&gt;());</span>
+
+<span class="nc" id="L42">                Element shapeElement = (Element) compoundshapeList.item(i);</span>
+<span class="nc" id="L43">                NodeList shapes = shapeElement.getChildNodes();</span>
+
+<span class="nc bnc" id="L45" title="All 2 branches missed.">                for (int j = 1; j &lt; shapes.getLength(); j += 2) {</span>
+<span class="nc" id="L46">                    Element shape = (Element) shapes.item(j);</span>
+
+<span class="nc" id="L48">                    String type = shape.getAttribute(&quot;type&quot;);</span>
+<span class="nc" id="L49">                    int x = Integer.parseInt(shape.getElementsByTagName(&quot;x&quot;).item(0).getTextContent());</span>
+<span class="nc" id="L50">                    int y = Integer.parseInt(shape.getElementsByTagName(&quot;y&quot;).item(0).getTextContent());</span>
+
+<span class="nc" id="L52">                    cShape.addShape(shapeFac.createSimpleShape(shapeFac.getShapes(type), x, y));</span>
+                }
+
+<span class="nc bnc" id="L55" title="All 2 branches missed.">                if (cShape.getShapes().size() &gt; 1) {</span>
+<span class="nc" id="L56">                    list.add(cShape);</span>
+<span class="nc bnc" id="L57" title="All 2 branches missed.">                } else if(cShape.getShapes().size() == 1) {</span>
+<span class="nc" id="L58">                    list.add(cShape.getShapes().get(0));</span>
+                }
+            }
+        }
+
+<span class="nc" id="L63">        NodeList shapeList = (NodeList) xPath.compile(&quot;/root/shapes/shape[not(@type='compoundshape')]&quot;).evaluate(xmlDocument, XPathConstants.NODESET);</span>
+
+<span class="nc bnc" id="L65" title="All 2 branches missed.">        for (int i = 0; i &lt; shapeList.getLength(); i++) {</span>
+<span class="nc" id="L66">            Element shapeElement = (Element) shapeList.item(i);</span>
+
+<span class="nc" id="L68">            String type = shapeElement.getAttribute(&quot;type&quot;);</span>
+<span class="nc" id="L69">            int x = Integer.parseInt(shapeElement.getElementsByTagName(&quot;x&quot;).item(0).getTextContent());</span>
+<span class="nc" id="L70">            int y = Integer.parseInt(shapeElement.getElementsByTagName(&quot;y&quot;).item(0).getTextContent());</span>
+
+<span class="nc" id="L72">            SimpleShape shapeCreated = shapeFac.createSimpleShape(shapeFac.getShapes(type), x, y);</span>
+
+<span class="nc bnc" id="L74" title="All 2 branches missed.">            if(shapeCreated != null) {</span>
+<span class="nc" id="L75">                list.add(shapeCreated);</span>
+            }
+        }
+
+<span class="nc" id="L79">        return list;</span>
+    }
+
+    public List&lt;SimpleShape&gt; getXMLFile(String nameXMLFile) throws IOException, ParserConfigurationException, SAXException, XPathExpressionException {
+<span class="nc" id="L83">        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();</span>
+<span class="nc" id="L84">        dbf.setFeature(&quot;http://apache.org/xml/features/disallow-doctype-decl&quot;, true);</span>
+<span class="nc" id="L85">        DocumentBuilder db = dbf.newDocumentBuilder();</span>
+<span class="nc" id="L86">        Document xmlDocument = db.parse( Path.of(nameXMLFile).toFile().getPath() );</span>
+
+<span class="nc" id="L88">        return importShape(xmlDocument);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

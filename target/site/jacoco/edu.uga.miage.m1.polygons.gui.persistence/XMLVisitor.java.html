@@ -18,7 +18,7 @@ public class XMLVisitor implements SimpleFile {
 <span class="fc" id="L18">        String className = shape.getClass().getSimpleName().toLowerCase();</span>
 
 <span class="fc bfc" id="L20" title="All 2 branches covered.">        if(className.equals(&quot;compoundshape&quot;)) {</span>
-<span class="fc" id="L21">            representation += String.format(&quot;&lt;shape&gt; &lt;type&gt;%s&lt;/type&gt; &lt;shapes&gt; &quot;, className);</span>
+<span class="fc" id="L21">            representation += String.format(&quot;&lt;shape type='%s'&gt; &lt;shapes&gt; &quot;, className);</span>
 
 <span class="fc bfc" id="L23" title="All 2 branches covered.">            for (SimpleShape s : ((CompoundShape) shape).getShapes()) {</span>
 <span class="fc" id="L24">                this.visit(s);</span>
@@ -26,7 +26,7 @@ public class XMLVisitor implements SimpleFile {
 
 <span class="fc" id="L27">            representation += &quot;&lt;/shapes&gt; &lt;/shape&gt; &quot;;</span>
         } else {
-<span class="fc" id="L29">            representation += String.format(&quot;&lt;shape&gt; &lt;type&gt;%s&lt;/type&gt; &lt;x&gt;%d&lt;/x&gt; &lt;y&gt;%d&lt;/y&gt; &lt;/shape&gt; &quot;, shape.getClass().getSimpleName().toLowerCase(), shape.getX(), shape.getY());</span>
+<span class="fc" id="L29">            representation += String.format(&quot;&lt;shape type='%s'&gt; &lt;x&gt;%d&lt;/x&gt; &lt;y&gt;%d&lt;/y&gt; &lt;/shape&gt; &quot;, shape.getClass().getSimpleName().toLowerCase(), shape.getX(), shape.getY());</span>
         }
 <span class="fc" id="L31">    }</span>
 
