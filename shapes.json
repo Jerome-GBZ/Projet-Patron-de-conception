@@ -1,9 +1,1 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 { "shapes":[ { "type": "compoundshape", "shapes": [{ "type": "circle", "x": 259, "y": 154 }, { "type": "square", "x": 152, "y": 100 } ]}] }
-=======
-{ "shapes":[ { "type": "square", "x": 299, "y": 103 }{ "type": "compoundshape", "shapes": [{ "type": "square", "x": 353, "y": 110 }, { "type": "circle", "x": 353, "y": 199 }, ]}] }
->>>>>>> 8d35253 (add clear method)
-=======
-{ "shapes":[ { "type": "compoundshape", "shapes": [{ "type": "circle", "x": 259, "y": 154 }, { "type": "square", "x": 152, "y": 100 } ]}] }
->>>>>>> 727b95a (fix clear)
