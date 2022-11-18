@@ -11,7 +11,7 @@ public class JSonVisitor implements SimpleFile {
     private String representation = null;
 
     public JSonVisitor() {
-        representation = "{ \"shapes\":[ ";
+        clear();
     }
 
     @Override
@@ -31,11 +31,14 @@ public class JSonVisitor implements SimpleFile {
         }
     }
 
-    /**
-     * @return the representation in JSon example for a Circle
-     */
+    @Override
     public String getRepresentation() {
         representation = representation.substring(0, representation.length()-2);
         return  representation.concat("] }");
+    }
+
+    @Override
+    public void clear() {
+        representation = "{ \"shapes\":[ ";
     }
 }
