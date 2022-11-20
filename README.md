@@ -14,20 +14,30 @@ persistence_g1_3: 6694cec615d0d3612e12b6c0064506453d78894f
 
 Créer un affichage graphique de gestion de forme. Le code doit pouvoir être adaptatif sur le futur. Ajouter de nouvelle forme doit être le plus simple possible. Cela se traduit par la mise en place de 4 patrons de conception :
   1. Visiteur
-    Une manière de séparer un algorithme d'une structure de données.
+    Une manière de séparer un algorithme d'une structure de données. Nous l'avons utilisé pour ajouter nos formes dans les fichiers XML et JSon durant l'export.
+  <br>
+
   2. Composite
-    L'idée est de manipuler un groupe d'objets de la même façon que s'il s'agissait d'un seul objet.
+    L'idée est de manipuler un groupe d'objets de la même façon que s'il s'agissait d'un seul objet. Cela nous sert pour faire un groupe de formes qui est déplaçable.
+ <br>
+
   3. Simple Factory
-    Une Factory simple est généralement représentée par une seule méthode dans une seule classe.
+    Le simple factory est la représentation d'une seule méthode dans une seule classe. Nous l'utiliserons pour la création de la forme que l'on souhaite.
+  <br>
+
   4. Commande
-    Il permet de séparer complètement le code initiateur de l'action, du code de l'action elle-même.
+    Il permet de séparer complètement le code initiateur de l'action, du code de l'action elle-même. On va s'en servir pour créer des commandes sur notre panel graphique.
 
 ## Développeurs <a id="dev"></a>
 - Jérôme G
 - Riad M
 
 ## Conception <a id="conception"></a>
-Nous avons fait plusieurs choix durant ce projet. Le premier est de recentrer le x et y d'une forme qui est dans notre cas au centre de la forme. Nous avons aussi décidé de ne pas définir de x et y pour un groupe. Pour déplacer un groupe il faut cliquer et déplacer une forme du groupe pour déplacer l'ensemble.
+Nous avons fait plusieurs choix de conception durant ce projet. Le premier a été de recentrer le x et y d'une forme pour qu'il correspond au centre de la forme.
+
+Nous avons aussi décidé de ne pas définir de x et y pour un groupe. Pour déplacer un groupe, il faudra cliquer et déplacer une forme du groupe pour déplacer l'ensemble. Le déplacement d'un groupe ce fait à partir la première forme du groupe. Une translation est alors calculée:  **Coordonnées futures - coordonnées première forme du groupe**
+
+Un autre choix de conception a été sur la commande undo, nous avons décidé de stocker une liste de commandes réalisée. Avec la position avans l'action et la position après l'action. Cela nous permet de connaitre la position X et Y avant un déplacement. A chaque undo nous supprimons la dernière commande réalisé de la liste.
 
 ## Diagrammes <a id="diagrammes"></a>
 Diagramme de classe
@@ -41,12 +51,12 @@ Le diagramme représente la création d'un carré aux coordonnées (90,90) ainsi
 ![Diagrammes de séquence](https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/master/Diagrammes/diag_sequence.png?raw=true)
 
 Etape 1 à 8 :
-![Image illustration diagramme](https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/master/Diagrammes/Etape-1_a_8.png?raw=true)
+![Image illustration diagramme](https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/master/target/classes/edu/uga/miage/m1/polygons/gui/documentation/Etape-1_a_8.png?raw=true)
 Etape 9 à 25 :
-![Image illustration diagramme](https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/master/Diagrammes/Etape-9_a_25.png?raw=true)
+![Image illustration diagramme](https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/master/target/classes/edu/uga/miage/m1/polygons/gui/documentation/Etape-9_a_25.png?raw=true)
 
 ## Sonar <a id="sonar"></a>
-![Sonar dashboard](https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/master/Diagrammes/Sonar.png?raw=true)
+![Sonar dashboard](https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/master/target/classes/edu/uga/miage/m1/polygons/gui/documentation/Sonar.png?raw=true)
 
 
 ## ToDo / Done <a id="todo"></a>
@@ -68,7 +78,8 @@ Etape 9 à 25 :
 - [x] cmd-z ou ctrl-z remplacé par un bouton retour en arrière
 
 ## Points d'améliorations <a id="improves"></a>
-Avec plus de temps on pourrait améliorer le code pour qui match encore plus avec les 4 patrons de conception. On pourrait aussi redévelopper la partie déplacement de forme. Actuellement à chaque déplacement on repaint toutes la fenêtre. Il faudrait dans le futur repeint seulement la forme ou le groupe de forme.
+Avec plus de temps on pourrait améliorer le code pour qui match encore plus avec les 4 patrons de conception.
+On pourrait aussi redévelopper la partie déplacement de forme. Actuellement à chaque déplacement on repaint toutes la fenêtre. Il faudrait dans le futur repeint seulement la forme ou le groupe de forme.
 
 ## Commandes utiles
 
