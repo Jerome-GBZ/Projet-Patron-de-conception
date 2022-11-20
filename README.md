@@ -36,9 +36,7 @@ Créer un affichage graphique de gestion de forme. Le code doit pouvoir être ad
 Nous avons fait plusieurs choix de conception durant ce projet. Le premier a été de recentrer le x et y d'une forme pour qu'il correspond au centre de la forme.
 
 Nous avons aussi décidé de ne pas définir de x et y pour un groupe. Pour déplacer un groupe, il faudra cliquer et déplacer une forme du groupe pour déplacer l'ensemble. Le déplacement d'un groupe ce fait à partir la première forme du groupe. Une translation est alors calculée:  **Coordonnées futures - coordonnées première forme du groupe**
-![Translation](https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/c21263837f84ea2cedf69ed73efadbecf1c66bc2/src/main/resources/edu/uga/miage/m1/polygons/gui/documentation/translation.png?raw=true)
-
-<img src="https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/c21263837f84ea2cedf69ed73efadbecf1c66bc2/src/main/resources/edu/uga/miage/m1/polygons/gui/documentation/translation.png?raw=true" alt="drawing" width="100"/>
+<img src="https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/c21263837f84ea2cedf69ed73efadbecf1c66bc2/src/main/resources/edu/uga/miage/m1/polygons/gui/documentation/translation.png?raw=true" alt="Translation exemple" width="500" style="max-width: 100%;margin-left: calc(50% - 250px);"/>
 
 Un autre choix de conception a été sur la commande undo, nous avons décidé de stocker une liste de commandes réalisée. Avec la position avans l'action et la position après l'action. Cela nous permet de connaitre la position X et Y avant un déplacement. A chaque undo nous supprimons la dernière commande réalisé de la liste.
 
@@ -56,9 +54,11 @@ Le diagramme représente la création d'un carré aux coordonnées (90,90) ainsi
 ![Diagrammes de séquence](https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/master/Diagrammes/diag_sequence.png?raw=true)
 
 Etape 1 à 8 :
-![Image illustration diagramme](https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/master/target/classes/edu/uga/miage/m1/polygons/gui/documentation/Etape-1_a_8.png?raw=true)
+<img src="https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/master/target/classes/edu/uga/miage/m1/polygons/gui/documentation/Etape-1_a_8.png?raw=true" alt="Image illustration diagramme" width="500" style="max-width: 100%;margin-left: calc(50% - 250px);"/>
+
 Etape 9 à 25 :
-![Image illustration diagramme](https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/master/target/classes/edu/uga/miage/m1/polygons/gui/documentation/Etape-9_a_25.png?raw=true)
+<img src="https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/master/target/classes/edu/uga/miage/m1/polygons/gui/documentation/Etape-9_a_25.png?raw=true" alt="Image illustration diagramme" width="500" style="max-width: 100%;margin-left: calc(50% - 250px);"/>
+
 
 ## Sonar <a id="sonar"></a>
 ![Sonar dashboard](https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/master/target/classes/edu/uga/miage/m1/polygons/gui/documentation/Sonar.png?raw=true)
