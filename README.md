@@ -63,8 +63,11 @@ Etape 9 à 25 : <br>
 
 
 Diagramme de séquence n°2
-![Diagrammes de séquence](https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/master/Diagrammes/diag_sequence2.png?raw=true)
 
+Dans cet exemple on partira du principe que l'utilisateur correspond à la classe "JDrawingFrame".
+Le diagramme représente la création d'un cercle aux coordonnées (120,250). Puis on va le déplacer en (200,250). Puis on réaliser un retour en arrière pour retourner à la position avant le déplacement.
+
+![Diagrammes de séquence](https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/master/Diagrammes/diag_sequence2.png?raw=true)
 
 
 ## Sonar <a id="sonar"></a>
