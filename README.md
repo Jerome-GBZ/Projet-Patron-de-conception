@@ -46,7 +46,7 @@ Un autre choix de conception a été sur la commande undo, nous avons décidé d
 Diagramme de classe
 ![Diagrammes de classe](https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/master/Diagrammes/diag_class.png?raw=true)
 
-Diagramme de séquence
+Diagramme de séquence n°1
 
 Dans cet exemple on partira du principe que l'utilisateur correspond à la classe "JDrawingFrame".
 Le diagramme représente la création d'un carré aux coordonnées (90,90) ainsi qu'un cercle aux coordonnées (120,250). On va regrouper ces 2 formes pour en faire qu'une. Puis il va déplacer le groupe en (400,300).
@@ -60,6 +60,11 @@ Etape 1 à 8 : <br>
 Etape 9 à 25 : <br>
 
 <img src="https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/master/target/classes/edu/uga/miage/m1/polygons/gui/documentation/Etape-9_a_25.png?raw=true" alt="Image illustration diagramme" width="500" style="max-width: 100%;margin-left: calc(50% - 250px);"/>
+
+
+Diagramme de séquence n°2
+![Diagrammes de séquence](https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/master/Diagrammes/diag_sequence2.png?raw=true)
+
 
 
 ## Sonar <a id="sonar"></a>

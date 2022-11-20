@@ -1,0 +1,76 @@
+@startuml
+
+autonumber
+
+actor Actor as JDrawingFrame
+participant "s1: Square" as Square
+participant "c1: Circle" as Circle
+participant "cs: CompoundShape" as CompoundShape
+
+activate JDrawingFrame
+JDrawingFrame -> JDrawingFrame : mouseClicked(MouseEvent evt)
+JDrawingFrame -> JDrawingFrame : createShape(Shapes Circle, int 120, int 250)
+
+JDrawingFrame -> Square ** : Square(int 90, int 90)
+Square -> Square ++ : moveTo(int 90, int 90)
+Square -> Square -- : draw(Graphics2D g2, float, 2,0)
+
+JDrawingFrame -> Circle ** : Circle(int 120, int 250)
+Circle -> Circle ++ : moveTo(int 120, int 250)
+Circle -> Circle -- : draw(Graphics2D g2, float, 2,0)
+
+JDrawingFrame -> JDrawingFrame : mouseClicked(MouseEvent evt)
+JDrawingFrame -> JDrawingFrame : shapeIsSelect(int 110, int 90)
+JDrawingFrame -> Circle : clickedOnShape(int 110, int 90) : false
+JDrawingFrame -> Square : clickedOnShape(int 110, int 90) : true
+JDrawingFrame -[#0000FF]> JDrawingFrame : System.out.println("Forme selectionnée")
+
+JDrawingFrame -> JDrawingFrame : mouseClicked(MouseEvent evt)
+JDrawingFrame -> JDrawingFrame : shapeIsSelect(int 110, int 90)
+JDrawingFrame -> Circle : clickedOnShape(int 110, int 260) : true
+JDrawingFrame -[#0000FF]> JDrawingFrame : System.out.println("Forme selectionnée")
+
+JDrawingFrame -> CompoundShape ** : CompoundShape([SimpleShape s1, SimpleShape c1])
+
+JDrawingFrame -> JDrawingFrame : mouseDragged(MouseEvent evt)
+JDrawingFrame -> CompoundShape ++ : moveTo(int 400, int 300)
+CompoundShape -> Square ++ : moveTo(int 400, int 300)
+CompoundShape -> Circle --++ : moveTo(int 430, int 460)
+
+JDrawingFrame -> JDrawingFrame : reDrawAll()
+JDrawingFrame -> Square : draw(Graphics2D g2, float, 2,0)
+JDrawingFrame -> Circle : draw(Graphics2D g2, float, 2,0)
+
+' Objectif de ce diagram :
+' On a déjà notre frame diponible
+' On va ajouter une forme Circle + Triangle que l'on va grouper puis déplacer
+
+' JDrawingFrame -> etuDBjrAV ** : EtudiantDitBonjourAVisitor(lolo)
+' Main -> enigma ++ : ditBonjourA(etuDBjrAV)
+
+' enigma -> etuDBjrAV --++ : visit(enigma)
+' etuDBjrAV -> enigma ++ : bonjour(false)
+' etuDBjrAV -> enigma : presentation(false)
+' etuDBjrAV -> etuRABjrDV ** : EtudiantRepondAuBonjourDeVisitor(enigma)
+' etuDBjrAV -> lolo ++-- : repondAuBonjourDe(etuRABjrDV)
+
+' lolo -> etuRABjrDV --++ : visit(lolo)
+' etuRABjrDV -> lolo ++ : reponseAuBonjourDe(enigma, false)
+' etuRABjrDV -> lolo : presentation(false)
+' etuRABjrDV -> etuSiCVAV **  : EtudiantDemandeSiCaVaVisitor(enigma)
+' etuRABjrDV -> lolo -- : demandeSiCaVaA(etuSiCVAV)
+
+' lolo -> etuSiCVAV --++ : visit(lolo)
+' etuSiCVAV -> lolo ++ : caVa(enigma, false)
+' etuSiCVAV -> lolo : presentation(false)
+' deactivate lolo
+
+' etuSiCVAV -> etuDEtVV ** : EtudiantDemandeEtVousVisitor(lolo)
+' etuSiCVAV -> enigma -- : demandeEtVousA(etuDEtVV)
+' enigma -> etuDEtVV --++ : visit(enigma)
+' etuDEtVV -> enigma ++ : etVous(enigma, false)
+' etuDEtVV -> enigma -- : presentation(false)
+
+' deactivate enigma
+deactivate JDrawingFrame
+@enduml
