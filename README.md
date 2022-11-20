@@ -53,10 +53,12 @@ Le diagramme représente la création d'un carré aux coordonnées (90,90) ainsi
 
 ![Diagrammes de séquence](https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/master/Diagrammes/diag_sequence.png?raw=true)
 
-Etape 1 à 8 :
+Etape 1 à 8 : <br>
+
 <img src="https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/master/target/classes/edu/uga/miage/m1/polygons/gui/documentation/Etape-1_a_8.png?raw=true" alt="Image illustration diagramme" width="500" style="max-width: 100%;margin-left: calc(50% - 250px);"/>
 
-Etape 9 à 25 :
+Etape 9 à 25 : <br>
+
 <img src="https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/master/target/classes/edu/uga/miage/m1/polygons/gui/documentation/Etape-9_a_25.png?raw=true" alt="Image illustration diagramme" width="500" style="max-width: 100%;margin-left: calc(50% - 250px);"/>
 
 
