@@ -77,7 +77,7 @@ Etape 9 à 25 : <br>
   - [x] JSON
   - [x] XML
 - [x] Rendre déplacable un groupe de forme apres import JSON
-- [ ] Rendre déplacable un groupe de forme apres import XML
+- [x] Rendre déplacable un groupe de forme apres import XML
 - [x] 90% de coverage sur Sonar
 - [x] 0min de dettes techniques
 - [ ] Déplacer un groupe contenant un groupe + une forme ou 2 groupes (pb de coordoné lors du déplacement)
