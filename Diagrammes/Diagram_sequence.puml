@@ -45,32 +45,5 @@ JDrawingFrame -> Circle : draw(Graphics2D g2, float, 2,0)
 ' On a déjà notre frame diponible
 ' On va ajouter une forme Circle + Triangle que l'on va grouper puis déplacer
 
-' JDrawingFrame -> etuDBjrAV ** : EtudiantDitBonjourAVisitor(lolo)
-' Main -> enigma ++ : ditBonjourA(etuDBjrAV)
-
-' enigma -> etuDBjrAV --++ : visit(enigma)
-' etuDBjrAV -> enigma ++ : bonjour(false)
-' etuDBjrAV -> enigma : presentation(false)
-' etuDBjrAV -> etuRABjrDV ** : EtudiantRepondAuBonjourDeVisitor(enigma)
-' etuDBjrAV -> lolo ++-- : repondAuBonjourDe(etuRABjrDV)
-
-' lolo -> etuRABjrDV --++ : visit(lolo)
-' etuRABjrDV -> lolo ++ : reponseAuBonjourDe(enigma, false)
-' etuRABjrDV -> lolo : presentation(false)
-' etuRABjrDV -> etuSiCVAV **  : EtudiantDemandeSiCaVaVisitor(enigma)
-' etuRABjrDV -> lolo -- : demandeSiCaVaA(etuSiCVAV)
-
-' lolo -> etuSiCVAV --++ : visit(lolo)
-' etuSiCVAV -> lolo ++ : caVa(enigma, false)
-' etuSiCVAV -> lolo : presentation(false)
-' deactivate lolo
-
-' etuSiCVAV -> etuDEtVV ** : EtudiantDemandeEtVousVisitor(lolo)
-' etuSiCVAV -> enigma -- : demandeEtVousA(etuDEtVV)
-' enigma -> etuDEtVV --++ : visit(enigma)
-' etuDEtVV -> enigma ++ : etVous(enigma, false)
-' etuDEtVV -> enigma -- : presentation(false)
-
-' deactivate enigma
 deactivate JDrawingFrame
 @enduml
