@@ -33,7 +33,7 @@ Circle -> Circle -- : getY()
 
 JDrawingFrame -> JDrawingFrame : mouseDragged(MouseEvent evt)
 JDrawingFrame -> Circle ++ : moveTo(int 200, int 250)
-Circle -> Circle -- : draw(Graphics2D g2, float, 2,0)
+JDrawingFrame -> Circle -- : draw(Graphics2D g2, float, 2,0)
 JDrawingFrame -> JDrawingFrame : reDrawAll()
 
 JDrawingFrame -> JDrawingFrame : mouseReleased(MouseEvent evt)
