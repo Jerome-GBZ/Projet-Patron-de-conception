@@ -35,7 +35,7 @@ Créer un affichage graphique de gestion de forme. Le code doit pouvoir être ad
 ## Conception <a id="conception"></a>
 Nous avons fait plusieurs choix de conception durant ce projet. Le premier a été de recentrer le x et y d'une forme pour qu'il correspond au centre de la forme.
 
-Nous avons aussi décidé de ne pas définir de x et y pour un groupe. Pour déplacer un groupe, il faudra cliquer et déplacer une forme du groupe pour déplacer l'ensemble. Le déplacement d'un groupe ce fait à partir la première forme du groupe. Une translation est alors calculée:  **Coordonnées futures - coordonnées première forme du groupe**
+Nous avons aussi décidé de ne pas définir de x et y pour un groupe. Pour déplacer un groupe, il faudra cliquer et déplacer une forme du groupe pour déplacer l'ensemble. Le déplacement d'un groupe ce fait à partir la première forme du groupe. Une translation est alors calculée:  **Coordonnées futures - coordonnées première forme du groupe**  <br>
 <img src="https://github.com/Jerome-GBZ/Projet-Patron-de-conception/blob/c21263837f84ea2cedf69ed73efadbecf1c66bc2/src/main/resources/edu/uga/miage/m1/polygons/gui/documentation/translation.png?raw=true" alt="Translation exemple" width="500" style="max-width: 100%;margin-left: calc(50% - 250px);"/>
 
 Un autre choix de conception a été sur la commande undo, nous avons décidé de stocker une liste de commandes réalisée. Avec la position avans l'action et la position après l'action. Cela nous permet de connaitre la position X et Y avant un déplacement. A chaque undo nous supprimons la dernière commande réalisé de la liste.
