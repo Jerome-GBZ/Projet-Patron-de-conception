@@ -20,11 +20,12 @@ package edu.uga.miage.m1.polygons.gui.shapes;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.GradientPaint;
 import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.geom.GeneralPath;
-import java.awt.geom.Path2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import edu.uga.miage.m1.polygons.gui.persistence.Visitable;
 import edu.uga.miage.m1.polygons.gui.persistence.Visitor;
@@ -48,31 +49,20 @@ public class Triangle extends Shape implements Visitable {
      */
     @Override
     public void draw(Graphics2D g2, float width) {
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        GradientPaint gradient = new GradientPaint((float) getX()-25, (float) getY()-25, Color.GREEN,(getX() + 50), getY(), Color.WHITE);
-        g2.setPaint(gradient);
+        try {
+            File fileImage = new File("src/main/resources/edu/uga/miage/m1/polygons/gui/images/triangle.png");
+            BufferedImage image = ImageIO.read(fileImage);
+            g2.drawImage(image, getX()-25, getY()-25, null);
 
-        int[] xcoords = { getX(), getX()-25, getX()+25 };
-        int[] ycoords = { getY()-25, getY()+25, getY()+25 };
-
-        GeneralPath polygon = new GeneralPath(Path2D.WIND_EVEN_ODD, xcoords.length);
-
-        polygon.moveTo(getX(), (float) getY()-25);
-        for (int i = 0; i < xcoords.length; i++) {
-            polygon.lineTo(xcoords[i], ycoords[i]);
+            if(width == 4.0) {
+                g2.setColor(Color.LIGHT_GRAY);
+                g2.setStroke(new BasicStroke(width));
+                g2.drawRect(getX()-25, getY()-25, 53, 53);
+                g2.setStroke(g2.getStroke());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        polygon.closePath();
-        g2.fill(polygon);
-
-        if(width == 4.0) {
-            g2.setColor(Color.LIGHT_GRAY);
-        } else {
-            g2.setColor(Color.BLACK);
-        }
-
-        BasicStroke wideStroke = new BasicStroke(width);
-        g2.setStroke(wideStroke);
-        g2.draw(polygon);
     }
 
     public void accept(Visitor visitor) { visitor.visit(this); }

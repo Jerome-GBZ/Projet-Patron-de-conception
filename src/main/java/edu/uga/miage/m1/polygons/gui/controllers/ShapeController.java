@@ -12,6 +12,7 @@ public class ShapeController {
         SQUARE,
         TRIANGLE,
         CIRCLE,
+        FIGMA,
         COMPOUNDSHAPE
     }
 

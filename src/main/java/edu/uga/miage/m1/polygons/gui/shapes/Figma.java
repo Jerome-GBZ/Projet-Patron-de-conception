@@ -21,24 +21,18 @@ package edu.uga.miage.m1.polygons.gui.shapes;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
 import edu.uga.miage.m1.polygons.gui.persistence.Visitable;
 import edu.uga.miage.m1.polygons.gui.persistence.Visitor;
 
-/**
- * This class implements the square <tt>SimpleShape</tt> extension.
- * It simply provides a <tt>draw()</tt> that paints a square.
- *
- * @author <a href="mailto:christophe.saint-marcel@univ-grenoble-alpes.fr">Christophe</a>
- */
-public class Square extends Shape implements Visitable {
+public class Figma extends Shape implements Visitable {
 
-    public Square(int x, int y) {
+    public Figma(int x, int y) {
         super(x, y);
     }
 
@@ -50,14 +44,14 @@ public class Square extends Shape implements Visitable {
     @Override
     public void draw(Graphics2D g2, float width) {
         try {
-            File fileImage = new File("src/main/resources/edu/uga/miage/m1/polygons/gui/images/square.png");
+            File fileImage = new File("src/main/resources/edu/uga/miage/m1/polygons/gui/images/figma.png");
             BufferedImage image = ImageIO.read(fileImage);
             g2.drawImage(image, getX()-25, getY()-25, null);
 
             if(width == 4.0) {
                 g2.setColor(Color.LIGHT_GRAY);
                 g2.setStroke(new BasicStroke(width));
-                g2.drawRect(getX()-25, getY()-25, 53, 53);
+                g2.drawRect(getX()-25, getY()-25, 48, 48);
                 g2.setStroke(g2.getStroke());
             }
         } catch (IOException e) {

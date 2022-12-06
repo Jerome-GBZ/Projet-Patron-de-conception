@@ -120,6 +120,7 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
         addShapeMenu(Shapes.SQUARE, new ImageIcon(getClass().getResource("images/square.png")));
         addShapeMenu(Shapes.TRIANGLE, new ImageIcon(getClass().getResource("images/triangle.png")));
         addShapeMenu(Shapes.CIRCLE, new ImageIcon(getClass().getResource("images/circle.png")));
+        addShapeMenu(Shapes.FIGMA, new ImageIcon(getClass().getResource("images/figma.png")));
 
         // Add buttons in the menu
         groupByCheckBox = new JCheckBox("Grouper");
@@ -141,7 +142,7 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
         undoButton = new JButton(icon);
         toolBar.add(undoButton);
 
-        setPreferredSize(new Dimension(700, 600));
+        setPreferredSize(new Dimension(800, 600));
         exportButtonAction();
     }
 

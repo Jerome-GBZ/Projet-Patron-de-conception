@@ -17,6 +17,9 @@ public class ShapeFactory implements SimpleShapeFactory {
             case SQUARE:
                 shape = new Square(x, y);
                 break;
+            case FIGMA:
+                shape = new Figma(x, y);
+                break;
             default:
                 shape = null;
         }
