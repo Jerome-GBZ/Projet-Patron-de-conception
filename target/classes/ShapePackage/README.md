@@ -7,7 +7,7 @@
 ```
     import ShapePackage.factories.ShapeFactory;
     private ShapeFactory shapeFac = new ShapeFactory();
-    shapeFac.createSimpleShape(type, x, y);
+    SimpleShape shape = shapeFac.createSimpleShape(type, x, y);
 
     // type :
     public enum Shapes {
@@ -17,4 +17,21 @@
         FIGMA,
         COMPOUNDSHAPE
     }
+```
+
+    - move shape
+```
+    shape.moveTo(x, y);
+```
+
+    - draw shape
+```
+    // Nombre correspond à la taille de l'encadré de la forme
+    // Utile pour montré les formes selectionées dans un groupe
+
+    // par default : 0px
+    shape.draw(g2, 0);
+
+    // par encadré : 2px
+    shape.draw(g2, 2);
 ```

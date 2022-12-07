@@ -54,7 +54,7 @@ public class Triangle extends Shape implements Visitable {
             BufferedImage image = ImageIO.read(fileImage);
             g2.drawImage(image, getX()-25, getY()-25, null);
 
-            if(width == 4.0) {
+            if(width > 0) {
                 g2.setColor(Color.LIGHT_GRAY);
                 g2.setStroke(new BasicStroke(width));
                 g2.drawRect(getX()-25, getY()-25, 53, 53);

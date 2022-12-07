@@ -330,7 +330,7 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
         SimpleShape shapeReturn = shapeController.createSimpleShape(type, x, y);
 
         if(shapeReturn != null) {
-            shapeReturn.draw(g2, (float) 2.0);
+            shapeReturn.draw(g2, (float) 0);
             shapesList.add(shapeReturn);
 
             histController.add(new CreateCommand(null, shapeReturn));
@@ -347,7 +347,7 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
     private void reDrawAll() {
         panel.repaint();
 
-        SwingUtilities.invokeLater(() -> this.shapesList.forEach(shape -> shape.draw((Graphics2D) panel.getGraphics(), (float) 2.0) ) );
+        SwingUtilities.invokeLater(() -> this.shapesList.forEach(shape -> shape.draw((Graphics2D) panel.getGraphics(), (float) 0) ) );
     }
 
     public JPanel getPanel() {
