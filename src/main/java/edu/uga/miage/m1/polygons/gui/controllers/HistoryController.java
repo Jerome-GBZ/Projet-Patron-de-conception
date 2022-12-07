@@ -17,6 +17,10 @@ public class HistoryController {
         return history.isEmpty();
     }
 
+    public void clear() {
+        history.clear();
+    }
+
     public List<SimpleShape> undo(List<SimpleShape> shapesList) {
         if(!isEmpty()) {
             Command lastCommand = history.get(history.size() - 1);

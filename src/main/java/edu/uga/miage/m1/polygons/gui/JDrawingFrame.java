@@ -54,6 +54,7 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
     private final JPanel panel;
     private final JLabel label;
 
+    private final JButton clearButton;
     private final JButton undoButton;
     private final JButton jsonExportButton;
     private final JButton xmlExportButton;
@@ -117,10 +118,10 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
         add(label, BorderLayout.SOUTH);
 
         // Add shapes in the menu
-        addShapeMenu(Shapes.SQUARE, new ImageIcon(getClass().getResource("images/square.png")));
-        addShapeMenu(Shapes.TRIANGLE, new ImageIcon(getClass().getResource("images/triangle.png")));
-        addShapeMenu(Shapes.CIRCLE, new ImageIcon(getClass().getResource("images/circle.png")));
-        addShapeMenu(Shapes.FIGMA, new ImageIcon(getClass().getResource("images/figma.png")));
+        addShapeMenu(Shapes.SQUARE, new ImageIcon("src/main/resources/images/square.png"));
+        addShapeMenu(Shapes.TRIANGLE, new ImageIcon("src/main/resources/images/triangle.png"));
+        addShapeMenu(Shapes.CIRCLE, new ImageIcon("src/main/resources/images/circle.png"));
+        addShapeMenu(Shapes.FIGMA, new ImageIcon("src/main/resources/images/figma.png"));
 
         // Add buttons in the menu
         groupByCheckBox = new JCheckBox("Grouper");
@@ -138,9 +139,13 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
         xmlImportButton = new JButton("Import as XML");
         toolBar.add(xmlImportButton);
 
-        Icon icon = new ImageIcon(getClass().getResource("icons/undo.png"));
-        undoButton = new JButton(icon);
+        Icon undoIcon = new ImageIcon("src/main/resources/icons/undo.png");
+        undoButton = new JButton(undoIcon);
         toolBar.add(undoButton);
+
+        Icon clearIcon = new ImageIcon("src/main/resources/icons/trash.png");
+        clearButton = new JButton(clearIcon);
+        toolBar.add(clearButton);
 
         setPreferredSize(new Dimension(800, 600));
         exportButtonAction();
@@ -194,6 +199,17 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
 
         undoButton.addActionListener(e -> {
             shapesList = histController.undo(shapesList);
+            reDrawAll();
+        });
+
+        clearButton.addActionListener(e -> {
+            shapesList.clear();
+            shapesListGroupBy.clear();
+            histController.clear();
+
+            shapeSelected = null;
+            groupBySelected = false;
+
             reDrawAll();
         });
     }

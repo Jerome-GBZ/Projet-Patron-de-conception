@@ -44,7 +44,7 @@ public class Circle extends Shape implements Visitable {
     @Override
     public void draw(Graphics2D g2, float width) {
         try {
-            File fileImage = new File("src/main/resources/edu/uga/miage/m1/polygons/gui/images/circle.png");
+            File fileImage = new File("src/main/resources/images/circle.png");
             BufferedImage image = ImageIO.read(fileImage);
             g2.drawImage(image, getX()-25, getY()-25, null);
 
