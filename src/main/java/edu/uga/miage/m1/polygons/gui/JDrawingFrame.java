@@ -25,11 +25,11 @@ import javax.xml.xpath.XPathExpressionException;
 
 import org.xml.sax.SAXException;
 
+import ShapePackage.shapes.CompoundShape;
+import ShapePackage.shapes.SimpleShape;
 import edu.uga.miage.m1.polygons.gui.persistence.JSonVisitor;
 import edu.uga.miage.m1.polygons.gui.persistence.SimpleFile;
 import edu.uga.miage.m1.polygons.gui.persistence.XMLVisitor;
-import edu.uga.miage.m1.polygons.gui.shapes.CompoundShape;
-import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
 import edu.uga.miage.m1.polygons.gui.command.CreateCommand;
 import edu.uga.miage.m1.polygons.gui.command.MoveCommand;
 import edu.uga.miage.m1.polygons.gui.controllers.FileController;

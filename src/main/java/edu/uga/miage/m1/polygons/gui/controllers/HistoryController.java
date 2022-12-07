@@ -3,8 +3,8 @@ package edu.uga.miage.m1.polygons.gui.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import ShapePackage.shapes.SimpleShape;
 import edu.uga.miage.m1.polygons.gui.command.Command;
-import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
 
 public class HistoryController {
     private List<Command> history = new ArrayList<>();

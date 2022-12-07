@@ -2,7 +2,7 @@ package shapes;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
-import edu.uga.miage.m1.polygons.gui.shapes.Square;
+import ShapePackage.shapes.Square;
 
 class SquareTest {
     Square s = new Square(0, 0);

@@ -9,7 +9,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
+import ShapePackage.shapes.SimpleShape;
 import edu.uga.miage.m1.polygons.gui.controllers.JSonController;
 
 class JSonControllerTest {

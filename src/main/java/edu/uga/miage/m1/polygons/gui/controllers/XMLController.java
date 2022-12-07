@@ -5,6 +5,9 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import ShapePackage.shapes.CompoundShape;
+import ShapePackage.shapes.SimpleShape;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -17,9 +20,6 @@ import java.util.List;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
-
-import edu.uga.miage.m1.polygons.gui.shapes.CompoundShape;
-import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
 
 public class XMLController {
 

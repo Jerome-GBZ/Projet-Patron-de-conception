@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package edu.uga.miage.m1.polygons.gui.shapes;
+package ShapePackage.shapes;
 
 import java.awt.BasicStroke;
 import java.awt.Color;

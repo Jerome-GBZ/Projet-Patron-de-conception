@@ -7,10 +7,11 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 
 import org.json.JSONObject;
-import org.json.JSONArray;
 
-import edu.uga.miage.m1.polygons.gui.shapes.CompoundShape;
-import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
+import ShapePackage.shapes.CompoundShape;
+import ShapePackage.shapes.SimpleShape;
+
+import org.json.JSONArray;
 
 public class JSonController {
     private List<SimpleShape> importShape(JSONArray shapesJSON) {

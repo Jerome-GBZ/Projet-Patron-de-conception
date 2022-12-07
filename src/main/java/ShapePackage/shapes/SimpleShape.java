@@ -1,7 +1,6 @@
-package edu.uga.miage.m1.polygons.gui.shapes;
+package ShapePackage.shapes;
 
 import java.awt.Graphics2D;
-import java.io.IOException;
 
 /**
  * This interface defines the <tt>SimpleShape</tt> extension. This extension

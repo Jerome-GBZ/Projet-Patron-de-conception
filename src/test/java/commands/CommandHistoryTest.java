@@ -6,11 +6,11 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import ShapePackage.shapes.Circle;
+import ShapePackage.shapes.SimpleShape;
 import edu.uga.miage.m1.polygons.gui.command.CreateCommand;
 import edu.uga.miage.m1.polygons.gui.command.MoveCommand;
 import edu.uga.miage.m1.polygons.gui.controllers.HistoryController;
-import edu.uga.miage.m1.polygons.gui.shapes.Circle;
-import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
 
 class CommandHistoryTest {
     HistoryController cmdHist = new HistoryController();

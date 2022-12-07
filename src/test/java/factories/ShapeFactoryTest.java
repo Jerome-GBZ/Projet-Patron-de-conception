@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.jupiter.api.Test;
 
+import ShapePackage.factories.ShapeFactory;
+import ShapePackage.shapes.SimpleShape;
 import edu.uga.miage.m1.polygons.gui.controllers.ShapeController.Shapes;
-import edu.uga.miage.m1.polygons.gui.factories.ShapeFactory;
-import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
 
 class ShapeFactoryTest {
     ShapeFactory shapeFac = new ShapeFactory();

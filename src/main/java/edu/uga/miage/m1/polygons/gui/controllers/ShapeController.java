@@ -2,8 +2,8 @@ package edu.uga.miage.m1.polygons.gui.controllers;
 
 import java.util.List;
 
-import edu.uga.miage.m1.polygons.gui.factories.ShapeFactory;
-import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
+import ShapePackage.factories.ShapeFactory;
+import ShapePackage.shapes.SimpleShape;
 
 public class ShapeController {
     private ShapeFactory shapeFac = new ShapeFactory();

@@ -3,13 +3,14 @@ package edu.uga.miage.m1.polygons.gui.controllers;
 import java.util.List;
 
 import edu.uga.miage.m1.polygons.gui.persistence.SimpleFile;
-import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
 import java.util.logging.Logger;
+
+import ShapePackage.shapes.SimpleShape;
 
 public class FileController {
     private Logger logger = Logger.getLogger(this.getClass().getName());

@@ -7,10 +7,10 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import edu.uga.miage.m1.polygons.gui.shapes.Circle;
-import edu.uga.miage.m1.polygons.gui.shapes.CompoundShape;
-import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
-import edu.uga.miage.m1.polygons.gui.shapes.Square;
+import ShapePackage.shapes.Circle;
+import ShapePackage.shapes.CompoundShape;
+import ShapePackage.shapes.SimpleShape;
+import ShapePackage.shapes.Square;
 
 class CompoundShapeTest {
     Circle c = new Circle(0, 0);

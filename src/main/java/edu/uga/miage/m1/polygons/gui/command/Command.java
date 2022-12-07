@@ -2,7 +2,7 @@ package edu.uga.miage.m1.polygons.gui.command;
 
 import java.util.List;
 
-import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
+import ShapePackage.shapes.SimpleShape;
 
 public abstract class Command {
     private SimpleShape oldShape;

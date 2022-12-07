@@ -2,7 +2,7 @@ package shapes;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
-import edu.uga.miage.m1.polygons.gui.shapes.Triangle;
+import ShapePackage.shapes.Triangle;
 
 class TriangleTest {
     Triangle t = new Triangle(0, 0);

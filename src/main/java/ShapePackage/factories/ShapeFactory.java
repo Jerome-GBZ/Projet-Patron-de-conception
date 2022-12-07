@@ -1,6 +1,6 @@
-package edu.uga.miage.m1.polygons.gui.factories;
+package ShapePackage.factories;
 
-import edu.uga.miage.m1.polygons.gui.shapes.*;
+import ShapePackage.shapes.*;
 import edu.uga.miage.m1.polygons.gui.controllers.ShapeController.Shapes;
 
 public class ShapeFactory implements SimpleShapeFactory {
