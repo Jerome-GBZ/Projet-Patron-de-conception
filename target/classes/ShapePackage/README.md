@@ -27,7 +27,7 @@
     - draw shape
 ```
     // Nombre correspond à la taille de l'encadré de la forme
-    // Utile pour montré les formes selectionées dans un groupe
+    // Utile pour montrer les formes selectionées dans un groupe
 
     // par default : 0px
     shape.draw(g2, 0);
