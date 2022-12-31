@@ -4,13 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+import ShapePackage.shapes.Circle;
+import ShapePackage.shapes.SimpleShape;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import edu.uga.miage.m1.polygons.gui.controllers.ShapeController;
-import edu.uga.miage.m1.polygons.gui.controllers.ShapeController.Shapes;
-import edu.uga.miage.m1.polygons.gui.shapes.Circle;
-import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
+import ShapePackage.shapes.ShapesEnum.Shapes;
 
 class ShapeControllerTest {
     ShapeController shapeC = new ShapeController();

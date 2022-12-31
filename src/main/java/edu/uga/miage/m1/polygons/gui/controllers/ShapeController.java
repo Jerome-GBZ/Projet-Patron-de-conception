@@ -2,18 +2,12 @@ package edu.uga.miage.m1.polygons.gui.controllers;
 
 import java.util.List;
 
-import edu.uga.miage.m1.polygons.gui.factories.ShapeFactory;
-import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
+import ShapePackage.factories.ShapeFactory;
+import ShapePackage.shapes.SimpleShape;
+import ShapePackage.shapes.ShapesEnum.Shapes;
 
 public class ShapeController {
     private ShapeFactory shapeFac = new ShapeFactory();
-
-    public enum Shapes {
-        SQUARE,
-        TRIANGLE,
-        CIRCLE,
-        COMPOUNDSHAPE
-    }
 
     public Shapes getShapes(String type) {
         return Shapes.valueOf(type.toUpperCase());

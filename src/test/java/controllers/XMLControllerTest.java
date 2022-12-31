@@ -13,8 +13,8 @@ import javax.xml.xpath.XPathExpressionException;
 import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 
+import ShapePackage.shapes.SimpleShape;
 import edu.uga.miage.m1.polygons.gui.controllers.XMLController;
-import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
 
 class XMLControllerTest {
     XMLController xmlC = new XMLController();

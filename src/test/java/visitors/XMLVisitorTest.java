@@ -6,12 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.uga.miage.m1.polygons.gui.persistence.XMLVisitor;
-import edu.uga.miage.m1.polygons.gui.shapes.Circle;
-import edu.uga.miage.m1.polygons.gui.shapes.CompoundShape;
-import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
-import edu.uga.miage.m1.polygons.gui.shapes.Square;
 
 import org.junit.jupiter.api.Test;
+
+import ShapePackage.shapes.Circle;
+import ShapePackage.shapes.CompoundShape;
+import ShapePackage.shapes.SimpleShape;
+import ShapePackage.shapes.Square;
 
 class XMLVisitorTest {
     Circle c = new Circle(50, 200);

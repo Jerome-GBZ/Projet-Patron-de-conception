@@ -14,10 +14,10 @@ import java.nio.file.Path;
 
 import org.junit.jupiter.api.Test;
 
+import ShapePackage.shapes.Circle;
+import ShapePackage.shapes.SimpleShape;
 import edu.uga.miage.m1.polygons.gui.controllers.FileController;
 import edu.uga.miage.m1.polygons.gui.persistence.JSonVisitor;
-import edu.uga.miage.m1.polygons.gui.shapes.Circle;
-import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
 
 class FileControllerTest {
     FileController fileController = new FileController();

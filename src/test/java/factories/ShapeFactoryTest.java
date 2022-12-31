@@ -1,14 +1,13 @@
 package factories;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.jupiter.api.Test;
 
-import edu.uga.miage.m1.polygons.gui.controllers.ShapeController.Shapes;
-import edu.uga.miage.m1.polygons.gui.factories.ShapeFactory;
-import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
+import ShapePackage.factories.ShapeFactory;
+import ShapePackage.shapes.SimpleShape;
+import ShapePackage.shapes.ShapesEnum.Shapes;
 
 class ShapeFactoryTest {
     ShapeFactory shapeFac = new ShapeFactory();

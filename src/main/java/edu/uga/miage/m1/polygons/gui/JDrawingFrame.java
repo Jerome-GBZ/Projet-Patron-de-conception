@@ -25,11 +25,11 @@ import javax.xml.xpath.XPathExpressionException;
 
 import org.xml.sax.SAXException;
 
+import ShapePackage.shapes.CompoundShape;
+import ShapePackage.shapes.SimpleShape;
 import edu.uga.miage.m1.polygons.gui.persistence.JSonVisitor;
 import edu.uga.miage.m1.polygons.gui.persistence.SimpleFile;
 import edu.uga.miage.m1.polygons.gui.persistence.XMLVisitor;
-import edu.uga.miage.m1.polygons.gui.shapes.CompoundShape;
-import edu.uga.miage.m1.polygons.gui.shapes.SimpleShape;
 import edu.uga.miage.m1.polygons.gui.command.CreateCommand;
 import edu.uga.miage.m1.polygons.gui.command.MoveCommand;
 import edu.uga.miage.m1.polygons.gui.controllers.FileController;
@@ -37,7 +37,7 @@ import edu.uga.miage.m1.polygons.gui.controllers.HistoryController;
 import edu.uga.miage.m1.polygons.gui.controllers.JSonController;
 import edu.uga.miage.m1.polygons.gui.controllers.ShapeController;
 import edu.uga.miage.m1.polygons.gui.controllers.XMLController;
-import edu.uga.miage.m1.polygons.gui.controllers.ShapeController.Shapes;
+import ShapePackage.shapes.ShapesEnum.Shapes;
 
 /**
  * This class represents the main application class, which is a JFrame subclass
@@ -54,6 +54,7 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
     private final JPanel panel;
     private final JLabel label;
 
+    private final JButton clearButton;
     private final JButton undoButton;
     private final JButton jsonExportButton;
     private final JButton xmlExportButton;
@@ -117,9 +118,10 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
         add(label, BorderLayout.SOUTH);
 
         // Add shapes in the menu
-        addShapeMenu(Shapes.SQUARE, new ImageIcon(getClass().getResource("images/square.png")));
-        addShapeMenu(Shapes.TRIANGLE, new ImageIcon(getClass().getResource("images/triangle.png")));
-        addShapeMenu(Shapes.CIRCLE, new ImageIcon(getClass().getResource("images/circle.png")));
+        addShapeMenu(Shapes.SQUARE, new ImageIcon("src/main/resources/images/square.png"));
+        addShapeMenu(Shapes.TRIANGLE, new ImageIcon("src/main/resources/images/triangle.png"));
+        addShapeMenu(Shapes.CIRCLE, new ImageIcon("src/main/resources/images/circle.png"));
+        addShapeMenu(Shapes.FIGMA, new ImageIcon("src/main/resources/images/figma.png"));
 
         // Add buttons in the menu
         groupByCheckBox = new JCheckBox("Grouper");
@@ -137,11 +139,15 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
         xmlImportButton = new JButton("Import as XML");
         toolBar.add(xmlImportButton);
 
-        Icon icon = new ImageIcon(getClass().getResource("icons/undo.png"));
-        undoButton = new JButton(icon);
+        Icon undoIcon = new ImageIcon("src/main/resources/icons/undo.png");
+        undoButton = new JButton(undoIcon);
         toolBar.add(undoButton);
 
-        setPreferredSize(new Dimension(700, 600));
+        Icon clearIcon = new ImageIcon("src/main/resources/icons/trash.png");
+        clearButton = new JButton(clearIcon);
+        toolBar.add(clearButton);
+
+        setPreferredSize(new Dimension(800, 600));
         exportButtonAction();
     }
 
@@ -193,6 +199,17 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
 
         undoButton.addActionListener(e -> {
             shapesList = histController.undo(shapesList);
+            reDrawAll();
+        });
+
+        clearButton.addActionListener(e -> {
+            shapesList.clear();
+            shapesListGroupBy.clear();
+            histController.clear();
+
+            shapeSelected = null;
+            groupBySelected = false;
+
             reDrawAll();
         });
     }
@@ -313,7 +330,7 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
         SimpleShape shapeReturn = shapeController.createSimpleShape(type, x, y);
 
         if(shapeReturn != null) {
-            shapeReturn.draw(g2, (float) 2.0);
+            shapeReturn.draw(g2, (float) 0);
             shapesList.add(shapeReturn);
 
             histController.add(new CreateCommand(null, shapeReturn));
@@ -330,7 +347,7 @@ public class JDrawingFrame extends JFrame implements MouseListener, MouseMotionL
     private void reDrawAll() {
         panel.repaint();
 
-        SwingUtilities.invokeLater(() -> this.shapesList.forEach(shape -> shape.draw((Graphics2D) panel.getGraphics(), (float) 2.0) ) );
+        SwingUtilities.invokeLater(() -> this.shapesList.forEach(shape -> shape.draw((Graphics2D) panel.getGraphics(), (float) 0) ) );
     }
 
     public JPanel getPanel() {
