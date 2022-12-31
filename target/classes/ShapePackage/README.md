@@ -6,17 +6,10 @@
     - Créer des shapes :
 ```
     import ShapePackage.factories.ShapeFactory;
+    import ShapePackage.shapes.ShapesEnum.Shapes;
+
     private ShapeFactory shapeFac = new ShapeFactory();
     SimpleShape shape = shapeFac.createSimpleShape(type, x, y);
-
-    // type :
-    public enum Shapes {
-        SQUARE,
-        TRIANGLE,
-        CIRCLE,
-        FIGMA,
-        COMPOUNDSHAPE
-    }
 ```
 
     - move shape
