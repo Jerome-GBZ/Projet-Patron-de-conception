@@ -5,9 +5,9 @@ import javax.swing.JToolBar;
 
 import org.junit.jupiter.api.Test;
 
-import ShapePackage.factories.ShapeFactory;
 import edu.uga.miage.m1.polygons.gui.JDrawingFrame;
 import edu.uga.miage.m1.polygons.gui.controllers.ShapeController;
+import ShapePackage.shapes.ShapesEnum.Shapes;
 
 class JDrawingFrameTest {
     JDrawingFrame jDrawFrame = new JDrawingFrame("test");
@@ -29,9 +29,9 @@ class JDrawingFrameTest {
 
     @Test
     void testEnumSahpes() {
-        assertEquals(ShapeController.Shapes.CIRCLE,  shapeController.getShapes("circle"));
-        assertEquals(ShapeController.Shapes.SQUARE,  shapeController.getShapes("square"));
-        assertEquals(ShapeController.Shapes.TRIANGLE,  shapeController.getShapes("triangle"));
+        assertEquals(Shapes.CIRCLE,  shapeController.getShapes("circle"));
+        assertEquals(Shapes.SQUARE,  shapeController.getShapes("square"));
+        assertEquals(Shapes.TRIANGLE,  shapeController.getShapes("triangle"));
     }
 
     @Test

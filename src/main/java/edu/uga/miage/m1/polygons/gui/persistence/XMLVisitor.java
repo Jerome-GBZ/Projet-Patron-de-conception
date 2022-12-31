@@ -2,7 +2,6 @@ package edu.uga.miage.m1.polygons.gui.persistence;
 
 import ShapePackage.shapes.CompoundShape;
 import ShapePackage.shapes.SimpleShape;
-
 /**
  * @author <a href="mailto:christophe.saint-marcel@univ-grenoble-alpes.fr">Christophe</a>
  */

@@ -33,7 +33,5 @@ public abstract class Shape implements SimpleShape {
         return this.getX()-25 <= x && this.getX()+25 >= x && this.getY()-25 <= y && this.getY()+25 >= y;
     }
 
-    @Override
     public boolean add(SimpleShape shape) { return false; }
-
 }

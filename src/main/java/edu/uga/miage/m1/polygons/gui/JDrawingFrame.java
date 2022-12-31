@@ -37,7 +37,7 @@ import edu.uga.miage.m1.polygons.gui.controllers.HistoryController;
 import edu.uga.miage.m1.polygons.gui.controllers.JSonController;
 import edu.uga.miage.m1.polygons.gui.controllers.ShapeController;
 import edu.uga.miage.m1.polygons.gui.controllers.XMLController;
-import edu.uga.miage.m1.polygons.gui.controllers.ShapeController.Shapes;
+import ShapePackage.shapes.ShapesEnum.Shapes;
 
 /**
  * This class represents the main application class, which is a JFrame subclass

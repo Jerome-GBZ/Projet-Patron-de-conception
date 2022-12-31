@@ -27,8 +27,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import edu.uga.miage.m1.polygons.gui.persistence.Visitable;
-import edu.uga.miage.m1.polygons.gui.persistence.Visitor;
+import ShapePackage.persistence.*;
 
 /**
  * This class implements the square <tt>SimpleShape</tt> extension.

@@ -1,7 +1,7 @@
 # Dans ce package vous pouvez :
     - Ajouter le package :
 ```
-    import edu.uga.miage.m1.polygons.gui.controllers.ShapeController.Shapes;
+    import ShapePackage.shapes.ShapesEnum.Shapes;
 ```
     - Créer des shapes :
 ```

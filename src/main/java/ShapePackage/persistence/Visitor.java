@@ -1,4 +1,4 @@
-package edu.uga.miage.m1.polygons.gui.persistence;
+package ShapePackage.persistence;
 
 import ShapePackage.shapes.SimpleShape;
 /**

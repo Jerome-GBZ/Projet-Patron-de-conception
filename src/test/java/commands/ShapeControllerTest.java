@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.uga.miage.m1.polygons.gui.controllers.ShapeController;
-import edu.uga.miage.m1.polygons.gui.controllers.ShapeController.Shapes;
+import ShapePackage.shapes.ShapesEnum.Shapes;
 
 class ShapeControllerTest {
     ShapeController shapeC = new ShapeController();

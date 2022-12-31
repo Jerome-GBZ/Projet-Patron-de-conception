@@ -27,8 +27,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import edu.uga.miage.m1.polygons.gui.persistence.Visitable;
-import edu.uga.miage.m1.polygons.gui.persistence.Visitor;
+import ShapePackage.persistence.*;
 
 /**
  * This inner class implements the triangle <tt>SimpleShape</tt> service.

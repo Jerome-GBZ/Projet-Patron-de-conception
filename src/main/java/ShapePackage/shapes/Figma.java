@@ -27,8 +27,7 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
-import edu.uga.miage.m1.polygons.gui.persistence.Visitable;
-import edu.uga.miage.m1.polygons.gui.persistence.Visitor;
+import ShapePackage.persistence.*;
 
 public class Figma extends Shape implements Visitable {
 

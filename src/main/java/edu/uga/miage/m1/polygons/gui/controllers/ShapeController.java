@@ -4,17 +4,10 @@ import java.util.List;
 
 import ShapePackage.factories.ShapeFactory;
 import ShapePackage.shapes.SimpleShape;
+import ShapePackage.shapes.ShapesEnum.Shapes;
 
 public class ShapeController {
     private ShapeFactory shapeFac = new ShapeFactory();
-
-    public enum Shapes {
-        SQUARE,
-        TRIANGLE,
-        CIRCLE,
-        FIGMA,
-        COMPOUNDSHAPE
-    }
 
     public Shapes getShapes(String type) {
         return Shapes.valueOf(type.toUpperCase());

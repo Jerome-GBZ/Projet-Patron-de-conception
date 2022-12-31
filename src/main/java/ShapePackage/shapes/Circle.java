@@ -27,8 +27,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import edu.uga.miage.m1.polygons.gui.persistence.Visitable;
-import edu.uga.miage.m1.polygons.gui.persistence.Visitor;
+import ShapePackage.persistence.*;
 
 public class Circle extends Shape implements Visitable {
 
